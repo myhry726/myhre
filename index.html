@@ -2,349 +2,93 @@
 <html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>میهری</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>میهری - پلاتفۆرمی شاهانە</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 🎨 بەکارهێنانی فۆنتی کوردی ستاندارد و زۆر شیرینی چەند کێشی */
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap');
-        
-        body {
-            font-family: 'Vazirmatn', sans-serif;
-            background-color: #070a12;
-            color: #e2e8f0;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* 🌌 کانڤاسی تایبەت بە جووڵەی بریسکەکان */
-        #particleCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .relative-z {
-            position: relative;
-            z-index: 10;
-        }
-
-        .gold-text {
-            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .gold-btn {
-            background: linear-gradient(135deg, #bf953f 0%, #d4af37 50%, #b38728 100%);
-            color: #0b0f17;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .gold-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
-        }
-
-        .premium-card {
-            background: rgba(15, 22, 36, 0.7);
-            border: 1px solid rgba(212, 175, 55, 0.08);
-            backdrop-filter: blur(16px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .premium-card:hover {
-            border-color: rgba(212, 175, 55, 0.4);
-            background: rgba(20, 30, 48, 0.85);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-        }
+        body { font-family: 'Vazirmatn', sans-serif; background-color: #070a12; color: #e2e8f0; }
+        #particleCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .relative-z { position: relative; z-index: 10; }
+        .gold-text { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-btn { background: linear-gradient(135deg, #bf953f 0%, #d4af37 50%, #b38728 100%); color: #0b0f17; font-weight: bold; }
+        .premium-card { background: rgba(15, 22, 36, 0.8); border: 1px solid rgba(212, 175, 55, 0.2); }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
-
-    <!-- 🌌 باگراوندی بریسکە جووڵاوەکان -->
+<body>
     <canvas id="particleCanvas"></canvas>
+    
+    <div class="relative-z max-w-5xl mx-auto p-6">
+        <header class="flex justify-between items-center py-6">
+            <h1 class="text-3xl font-black gold-text">میهری</h1>
+            <button id="authBtn" onclick="openAuthModal()" class="gold-btn px-6 py-2 rounded-xl">چوونەژوورەوە</button>
+        </header>
 
-    <!-- 🌐 هێدەر -->
-    <header class="border-b border-white/5 backdrop-blur-md sticky top-0 z-50 bg-[#070a12]/80 relative-z">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-crown text-2xl text-amber-400"></i>
-                <span class="text-2xl font-black tracking-wide gold-text">میهری</span>
-            </div>
-            <div class="flex items-center gap-3">
-                <button id="authBtn" onclick="openAuthModal()" class="gold-btn text-xs sm:text-sm font-black px-4 py-2 rounded-xl shadow-lg">چوونەژوورەوە / تۆماربوون</button>
-                <button id="logoutBtn" onclick="logout()" class="hidden text-xs text-red-400 bg-red-500/10 px-3 py-2 rounded-xl font-bold">دەرچوون</button>
-            </div>
-        </div>
-    </header>
+        <main id="homePage" class="space-y-4">
+            <div class="premium-card p-6 rounded-2xl"><h3>دروستکردنی ڕاپۆرت</h3><p>٥,٠٠٠ د.ع</p></div>
+            <div class="premium-card p-6 rounded-2xl"><h3>ئامادەکردنی سیمینار</h3><p>٨,٠٠٠ د.ع</p></div>
+        </main>
 
-    <!-- 🏠 خزمەتگوزارییەکان -->
-    <main id="homePage" class="max-w-5xl mx-auto px-4 sm:px-6 py-12 w-full relative-z">
-        <div class="text-center max-w-2xl mx-auto mb-16">
-            <h1 class="text-3xl sm:text-5xl font-black mb-4 leading-tight text-white">پلاتفۆرمی شاهانەی <span class="gold-text">میهری</span></h1>
-            <p class="text-slate-400 text-xs sm:text-sm">ئەزموونی خزمەتگوزاری مۆدێرن بە بەرزترین کوالێتی بۆ پڕۆژەکانت.</p>
-        </div>
-
-        <div class="space-y-4">
-            <!-- دروستکردنی ڕاپۆرت -->
-            <div class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-file-invoice"></i></div>
-                    <div>
-                        <h3 class="text-base sm:text-lg font-bold text-white">دروستکردنی ڕاپۆرت</h3>
-                        <p class="text-slate-400 text-xs mt-0.5">ئامادەکردنی ڕاپۆرتی زانستی و ئەکادیمی بە وردەکاری زۆر بەرزەوە.</p>
-                    </div>
-                </div>
-                <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
-                    <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
-                    <span class="text-sm font-black text-amber-400">٥,٠٠٠ د.ع</span>
-                </div>
-            </div>
-
-            <!-- ئامادەکردنی سیمینار -->
-            <div class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-chalkboard-user"></i></div>
-                    <div>
-                        <h3 class="text-base sm:text-lg font-bold text-white">ئامادەکردنی سیمینار</h3>
-                        <p class="text-slate-400 text-xs mt-0.5">دیزاینکردنی سیمینار و پاوەرپۆینتی سەکۆیی بەرز بۆ پێشکەشکردن.</p>
-                    </div>
-                </div>
-                <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
-                    <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
-                    <span class="text-sm font-black text-amber-400">٨,٠٠٠ د.ع</span>
-                </div>
-            </div>
-
-            <!-- دروستکردنی CV -->
-            <div class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-address-card"></i></div>
-                    <div>
-                        <h3 class="text-base sm:text-lg font-bold text-white">دروستکردنی CV</h3>
-                        <p class="text-slate-400 text-xs mt-0.5">دیزاینکردنی سیڤی پرۆفیشناڵ و مۆدێرن بە زمانی جیاواز بۆ کار و دامەزراندن.</p>
-                    </div>
-                </div>
-                <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
-                    <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
-                    <span class="text-sm font-black text-amber-400">٤,٠٠٠ د.ع</span>
-                </div>
-            </div>
-
-            <!-- دروستکردنی سیستەمی کاشێری -->
-            <div class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-cash-register"></i></div>
-                    <div>
-                        <h3 class="text-base sm:text-lg font-bold text-white">دروستکردنی سیستەمی کاشێری</h3>
-                        <p class="text-slate-400 text-xs mt-0.5">باشترین کۆدەکان بۆ بەڕێوەبردنی کۆگا و فرۆشتنی مارکێتەکان.</p>
-                    </div>
-                </div>
-                <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
-                    <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
-                    <span class="text-sm font-black text-amber-400">١٥٠,٠٠٠ د.ع</span>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- 📊 بەشی دەشبۆرد -->
-    <div id="dashboardPage" class="max-w-6xl mx-auto px-4 sm:px-6 py-8 w-full hidden relative-z">
-        <div class="grid lg:grid-cols-3 gap-6">
-            <div class="lg:col-span-1 space-y-4">
-                <div class="p-6 rounded-2xl bg-zinc-950 border border-amber-500/30 text-white shadow-xl">
-                    <h4 class="text-xs font-bold text-slate-400 mb-1">باڵانسی تۆ</h4>
-                    <div class="text-3xl font-black text-amber-400"><span id="userBalance">0</span> د.ع</div>
-                    <div class="text-[11px] text-slate-400 mt-2 border-t border-white/5 pt-2" id="userEmail">ئیمەیڵ: ...</div>
-                    <div class="text-[11px] text-slate-400 mt-1" id="userPhoneDisplay">مۆبایل: ...</div>
-                </div>
-
-                <div class="p-5 rounded-2xl premium-card">
-                    <h4 class="text-xs font-black text-amber-400 mb-3">داخڵکردنی باڵانسی نوێ</h4>
-                    <form onsubmit="depositRequest(event)">
-                        <input type="text" id="invoiceInput" placeholder="کۆدی پسوولە" required class="w-full bg-black/50 border border-white/10 rounded-xl px-3 py-2 text-xs text-white mb-2 focus:outline-none">
-                        <input type="number" id="amountInput" placeholder="بڕی پارە" required class="w-full bg-black/50 border border-white/10 rounded-xl px-3 py-2 text-xs text-white mb-3 focus:outline-none">
-                        <button type="submit" class="w-full gold-btn font-bold py-2 rounded-xl text-xs shadow-md">ناردنی داواکاری</button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="lg:col-span-2 p-5 sm:p-6 rounded-2xl premium-card">
-                <h3 class="text-base font-black text-white mb-4">مێژووی داواکارییەکانت</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-right text-xs">
-                        <thead><tr class="text-slate-500 border-b border-white/5"><th class="pb-2">کۆدی پسوولە</th><th class="pb-2">بڕی پارە</th><th class="pb-2">دۆخی باڵانس</th></tr></thead>
-                        <tbody id="historyTable" class="text-slate-300 divide-y divide-white/5">
-                            <tr><td colspan="3" class="text-center py-8 text-slate-500">هیچ داواکارییەک نییە.</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div id="dashboardPage" class="hidden premium-card p-6 rounded-2xl">
+            <h2 class="text-xl font-bold">بەخێر هاتیت</h2>
+            <p>باڵانسی تۆ: <span id="userBalance" class="text-amber-400">0</span> د.ع</p>
         </div>
     </div>
 
-    <!-- 🔐 مۆدال -->
-    <div id="authModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[99999] relative-z">
-        <div class="bg-[#111622] border border-white/10 rounded-2xl p-6 w-full max-w-sm relative shadow-2xl">
-            <button onclick="closeAuthModal()" class="absolute top-4 left-4 text-slate-400"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <h3 id="authTitle" class="text-lg font-black text-white mb-4">چوونەژوورەوە</h3>
-            <form onsubmit="handleAuth(event)">
-                <input type="email" id="emailField" required class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-2" dir="ltr" placeholder="ئیمەیڵ">
-                <input type="tel" id="phoneField" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-2 hidden" dir="ltr" placeholder="مۆبایل">
-                <input type="password" id="passwordField" required class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-4" dir="ltr" placeholder="پاسۆرد">
-                <button type="submit" id="submitAuthBtn" class="w-full gold-btn font-black py-2 rounded-xl text-xs mb-4">چوونەژوورەوە</button>
-            </form>
-            <button onclick="toggleAuthMode()" id="toggleModeBtn" class="text-xs text-amber-400 underline font-bold w-full text-center">دروستکردنی حیسابی نوێ</button>
+    <div id="authModal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+        <div class="bg-gray-900 p-8 rounded-2xl w-full max-w-sm text-white">
+            <h3 id="authTitle" class="mb-4 font-bold">چوونەژوورەوە</h3>
+            <input type="email" id="emailField" placeholder="ئیمەیڵ" class="w-full p-2 mb-2 rounded text-black">
+            <input type="password" id="passwordField" placeholder="پاسۆرد" class="w-full p-2 mb-4 rounded text-black">
+            <button onclick="handleAuth()" id="submitAuthBtn" class="gold-btn w-full py-2 rounded-lg">چوونەژوورەوە</button>
+            <button onclick="toggleAuthMode()" class="text-xs text-amber-500 mt-4 w-full">گۆڕین بۆ تۆماربوون</button>
         </div>
     </div>
-
-    <footer class="border-t border-white/5 py-4 text-center text-xs text-slate-600 relative-z">© ٢٠٢٦ پلاتفۆرمی میهری.</footer>
 
     <script>
         const supabase = Supabase.createClient('https://lydmtihssxpglpfoeyiz.supabase.co', 'sb_p_VWm_EBXynu4Pk1Kx0tjPLw_z7PQoIyy');
-
-        let currentUser = null;
         let isSignUpMode = false;
 
-        // 🌟 دروستکردنی سیستەمی بریسکەی جووڵاو لە باگراونددا (Particles)
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
-                this.alpha = Math.random() * 0.5 + 0.2;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = '#d4af37';
-                ctx.fillStyle = '#d4af37';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.restore();
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < 75; i++) {
-                particles.push(new Particle());
-            }
-        }
-        initParticles();
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-
-        // 🔐 بەشی لۆجیکی ئەپڵیکەیشن
         function openAuthModal() { document.getElementById('authModal').classList.remove('hidden'); }
-        function closeAuthModal() { document.getElementById('authModal').classList.add('hidden'); }
-
+        
         function toggleAuthMode() {
             isSignUpMode = !isSignUpMode;
-            document.getElementById('phoneField').classList.toggle('hidden', !isSignUpMode);
-            document.getElementById('authTitle').innerText = isSignUpMode ? "دروستکردنی حیساب" : "چوونەژوورەوە";
+            document.getElementById('authTitle').innerText = isSignUpMode ? "تۆماربوون" : "چوونەژوورەوە";
             document.getElementById('submitAuthBtn').innerText = isSignUpMode ? "تۆماربوون" : "چوونەژوورەوە";
-            document.getElementById('toggleModeBtn').innerText = isSignUpMode ? "حیسابم هەیە؟ لۆگین" : "دروستکردنی حیسابی نوێ";
         }
 
-        async function handleAuth(e) {
-            e.preventDefault();
+        async function handleAuth() {
             const email = document.getElementById('emailField').value;
             const password = document.getElementById('passwordField').value;
 
-            try {
-                if (isSignUpMode) {
-                    const phone = document.getElementById('phoneField').value;
-                    const { data, error } = await supabase.from('mihry_users').insert([{ email, phone, password, balance: 0 }]).select().maybeSingle();
-                    if (error) throw error;
-                    alert('حیساب بە سەرکەوتوویی دروستبوو! 🎉');
-                    loginSuccess(data);
-                } else {
-                    const { data, error } = await supabase.from('mihry_users').select('*').eq('email', email).eq('password', password).maybeSingle();
-                    if (error) throw error;
-                    if (!data) return alert('ئیمەیڵ یان پاسۆرد هەڵەیە!');
-                    loginSuccess(data);
-                }
-            } catch (err) {
-                alert('کێشەیەک هەیە، تکایە ڕێپێدانەکانی SQL لە داتابەیسەکەت نوێ بکەرەوە.');
-            }
-        }
-
-        function loginSuccess(user) {
-            currentUser = user;
-            document.getElementById('homePage').classList.add('hidden');
-            document.getElementById('dashboardPage').classList.remove('hidden');
-            document.getElementById('authBtn').classList.add('hidden');
-            document.getElementById('logoutBtn').classList.remove('hidden');
-            document.getElementById('userEmail').innerText = "ئیمەیڵ: " + user.email;
-            document.getElementById('userPhoneDisplay').innerText = "مۆبایل: " + (user.phone || 'دیاری نەکراوە');
-            document.getElementById('userBalance').innerText = parseInt(user.balance).toLocaleString();
-            closeAuthModal();
-            fetchHistory();
-        }
-
-        async function depositRequest(e) {
-            e.preventDefault();
-            const invoice = document.getElementById('invoiceInput').value;
-            const amount = document.getElementById('amountInput').value;
-            const { error } = await supabase.from('mihry_deposits').insert([{ user_email: currentUser.email, user_phone: currentUser.phone || '', invoice_code: invoice, amount: amount, status: 'چاوەڕوانکردن' }]);
-            if (error) return alert('ناردن سەرکەوتوو نەبوو!');
-            alert('پسوولە بە سەرکەوتوویی نێردرا! 🎉');
-            document.getElementById('invoiceInput').value = '';
-            document.getElementById('amountInput').value = '';
-            fetchHistory();
-        }
-
-        async function fetchHistory() {
-            const { data } = await supabase.from('mihry_deposits').select('*').eq('user_email', currentUser.email);
-            const tbody = document.getElementById('historyTable');
-            tbody.innerHTML = '';
-            if(data && data.length > 0) {
-                data.forEach(row => {
-                    tbody.innerHTML += `<tr><td class="py-2">${row.invoice_code}</td><td>${parseInt(row.amount).toLocaleString()} د.ع</td><td class="text-amber-500">${row.status}</td></tr>`;
-                });
+            if (isSignUpMode) {
+                const { error } = await supabase.from('mihry_users').insert([{ email, password, balance: 0 }]);
+                if (error) alert("هەڵە: " + error.message);
+                else alert("سەرکەوتوو بوو، ئێستا لۆگین بکە");
             } else {
-                tbody.innerHTML = '<tr><td colspan="3" class="text-center py-4">هیچ داواکارییەک نییە.</td></tr>';
+                const { data, error } = await supabase.from('mihry_users').select('*').eq('email', email).eq('password', password).maybeSingle();
+                if (data) {
+                    document.getElementById('homePage').classList.add('hidden');
+                    document.getElementById('dashboardPage').classList.remove('hidden');
+                    document.getElementById('authModal').classList.add('hidden');
+                    document.getElementById('userBalance').innerText = data.balance;
+                } else {
+                    alert("زانیارییەکان هەڵەن");
+                }
             }
         }
-        function logout() { location.reload(); }
+
+        // Particle Effect
+        const c = document.getElementById('particleCanvas'), x = c.getContext('2d');
+        function draw() {
+            c.width = window.innerWidth; c.height = window.innerHeight;
+            x.fillStyle = "#070a12"; x.fillRect(0,0,c.width, c.height);
+            x.fillStyle = "#d4af37";
+            for(let i=0; i<40; i++) x.fillRect(Math.random()*c.width, Math.random()*c.height, 2, 2);
+            requestAnimationFrame(draw);
+        } draw();
     </script>
 </body>
 </html>
