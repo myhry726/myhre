@@ -16,6 +16,9 @@
             color: #e2e8f0;
             overflow-x: hidden;
             position: relative;
+            /* ڕێگری لە دیاریکردنی دەقەکان بۆ پاراستنی زیاتر */
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         #particleCanvas {
@@ -69,7 +72,6 @@
 
     <canvas id="particleCanvas"></canvas>
 
-    <!-- 🌐 هێدەر -->
     <header class="border-b border-white/5 backdrop-blur-md sticky top-0 z-50 bg-[#070a12]/80 relative-z">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-2">
@@ -86,7 +88,6 @@
         </div>
     </header>
 
-    <!-- 🏠 خزمەتگوزارییەکان -->
     <main id="homePage" class="max-w-5xl mx-auto px-4 sm:px-6 py-12 w-full relative-z">
         <div class="text-center max-w-2xl mx-auto mb-16">
             <h1 class="text-3xl sm:text-5xl font-black mb-4 leading-tight text-white"><span class="gold-text">میهری</span></h1>
@@ -94,7 +95,6 @@
         </div>
 
         <div class="space-y-4">
-            <!-- دروستکردنی ڕاپۆرت -->
             <div onclick="openOrderModal('ڕاپۆرت', 5000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-file-invoice"></i></div>
@@ -109,7 +109,6 @@
                 </div>
             </div>
 
-            <!-- ئامادەکردنی سیمینار -->
             <div onclick="openOrderModal('سیمینار', 8000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-chalkboard-user"></i></div>
@@ -124,7 +123,6 @@
                 </div>
             </div>
 
-            <!-- دروستکردنی CV -->
             <div onclick="openOrderModal('CV', 4000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-address-card"></i></div>
@@ -139,7 +137,6 @@
                 </div>
             </div>
 
-            <!-- دروستکردنی سیستەمی کاشێری -->
             <div onclick="openOrderModal('سیستەمی کاشێری', 150000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-cash-register"></i></div>
@@ -156,7 +153,6 @@
         </div>
     </main>
 
-    <!-- 📊 بەشی دەشبۆرد -->
     <div id="dashboardPage" class="max-w-6xl mx-auto px-4 sm:px-6 py-8 w-full hidden relative-z">
         <div class="grid lg:grid-cols-3 gap-6">
             <div class="lg:col-span-1 space-y-4">
@@ -198,7 +194,6 @@
         </div>
     </div>
 
-    <!-- 📝 فۆڕمی داواکردنی خزمەتگوزاری (دینامیکی) -->
     <div id="orderModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[99999] relative-z">
         <div class="bg-[#111622] border border-white/10 rounded-2xl p-6 w-full max-w-md relative shadow-2xl">
             <button onclick="closeOrderModal()" class="absolute top-4 left-4 text-slate-400"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -206,14 +201,15 @@
             <p id="orderModalPrice" class="text-xs text-amber-400 font-bold mb-4"></p>
             
             <form onsubmit="submitOrder(event)">
-                <!-- کێڵگەی تایبەت بە CV -->
                 <div id="cvFields" class="hidden space-y-3 mb-4">
                     <input type="text" id="cvDept" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="بەشەکەت چییە؟ (بۆ نموونە: کۆمپیوتەر)">
-                    <input type="text" id="cvImg" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="لێنکی وێنەکەت (یان بە تەلەگرام بینێرە)">
+                    <div class="w-full">
+                        <label class="block text-[11px] text-slate-400 mb-1">وێنەیەک بۆ ناو CV دیاری بکە:</label>
+                        <input type="file" id="cvFileDrop" accept="image/*" onchange="convertImageToBase64()" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white file:bg-amber-500/20 file:text-amber-400 file:border-0 file:rounded-lg file:px-2 file:py-1 file:ml-2 file:font-bold cursor-pointer">
+                    </div>
                     <textarea id="cvInfo" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="زانیارییەکانی تر (ناو، تەمەن، ئەزموون، زمانەکان)"></textarea>
                 </div>
 
-                <!-- کێڵگەی گشتی (بۆ ڕاپۆرت، سیمینار، سیستەم) -->
                 <div id="generalFields" class="hidden mb-4">
                     <textarea id="generalDetails" rows="4" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="تکایە بە تەواوی ڕوونی بکەرەوە کە دەتەوێت بابەتەکە لەسەر چی بێت و چۆن بێت..."></textarea>
                 </div>
@@ -223,7 +219,6 @@
         </div>
     </div>
 
-    <!-- 🔐 مۆدال ئەکاونت -->
     <div id="authModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[99999] relative-z">
         <div class="bg-[#111622] border border-white/10 rounded-2xl p-6 w-full max-w-sm relative shadow-2xl">
             <button onclick="closeAuthModal()" class="absolute top-4 left-4 text-slate-400"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -241,12 +236,29 @@
     <footer class="border-t border-white/5 py-4 text-center text-xs text-slate-600 relative-z">© ٢٠٢٦ پلاتفۆرمی میهری.</footer>
 
     <script>
+        // 🔒 ١. بەشی پاراستنی سۆرس کۆد (Disable Right Click & DevTools Shortcuts)
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        document.onkeydown = function(e) {
+            // پەکخستنی F12
+            if (e.keyCode == 123) { return false; }
+            // پەکخستنی Ctrl+Shift+I
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
+            // پەکخستنی Ctrl+Shift+C
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; }
+            // پەکخستنی Ctrl+U (View Source)
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; }
+        };
+
         const supabaseClient = window.supabase.createClient('https://lydmtihssxpglpfoeyiz.supabase.co', 'sb_publishable_VWm_EBXynu4Pk1Kx0tjPLw_z7PQoIyy');
 
         let currentUser = null;
         let isSignUpMode = false;
         let activeServiceName = '';
         let activeServicePrice = 0;
+        let encodedBase64Image = '';
 
         // 🌟 Particles Animation
         const canvas = document.getElementById('particleCanvas');
@@ -283,7 +295,7 @@
         function animateParticles() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
         animateParticles();
 
-        // 🔐 Navigation
+        // 🔐 Navigation & App Logic
         function showPage(pageName) {
             const homePage = document.getElementById('homePage');
             const dashboardPage = document.getElementById('dashboardPage');
@@ -350,11 +362,19 @@
             fetchOrders();
         }
 
-        // 📝 لۆجیکی فۆڕمی داواکاری خزمەتگوزارییەکان
+        function convertImageToBase64() {
+            const file = document.getElementById('cvFileDrop').files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onloadend = function () { encodedBase64Image = reader.result; };
+            reader.readAsDataURL(file);
+        }
+
         function openOrderModal(serviceName, price) {
             if (!currentUser) { return alert('تکایە پێشتر لۆگین بکە بۆ داواکردنی خزمەتگوزاری!'); }
             activeServiceName = serviceName;
             activeServicePrice = price;
+            encodedBase64Image = '';
             
             document.getElementById('orderModalTitle').innerText = "داواکردنی " + serviceName;
             document.getElementById('orderModalPrice').innerText = "بڕی پارە لە باڵانست دەبڕدرێت: " + price.toLocaleString() + " د.ع";
@@ -378,15 +398,14 @@
             let details = '';
             if (activeServiceName === 'CV') {
                 const dept = document.getElementById('cvDept').value;
-                const img = document.getElementById('cvImg').value;
                 const info = document.getElementById('cvInfo').value;
-                details = `بەش: ${dept} | وێنە: ${img} | زانیاری: ${info}`;
+                if(!encodedBase64Image) { return alert('تکایە سەرەتا وێنەیەک بۆ ناو CV دیاری بکە!'); }
+                details = `بەش: ${dept} | وێنە: ${encodedBase64Image} | زانیاری: ${info}`;
             } else {
                 details = document.getElementById('generalDetails').value;
             }
 
             try {
-                // ١. تۆمارکردنی داواکاری لە خشتەی mihry_orders
                 const { error: orderError } = await supabaseClient.from('mihry_orders').insert([{
                     user_email: currentUser.email,
                     service_name: activeServiceName,
@@ -397,12 +416,11 @@
                 }]);
                 if (orderError) throw orderError;
 
-                // ٢. کەمکردنەوەی پارە لە باڵانسی بەکارهێنەر
                 const newBalance = currentUser.balance - activeServicePrice;
                 const { error: userError } = await supabaseClient.from('mihry_users').update({ balance: newBalance }).eq('email', currentUser.email);
                 if (userError) throw userError;
 
-                alert('داواکارییەکەت بە سەرکەوتوویی تۆمارکرا و بڕی پارەکە لە باڵانست بڕدرا! 🎉');
+                alert('داواکارییەکەت بە سەرکەوتوویی تۆمارکرا! 🎉');
                 currentUser.balance = newBalance;
                 document.getElementById('userBalance').innerText = newBalance.toLocaleString();
                 closeOrderModal();
@@ -411,7 +429,7 @@
         }
 
         async function fetchOrders() {
-            const { data, error } = await supabaseClient.from('mihry_orders').select('*').eq('user_email', currentUser.email);
+            const { data } = await supabaseClient.from('mihry_orders').select('*').eq('user_email', currentUser.email);
             const tbody = document.getElementById('historyTable');
             tbody.innerHTML = '';
             
