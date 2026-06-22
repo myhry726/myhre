@@ -586,7 +586,7 @@
 
                     const phone = document.getElementById('phoneField').value;
 
-                    const { data, error } = await supabase.from('mihry_users').insert([{ email, phone, password, balance: 0 }]).select().maybeSingle();
+                    const { data, error } = await supabaseClient.from('mihry_users').insert([{ email, phone, password, balance: 0 }]).select().maybeSingle();
 
                     if (error) throw error;
 
@@ -596,7 +596,7 @@
 
                 } else {
 
-                    const { data, error } = await supabase.from('mihry_users').select('*').eq('email', email).eq('password', password).maybeSingle();
+                    const { data, error } = await supabaseClient.from('mihry_users').select('*').eq('email', email).eq('password', password).maybeSingle();
 
                     if (error) throw error;
 
@@ -649,7 +649,7 @@
 
             const amount = document.getElementById('amountInput').value;
 
-            const { error } = await supabase.from('mihry_deposits').insert([{ user_email: currentUser.email, user_phone: currentUser.phone || '', invoice_code: invoice, amount: amount, status: 'چاوەڕوانکردن' }]);
+            const { error } = await supabaseClient.from('mihry_deposits').insert([{ user_email: currentUser.email, user_phone: currentUser.phone || '', invoice_code: invoice, amount: amount, status: 'چاوەڕوانکردن' }]);
 
             if (error) return alert('ناردن سەرکەوتوو نەبوو!');
 
@@ -667,7 +667,7 @@
 
         async function fetchHistory() {
 
-            const { data } = await supabase.from('mihry_deposits').select('*').eq('user_email', currentUser.email);
+            const { data } = await supabaseClient.from('mihry_deposits').select('*').eq('user_email', currentUser.email);
 
             const tbody = document.getElementById('historyTable');
 
