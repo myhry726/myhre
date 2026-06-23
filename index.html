@@ -18,6 +18,26 @@
             position: relative;
             user-select: none;
             -webkit-user-select: none;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* 🖼️ بەشی باگراوندی وێنە کاڵەکە لە پشتی بریسکەکان */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('9771.png'); /* ناوی وێنەکەت */
+            background-size: contain; /* وێنەکە ڕێک دەخات لە ناوەڕاست بەبێ بڕین */
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.08; /* ڕێژەی کاڵکردنەوە (٨٪ دیارە بۆ ئەوەی شیک بێت) */
+            z-index: -2; /* دەیخاتە دواوەی دواوەی بریسکەکانیش */
+            pointer-events: none;
         }
 
         #particleCanvas {
@@ -26,7 +46,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
+            z-index: -1; /* گۆڕدرا بۆ -1 بۆ ئەوەی نەکەوێتە سەر دوگمە و کارتەکان */
             pointer-events: none;
         }
 
@@ -71,7 +91,6 @@
 
     <canvas id="particleCanvas"></canvas>
 
-    <!-- 🌐 هێدەر -->
     <header class="border-b border-white/5 backdrop-blur-md sticky top-0 z-50 bg-[#070a12]/80 relative-z">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-2">
@@ -88,7 +107,6 @@
         </div>
     </header>
 
-    <!-- 🏠 خزمەتگوزارییەکان -->
     <main id="homePage" class="max-w-5xl mx-auto px-4 sm:px-6 py-12 w-full relative-z">
         <div class="text-center max-w-2xl mx-auto mb-16">
             <h1 class="text-3xl sm:text-5xl font-black mb-4 leading-tight text-white"><span class="gold-text">میهری</span></h1>
@@ -96,7 +114,6 @@
         </div>
 
         <div class="space-y-4">
-            <!-- خزمەتگوزارییەکان وەک خۆیانن -->
             <div onclick="openOrderModal('ڕاپۆرت', 5000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-file-invoice"></i></div>
@@ -135,7 +152,7 @@
                 </div>
                 <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
                     <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
-                    <span class="text-sm font-black text-amber-400">٤,٠٠0 د.ع</span>
+                    <span class="text-sm font-black text-amber-400">٤,٠٠٠ د.ع</span>
                 </div>
             </div>
 
@@ -155,7 +172,6 @@
         </div>
     </main>
 
-    <!-- 📊 بەشی دەشبۆرد -->
     <div id="dashboardPage" class="max-w-6xl mx-auto px-4 sm:px-6 py-8 w-full hidden relative-z">
         <div class="grid lg:grid-cols-3 gap-6">
             <div class="lg:col-span-1 space-y-4">
@@ -198,7 +214,6 @@
         </div>
     </div>
 
-    <!-- 📝 فۆڕمی داواکردنی خزمەتگوزاری -->
     <div id="orderModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[99999] relative-z">
         <div class="bg-[#111622] border border-white/10 rounded-2xl p-6 w-full max-w-md relative shadow-2xl">
             <button onclick="closeOrderModal()" class="absolute top-4 left-4 text-slate-400"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -224,7 +239,6 @@
         </div>
     </div>
 
-    <!-- 🔐 مۆدال ئەکاونت -->
     <div id="authModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[99999] relative-z">
         <div class="bg-[#111622] border border-white/10 rounded-2xl p-6 w-full max-w-sm relative shadow-2xl">
             <button onclick="closeAuthModal()" class="absolute top-4 left-4 text-slate-400"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -235,7 +249,6 @@
                 <input type="tel" id="phoneField" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-2 hidden" dir="ltr" placeholder="مۆبایل">
                 <input type="password" id="passwordField" required class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-1" dir="ltr" placeholder="پاسۆرد">
                 
-                <!-- نامەی ڕێنمایی پاسۆرد -->
                 <p id="passwordHint" class="text-[10px] text-slate-500 mb-4 hidden leading-tight">پاسۆرد دەبێت لانی کەم ٨ پیت بێت، پیتی گەورە (A-Z) و هێمای تێدابێت (وەک @،#،$).</p>
                 
                 <button type="submit" id="submitAuthBtn" class="w-full gold-btn font-black py-2 rounded-xl text-xs mb-4">چوونەژوورەوە</button>
@@ -299,7 +312,6 @@
         function animateParticles() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
         animateParticles();
 
-        // 🔄 پشکینینی ئەکاونت لە کاتی کردنەوەی سایت (دژە ڕیفرێش)
         window.addEventListener('DOMContentLoaded', () => {
             const savedUser = localStorage.getItem('mihry_session');
             if (savedUser) {
@@ -341,7 +353,6 @@
             document.getElementById('toggleModeBtn').innerText = isSignUpMode ? "حیسابم هەیە؟ لۆگین" : "دروستکردنی حیسابی نوێ";
         }
 
-        // 🛡️ فلتەری پشکنینی هێزی پاسۆرد
         function isPasswordStrong(password) {
             const minLength = 8;
             const hasUpperCase = /[A-Z]/.test(password);
@@ -379,7 +390,6 @@
 
         function loginSuccess(user) {
             currentUser = user;
-            // خەزنکردن لە لۆکاڵ ستۆریج بۆ ئەوەی بە ڕیفرێش دانەخرێت
             localStorage.setItem('mihry_session', JSON.stringify(user));
 
             document.getElementById('navHomeBtn').classList.remove('hidden');
@@ -458,7 +468,6 @@
                 currentUser.balance = newBalance;
                 document.getElementById('userBalance').innerText = newBalance.toLocaleString();
                 
-                // نوێکردنەوەی داتا لە ناو localStorage
                 localStorage.setItem('mihry_session', JSON.stringify(currentUser));
                 
                 closeOrderModal();
