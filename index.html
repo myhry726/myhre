@@ -110,7 +110,7 @@
         
         <div class="text-center max-w-2xl mx-auto">
             <h1 class="text-3xl sm:text-5xl font-black mb-4 leading-tight text-white"><span class="gold-text">میهری</span></h1>
-            <p class="text-slate-400 text-xs sm:text-sm">بەباشترین شێوە کارەکانتان بۆ جێبەجێ دەکەین دڵنیاو متمانە لەگەڵ میهری.</p>
+            <p class="text-slate-400 text-xs sm:text-sm">ئەزموونی خزمەتگوزاری مۆدێرن بە بەرزترین کوالێتی بۆ پڕۆژەکانت.</p>
         </div>
 
         <div class="space-y-4">
@@ -289,6 +289,10 @@
                 
                 <p id="passwordHint" class="text-[10px] text-slate-500 mb-4 hidden leading-tight">پاسۆرد دەبێت لانی کەم ٨ پیت بێت، پیتی گەورە (A-Z) و هێمای تێدابێت (وەک @،#،$).</p>
                 
+                <div id="forgotPasswordContainer" class="text-right mb-4">
+                    <a href="https://t.me/dark_1877t?text=سڵاو،%20پاسۆردی%20حیسابەکەم%20لەبیرچووە،%20تکایە%20یارمەتیم%20بدەن." target="_blank" class="text-[11px] text-slate-400 hover:text-amber-400 transition font-bold">پاسۆردت لەبیرچووە؟</a>
+                </div>
+
                 <button type="submit" id="submitAuthBtn" class="w-full gold-btn font-black py-2 rounded-xl text-xs mb-4">چوونەژوورەوە</button>
             </form>
             <button onclick="toggleAuthMode()" id="toggleModeBtn" class="text-xs text-amber-400 underline font-bold w-full text-center">دروستکردنی حیسابی نوێ</button>
@@ -382,6 +386,10 @@
             document.getElementById('usernameField').classList.toggle('hidden', !isSignUpMode);
             document.getElementById('phoneField').classList.toggle('hidden', !isSignUpMode);
             document.getElementById('passwordHint').classList.toggle('hidden', !isSignUpMode);
+            
+            // شاردنەوە یان پیشاندانی بەشی پاسۆرد لەبیرچوون بەپێی دۆخی فۆڕمەکە
+            document.getElementById('forgotPasswordContainer').classList.toggle('hidden', isSignUpMode);
+            
             document.getElementById('authTitle').innerText = isSignUpMode ? "دروستکردنی حیساب" : "چوونەژوورەوە";
             document.getElementById('submitAuthBtn').innerText = isSignUpMode ? "تۆماربوون" : "چوونەژوورەوە";
             document.getElementById('toggleModeBtn').innerText = isSignUpMode ? "حیسابم هەیە؟ لۆگین" : "دروستکردنی حیسابی نوێ";
