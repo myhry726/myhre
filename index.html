@@ -31,9 +31,530 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('1782168552908_edit_179338382467262.png'); /* ناوی وێنەکەت */
-            background-size: contain; /* وێنەکە ڕێک دەخات لە ناوەڕاست بەبێ بڕین */
+            background-image: url('1782168552908_edit_179338382467262.png'); /* ناوی نوێی وێنەکەت */
+            background-size: contain;
             background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.11;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .relative-z {
+            position: relative;
+            z-index: 10;
+        }
+
+        .gold-text {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-btn {
+            background: linear-gradient(135deg, #bf953f 0%, #d4af37 50%, #b38728 100%);
+            color: #0b0f17;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gold-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .premium-card {
+            background: rgba(15, 22, 36, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            backdrop-filter: blur(16px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .premium-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            background: rgba(20, 30, 48, 0.85);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- 🌐 هێدەر -->
+    <header class="border-b border-white/5 backdrop-blur-md sticky top-0 z-50 bg-[#070a12]/80 relative-z">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-crown text-2xl text-amber-400"></i>
+                <span class="text-2xl font-black tracking-wide gold-text">میهری</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="navHomeBtn" onclick="showPage('home')" class="text-xs sm:text-sm font-bold text-amber-400 px-3 py-2 rounded-xl bg-white/5 border border-amber-500/20 hidden">پەڕەی سەرەکی</button>
+                <button id="navDashboardBtn" onclick="showPage('dashboard')" class="text-xs sm:text-sm font-bold text-slate-300 hover:text-white px-3 py-2 rounded-xl hidden">دەشبۆرد</button>
+                
+                <button id="authBtn" onclick="openAuthModal()" class="gold-btn text-xs sm:text-sm font-black px-4 py-2 rounded-xl shadow-lg">چوونەژوورەوە / تۆماربوون</button>
+                <button id="logoutBtn" onclick="logout()" class="hidden text-xs text-red-400 bg-red-500/10 px-3 py-2 rounded-xl font-bold">دەرچوون</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 🏠 لاپەڕەی سەرەکی -->
+    <main id="homePage" class="max-w-5xl mx-auto px-4 sm:px-6 py-12 w-full relative-z space-y-16">
+        
+        <!-- بەشی پێشەکی -->
+        <div class="text-center max-w-2xl mx-auto">
+            <h1 class="text-3xl sm:text-5xl font-black mb-4 leading-tight text-white"><span class="gold-text">میهری</span></h1>
+            <p class="text-slate-400 text-xs sm:text-sm">ئەزموونی خزمەتگوزاری مۆدێرن بە بەرزترین کوالێتی بۆ پڕۆژەکانت.</p>
+        </div>
+
+        <!-- بەشی خزمەتگوزارییەکان -->
+        <div class="space-y-4">
+            <div onclick="openOrderModal('ڕاپۆرت', 5000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-file-invoice"></i></div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-bold text-white">دروستکردنی ڕاپۆرت</h3>
+                        <p class="text-slate-400 text-xs mt-0.5">ئامادەکردنی ڕاپۆرتی زانستی و ئەکادیمی بە وردەکاری زۆر بەرزەوە.</p>
+                    </div>
+                </div>
+                <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
+                    <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
+                    <span class="text-sm font-black text-amber-400">٥,٠٠٠ د.ع</span>
+                </div>
+            </div>
+
+            <div onclick="openOrderModal('سیمینار', 8000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-chalkboard-user"></i></div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-bold text-white">ئامادەکردنی سیمینار</h3>
+                        <p class="text-slate-400 text-xs mt-0.5">دیزاینکردنی سیمینار و پاوەرپۆینتی سەکۆیی بەرز بۆ پێشکەشکردن.</p>
+                    </div>
+                </div>
+                <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
+                    <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
+                    <span class="text-sm font-black text-amber-400">٨,٠٠٠ د.ع</span>
+                </div>
+            </div>
+
+            <div onclick="openOrderModal('CV', 4000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-address-card"></i></div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-bold text-white">دروستکردنی CV</h3>
+                        <p class="text-slate-400 text-xs mt-0.5">دیزاینکردنی سیڤی پرۆفیشناڵ و مۆدێرن بە زمانی جیاواز بۆ کار و دامەزراندن.</p>
+                    </div>
+                </div>
+                <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
+                    <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
+                    <span class="text-sm font-black text-amber-400">٤,٠٠٠ د.ع</span>
+                </div>
+            </div>
+
+            <div onclick="openOrderModal('سیستەمی کاشێری', 150000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-cash-register"></i></div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-bold text-white">دروستکردنی سیستەمی کاشێری</h3>
+                        <p class="text-slate-400 text-xs mt-0.5">باشترین کۆدەکان بۆ بەڕێوەبردنی کۆگا و فرۆشتنی مارکێتەکان.</p>
+                    </div>
+                </div>
+                <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
+                    <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
+                    <span class="text-sm font-black text-amber-400">١٥٠,٠٠٠ د.ع</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ⭐ بەشی ڕای کڕیاران (Testimonials) -->
+        <div class="pt-6">
+            <div class="text-center mb-8">
+                <h2 class="text-xl sm:text-2xl font-black text-white flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-star text-amber-400 text-sm"></i> ڕای کڕیارانمان <i class="fa-solid fa-star text-amber-400 text-sm"></i>
+                </h2>
+                <p class="text-slate-500 text-xs mt-1">ئەوەی کڕیارەکانمان دەربارەی خزمەتگوزارییەکانمان دەڵێن</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="premium-card p-5 rounded-2xl border border-white/5 relative">
+                    <div class="flex gap-1 text-[10px] text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-slate-300 text-xs leading-relaxed">"سیڤییەکەم بۆ دروستکردن زۆر خێرا و پرۆفیشناڵ بوو، ڕێک بەو شێوازەی خۆم دەمویست. دەستان خۆش بێت."</p>
+                    <h4 class="text-xs font-bold text-amber-400 mt-4">- ئەحمەد عەلی</h4>
+                </div>
+                <div class="premium-card p-5 rounded-2xl border border-white/5 relative">
+                    <div class="flex gap-1 text-[10px] text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-slate-300 text-xs leading-relaxed">"ڕاپۆرتێکی زانستیم لایان داواکرد، وردەکاری و سەرچاوەکان زۆر ڕێک و پێك بوون. باشترین پلاتفۆڕمن بەڕاستی."</p>
+                    <h4 class="text-xs font-bold text-amber-400 mt-4">- لانە محەمەد</h4>
+                </div>
+                <div class="premium-card p-5 rounded-2xl border border-white/5 relative">
+                    <div class="flex gap-1 text-[10px] text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-slate-300 text-xs leading-relaxed">"سیستەمی کاشێرەکەیان زۆر بێ باگە و خێرایە، پشتگیری کڕیارانیان زۆر باشە و هەمیشە وەڵام دەدەنەوە."</p>
+                    <h4 class="text-xs font-bold text-amber-400 mt-4">- هێمن عومەر</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🛠️ بەشی هاکاری و پشتیوانی (Support) -->
+        <div class="premium-card p-6 rounded-2xl border border-amber-500/20 text-center max-w-xl mx-auto">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl mx-auto mb-3">
+                <i class="fa-solid fa-headset"></i>
+            </div>
+            <h3 class="text-base font-black text-white mb-1">پشتیوانی و هاکاری میهری (Sports Support)</h3>
+            <p class="text-xs text-slate-400 mb-4 leading-relaxed">بۆ هەر کێشەیەک، پرسیارێک یاخود ڕێنماییەک لەسەر خزمەتگوزارییەکانمان، تیمی پشتیوانی هەمیشە ئامادەیە یارمەتیت بدات.</p>
+            <a href="https://t.me/dark_1877t" target="_blank" class="inline-flex items-center gap-2 bg-[#229ED9] hover:bg-[#1e8ec3] text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-lg">
+                <i class="fa-brands fa-telegram text-sm"></i>
+                پەیوەندی بە پشتیوانی تەلەگرام
+            </a>
+        </div>
+
+    </main>
+
+    <!-- 📊 بەشی دەشبۆرد -->
+    <div id="dashboardPage" class="max-w-6xl mx-auto px-4 sm:px-6 py-8 w-full hidden relative-z">
+        <div class="grid lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-1 space-y-4">
+                <div class="p-6 rounded-2xl bg-zinc-950 border border-amber-500/30 text-white shadow-xl">
+                    <h4 class="text-xs font-bold text-slate-400 mb-1">باڵانسی تۆ</h4>
+                    <div class="text-3xl font-black text-amber-400"><span id="userBalance">0</span> د.ع</div>
+                    <div class="text-[11px] text-slate-400 mt-2 border-t border-white/5 pt-2" id="userUsernameDisplay">ناو: ...</div>
+                    <div class="text-[11px] text-slate-400 mt-1" id="userEmail">ئیمەیڵ: ...</div>
+                    <div class="text-[11px] text-slate-400 mt-1" id="userPhoneDisplay">مۆبایل: ...</div>
+                </div>
+
+                <div class="p-5 rounded-2xl premium-card text-center">
+                    <h4 class="text-xs font-black text-amber-400 mb-2">شحنکردن و زیادکردنی باڵانس</h4>
+                    <p class="text-[11px] text-slate-400 mb-4">بۆ زیادکردنی باڵانسی حیسابەکەت، تکایە ڕاستەوخۆ لە ڕێگەی تەلەگرامەوە پەیوەندیم پێوە بکە.</p>
+                    <a href="https://t.me/dark_1877t" target="_blank" class="w-full inline-flex justify-center items-center gap-2 bg-[#229ED9] hover:bg-[#1e8ec3] text-white font-bold py-2.5 rounded-xl text-xs transition duration-300 shadow-md">
+                        <i class="fa-brands fa-telegram text-sm"></i>
+                        پەیوەندی بە تەلەگرامەوە بکە
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 p-5 sm:p-6 rounded-2xl premium-card">
+                <h3 class="text-base font-black text-white mb-4">مێژووی داواکارییەکانت</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right text-xs">
+                        <thead>
+                            <tr class="text-slate-500 border-b border-white/5">
+                                <th class="pb-2">خزمەتگوزاری</th>
+                                <th class="pb-2">بڕی پارە</th>
+                                <th class="pb-2">دۆخ</th>
+                                <th class="pb-2 text-center">فایلی ئامادەکراو</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTable" class="text-slate-300 divide-y divide-white/5">
+                            <tr><td colspan="4" class="text-center py-8 text-slate-500">هیچ داواکارییەک نییە.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📝 فۆڕمی داواکردنی خزمەتگوزاری -->
+    <div id="orderModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[99999] relative-z">
+        <div class="bg-[#111622] border border-white/10 rounded-2xl p-6 w-full max-w-md relative shadow-2xl">
+            <button onclick="closeOrderModal()" class="absolute top-4 left-4 text-slate-400"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 id="orderModalTitle" class="text-lg font-black text-white mb-1">داواکردنی خزمەتگوزاری</h3>
+            <p id="orderModalPrice" class="text-xs text-amber-400 font-bold mb-4"></p>
+            
+            <form onsubmit="submitOrder(event)">
+                <div id="cvFields" class="hidden space-y-3 mb-4">
+                    <input type="text" id="cvDept" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="بەشەکەت چییە؟ (بۆ نموونە: کۆمپیوتەر)">
+                    <div class="w-full">
+                        <label class="block text-[11px] text-slate-400 mb-1">وێنەیەک بۆ ناو CV دیاری بکە:</label>
+                        <input type="file" id="cvFileDrop" accept="image/*" onchange="convertImageToBase64()" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white file:bg-amber-500/20 file:text-amber-400 file:border-0 file:rounded-lg file:px-2 file:py-1 file:ml-2 file:font-bold cursor-pointer">
+                    </div>
+                    <textarea id="cvInfo" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="زانیارییەکانی تر (ناو، تەمەن، ئەزموون، زمانەکان)"></textarea>
+                </div>
+
+                <div id="generalFields" class="hidden mb-4">
+                    <textarea id="generalDetails" rows="4" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="تکایە بە تەواوی ڕوونی بکەرەوە کە دەتەوێت بابەتەکە لەسەر چی بێت و چۆن بێت..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full gold-btn font-black py-2.5 rounded-xl text-xs shadow-md">پەسەندکردنی داواکاری</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 🔐 مۆدال ئەکاونت -->
+    <div id="authModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[99999] relative-z">
+        <div class="bg-[#111622] border border-white/10 rounded-2xl p-6 w-full max-w-sm relative shadow-2xl">
+            <button onclick="closeAuthModal()" class="absolute top-4 left-4 text-slate-400"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 id="authTitle" class="text-lg font-black text-white mb-4">چوونەژوورەوە</h3>
+            <form onsubmit="handleAuth(event)">
+                <input type="text" id="usernameField" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white mb-2 hidden" placeholder="ناوی تەواو (بەکارهێنەر)">
+                <input type="email" id="emailField" required class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-2" dir="ltr" placeholder="ئیمەیڵ">
+                <input type="tel" id="phoneField" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-2 hidden" dir="ltr" placeholder="مۆبایل">
+                <input type="password" id="passwordField" required class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-1" dir="ltr" placeholder="پاسۆرد">
+                
+                <p id="passwordHint" class="text-[10px] text-slate-500 mb-4 hidden leading-tight">پاسۆرد دەبێت لانی کەم ٨ پیت بێت، پیتی گەورە (A-Z) و هێمای تێدابێت (وەک @،#،$).</p>
+                
+                <button type="submit" id="submitAuthBtn" class="w-full gold-btn font-black py-2 rounded-xl text-xs mb-4">چوونەژوورەوە</button>
+            </form>
+            <button onclick="toggleAuthMode()" id="toggleModeBtn" class="text-xs text-amber-400 underline font-bold w-full text-center">دروستکردنی حیسابی نوێ</button>
+        </div>
+    </div>
+
+    <footer class="border-t border-white/5 py-4 text-center text-xs text-slate-600 relative-z">© ٢٠٢٦ پلاتفۆرمی میهری.</footer>
+
+    <script>
+        // 🔒 پاراستنی سۆرس کۆد
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+        };
+
+        const supabaseClient = window.supabase.createClient('https://lydmtihssxpglpfoeyiz.supabase.co', 'sb_publishable_VWm_EBXynu4Pk1Kx0tjPLw_z7PQoIyy');
+
+        let currentUser = null;
+        let isSignUpMode = false;
+        let activeServiceName = '';
+        let activeServicePrice = 0;
+        let encodedBase64Image = '';
+
+        // 🌟 Particles Animation
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.alpha = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX; this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.save(); ctx.globalAlpha = this.alpha;
+                ctx.shadowBlur = 10; ctx.shadowColor = '#d4af37'; ctx.fillStyle = '#d4af37';
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+                ctx.restore();
+            }
+        }
+        function initParticles() { particles = []; for (let i = 0; i < 75; i++) particles.push(new Particle()); }
+        initParticles();
+        function animateParticles() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
+        animateParticles();
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedUser = localStorage.getItem('mihry_session');
+            if (savedUser) {
+                loginSuccess(JSON.parse(savedUser));
+            }
+        });
+
+        function showPage(pageName) {
+            const homePage = document.getElementById('homePage');
+            const dashboardPage = document.getElementById('dashboardPage');
+            const navHomeBtn = document.getElementById('navHomeBtn');
+            const navDashboardBtn = document.getElementById('navDashboardBtn');
+
+            if (pageName === 'home') {
+                homePage.classList.remove('hidden'); dashboardPage.classList.add('hidden');
+                navHomeBtn.classList.add('text-amber-400', 'bg-white/5', 'border', 'border-amber-500/20');
+                navHomeBtn.classList.remove('text-slate-300');
+                navDashboardBtn.classList.remove('text-amber-400', 'bg-white/5', 'border', 'border-amber-500/20');
+                navDashboardBtn.classList.add('text-slate-300');
+            } else if (pageName === 'dashboard') {
+                homePage.classList.add('hidden'); dashboardPage.classList.remove('hidden');
+                navDashboardBtn.classList.add('text-amber-400', 'bg-white/5', 'border', 'border-amber-500/20');
+                navDashboardBtn.classList.remove('text-slate-300');
+                navHomeBtn.classList.remove('text-amber-400', 'bg-white/5', 'border', 'border-amber-500/20');
+                navHomeBtn.classList.add('text-slate-300');
+            }
+        }
+
+        function openAuthModal() { document.getElementById('authModal').classList.remove('hidden'); }
+        function closeAuthModal() { document.getElementById('authModal').classList.add('hidden'); }
+
+        function toggleAuthMode() {
+            isSignUpMode = !isSignUpMode;
+            document.getElementById('usernameField').classList.toggle('hidden', !isSignUpMode);
+            document.getElementById('phoneField').classList.toggle('hidden', !isSignUpMode);
+            document.getElementById('passwordHint').classList.toggle('hidden', !isSignUpMode);
+            document.getElementById('authTitle').innerText = isSignUpMode ? "دروستکردنی حیساب" : "چوونەژوورەوە";
+            document.getElementById('submitAuthBtn').innerText = isSignUpMode ? "تۆماربوون" : "چوونەژوورەوە";
+            document.getElementById('toggleModeBtn').innerText = isSignUpMode ? "حیسابم هەیە؟ لۆگین" : "دروستکردنی حیسابی نوێ";
+        }
+
+        function isPasswordStrong(password) {
+            const minLength = 8;
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasSymbol = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(password);
+            return password.length >= minLength && hasUpperCase && hasSymbol;
+        }
+
+        async function handleAuth(e) {
+            e.preventDefault();
+            const email = document.getElementById('emailField').value;
+            const password = document.getElementById('passwordField').value;
+
+            try {
+                if (isSignUpMode) {
+                    const username = document.getElementById('usernameField').value;
+                    const phone = document.getElementById('phoneField').value;
+
+                    if (!username.trim()) return alert('تکایە ناوی بەکارهێنەر بنووسە!');
+                    if (!isPasswordStrong(password)) {
+                        return alert('پاسۆردەکەت لاوازە! دەبێت لانی کەم ٨ پیت بێت و پیتی گەورە و سیمبولی تێدابێت.');
+                    }
+
+                    const { data, error } = await supabaseClient.from('mihry_users').insert([{ username, email, phone, password, balance: 0 }]).select().maybeSingle();
+                    if (error) throw error;
+                    alert('حیساب بە سەرکەوتوویی دروستبوو! 🎉');
+                    loginSuccess(data);
+                } else {
+                    const { data, error } = await supabaseClient.from('mihry_users').select('*').eq('email', email).eq('password', password).maybeSingle();
+                    if (error) throw error;
+                    if (!data) return alert('ئیمەیڵ یان پاسۆرد هەڵەیە!');
+                    loginSuccess(data);
+                }
+            } catch (error) { alert(error.message); }
+        }
+
+        function loginSuccess(user) {
+            currentUser = user;
+            localStorage.setItem('mihry_session', JSON.stringify(user));
+
+            document.getElementById('navHomeBtn').classList.remove('hidden');
+            document.getElementById('navDashboardBtn').classList.remove('hidden');
+            showPage('home');
+            document.getElementById('authBtn').classList.add('hidden');
+            document.getElementById('logoutBtn').classList.remove('hidden');
+            
+            document.getElementById('userUsernameDisplay').innerText = "ناو: " + (user.username || 'دیاری نەکراوە');
+            document.getElementById('userEmail').innerText = "ئیمەیڵ: " + user.email;
+            document.getElementById('userPhoneDisplay').innerText = "مۆبایل: " + (user.phone || 'دیاری نەکراوە');
+            document.getElementById('userBalance').innerText = parseInt(user.balance).toLocaleString();
+            closeAuthModal();
+            fetchOrders();
+        }
+
+        function convertImageToBase64() {
+            const file = document.getElementById('cvFileDrop').files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onloadend = function () { encodedBase64Image = reader.result; };
+            reader.readAsDataURL(file);
+        }
+
+        function openOrderModal(serviceName, price) {
+            if (!currentUser) return alert('تکایە پێشتر لۆگین بکە بۆ داواکردنی خزمەتگوزاری!');
+            activeServiceName = serviceName;
+            activeServicePrice = price;
+            encodedBase64Image = '';
+            
+            document.getElementById('orderModalTitle').innerText = "داواکردنی " + serviceName;
+            document.getElementById('orderModalPrice').innerText = "بڕی پارە لە باڵانست دەبڕدرێت: " + price.toLocaleString() + " د.ع";
+            
+            if (serviceName === 'CV') {
+                document.getElementById('cvFields').classList.remove('hidden');
+                document.getElementById('generalFields').classList.add('hidden');
+            } else {
+                document.getElementById('cvFields').classList.add('hidden');
+                document.getElementById('generalFields').classList.remove('hidden');
+            }
+            document.getElementById('orderModal').classList.remove('hidden');
+        }
+
+        function closeOrderModal() { document.getElementById('orderModal').classList.add('hidden'); }
+
+        async function submitOrder(e) {
+            e.preventDefault();
+            if (currentUser.balance < activeServicePrice) return alert('باڵانسی پێویستت نییە! تکایە باڵانسەکەت شحن بکەرەوە.');
+
+            let details = '';
+            if (activeServiceName === 'CV') {
+                const dept = document.getElementById('cvDept').value;
+                const info = document.getElementById('cvInfo').value;
+                if(!encodedBase64Image) return alert('تکایە سەرەتا وێنەیەک بۆ ناو CV دیاری بکە!');
+                details = `بەش: ${dept} | وێنە: ${encodedBase64Image} | زانیاری: ${info}`;
+            } else {
+                details = document.getElementById('generalDetails').value;
+            }
+
+            try {
+                const { error: orderError } = await supabaseClient.from('mihry_orders').insert([{
+                    user_email: currentUser.email,
+                    service_name: activeServiceName,
+                    price: activeServicePrice,
+                    details: details,
+                    status: 'لەکاردایە',
+                    download_url: ''
+                }]);
+                if (orderError) throw orderError;
+
+                const newBalance = currentUser.balance - activeServicePrice;
+                const { error: userError } = await supabaseClient.from('mihry_users').update({ balance: newBalance }).eq('email', currentUser.email);
+                if (userError) throw userError;
+
+                alert('داواکارییەکەت بە سەرکەوتوویی تۆمارکرا! 🎉');
+                currentUser.balance = newBalance;
+                document.getElementById('userBalance').innerText = newBalance.toLocaleString();
+                
+                localStorage.setItem('mihry_session', JSON.stringify(currentUser));
+                
+                closeOrderModal();
+                fetchOrders();
+            } catch (error) { alert('کێشەیەک ڕوویدا: ' + error.message); }
+        }
+
+        async function fetchOrders() {
+            const { data } = await supabaseClient.from('mihry_orders').select('*').eq('user_email', currentUser.email);
+            const tbody = document.getElementById('historyTable');
+            tbody.innerHTML = '';
+            
+            if (data && data.length > 0) {
+                data.forEach(row => {
+                    let downloadButton = `<span class="text-slate-500 text-[11px]">هێشتا ئامادە نییە</span>`;
+                    if (row.download_url) {
+                        downloadButton = `<a href="${row.download_url}" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-black px-3 py-1 rounded-lg font-bold text-[11px] inline-block transition"><i class="fa-solid fa-download"></i> داونلۆد</a>`;
+                    }
+                    tbody.innerHTML += `
+                        <tr class="border-b border-white/5">
+                            <td class="py-3 font-bold">${row.service_name}</td>
+                            <td>${parseInt(row.price).toLocaleString()} د.ع</td>
+                            <td class="text-amber-400">${row.status}</td>
+                            <td class="text-center py-2">${downloadButton}</td>
+                        </tr>`;
+                });
+            } else {
+                tbody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-slate-500">هیچ داواکارییەک نییە.</td></tr>';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('mihry_session');
+            location.reload();
+        }
+    </script>
+</body>
+</html>
             background-repeat: no-repeat;
             opacity: 0.11; /* ڕێژەی کاڵکردنەوە (٨٪ دیارە بۆ ئەوەی شیک بێت) */
             z-index: -2; /* دەیخاتە دواوەی دواوەی بریسکەکانیش */
