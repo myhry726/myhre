@@ -170,7 +170,6 @@
                 </div>
             </div>
 
-            <!-- 👻 باندی سناپچات -->
             <div onclick="openOrderModal('چاککردنی باندی سناپچات (SS06/SS07)', 20000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 rounded-xl bg-yellow-500/10 flex items-center justify-center text-yellow-400 text-xl"><i class="fa-brands fa-snapchat"></i></div>
@@ -185,7 +184,6 @@
                 </div>
             </div>
 
-            <!-- 🚨 سوتاندنی ئەکاونت -->
             <div onclick="openOrderModal('سوتاندنی ئەکاونت (بڵاوکردنەوەی وێنە و هەڕەشە)', 45000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400 text-xl"><i class="fa-solid fa-shield-halved"></i></div>
@@ -196,7 +194,7 @@
                 </div>
                 <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
                     <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
-                    <span class="text-sm font-black text-red-400">٤٥,٠٠٠ د.ع</span>
+                    <span class="text-sm font-black text-red-400">٤٥,٠٠0 د.ع</span>
                 </div>
             </div>
         </div>
@@ -282,7 +280,6 @@
         </div>
     </div>
 
-    <!-- مۆداڵی داواکاری هەمەلایەنە -->
     <div id="orderModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[99999] relative-z">
         <div class="bg-[#111622] border border-white/10 rounded-2xl p-6 w-full max-w-md relative shadow-2xl">
             <button onclick="closeOrderModal()" class="absolute top-4 left-4 text-slate-400"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -291,17 +288,15 @@
             
             <form onsubmit="submitOrder(event)">
                 
-                <!-- 1. بەشی سیڤی (CV) -->
                 <div id="cvFields" class="hidden space-y-3 mb-4">
                     <input type="text" id="cvDept" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="بەشەکەت چییە؟ (بۆ نموونە: کۆمپیوتەر)">
                     <div class="w-full">
                         <label class="block text-[11px] text-slate-400 mb-1">وێنەیەک بۆ ناو CV دیاری بکە:</label>
-                        <input type="file" id="cvFileDrop" accept="image/*" onchange="convertImageToBase64()" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white file:bg-amber-500/20 file:text-amber-400 file:border-0 file:rounded-lg file:px-2 file:py-1 file:ml-2 file:font-bold cursor-pointer">
+                        <input type="file" id="cvFileDrop" accept="image/*" onchange="convertImageToBase64('cvFileDrop', 'cv')" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white file:bg-amber-500/20 file:text-amber-400 file:border-0 file:rounded-lg file:px-2 file:py-1 file:ml-2 file:font-bold cursor-pointer">
                     </div>
                     <textarea id="cvInfo" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="زانیارییەکانی تر (ناو، تەمەن، ئەزموون، زمانەکان)"></textarea>
                 </div>
 
-                <!-- 2. بەشی باندی سناپچات SS06 / SS07 -->
                 <div id="snapchatFields" class="hidden space-y-3 mb-4">
                     <input type="text" id="snapUser" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="یوزەرنەییمی سناپچات (Username)">
                     <input type="text" id="snapDevice" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="ناوی مۆبایل و مۆدێلەکەی (بۆ نموونە: iPhone 14 Pro Max)">
@@ -313,7 +308,6 @@
                     </select>
                 </div>
 
-                <!-- 3. بەشی سوتاندنی ئەکاونت -->
                 <div id="burnFields" class="hidden space-y-3 mb-4">
                     <input type="text" id="burnTarget" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="لینک یاخود یوزەرنەییمی ئەکاونتی سەرپێچیکار">
                     <select id="burnReason" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
@@ -322,10 +316,21 @@
                         <option value="ئەکاونتی ساختە و فەیک">ئەکاونتی ساختە (Fake Account)</option>
                         <option value="کێشەی تر">کێشەی تر</option>
                     </select>
+                    
+                    <div class="grid grid-cols-2 gap-2 border border-white/5 p-2 rounded-xl bg-black/20">
+                        <div>
+                            <label class="block text-[10px] text-slate-400 mb-1">وێنەی پێشەوەی کارت:</label>
+                            <input type="file" id="idFrontFile" accept="image/*" onchange="convertImageToBase64('idFrontFile', 'front')" class="w-full bg-black/40 border border-white/10 rounded-xl p-1 text-[10px] text-white file:bg-amber-500/20 file:text-amber-400 file:border-0 file:rounded file:px-1 cursor-pointer">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-slate-400 mb-1">وێنەی دواوەی کارت:</label>
+                            <input type="file" id="idBackFile" accept="image/*" onchange="convertImageToBase64('idBackFile', 'back')" class="w-full bg-black/40 border border-white/10 rounded-xl p-1 text-[10px] text-white file:bg-amber-500/20 file:text-amber-400 file:border-0 file:rounded file:px-1 cursor-pointer">
+                        </div>
+                    </div>
+
                     <textarea id="burnDetails" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="وردەکاری زیاتر بنووسە ئەگەر پێویستە..."></textarea>
                 </div>
 
-                <!-- 4. بەشی گشتی (ڕاپۆرت، سیمینار، کاشێر) -->
                 <div id="generalFields" class="hidden mb-4">
                     <textarea id="generalDetails" rows="4" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="تکایە بە تەواوی ڕوونی بکەرەوە کە دەتەوێت بابەتەکە لەسەر چی بێت و چۆن بێت..."></textarea>
                 </div>
@@ -374,7 +379,11 @@
         let isSignUpMode = false;
         let activeServiceName = '';
         let activeServicePrice = 0;
-        let encodedBase64Image = '';
+        
+        // گۆڕاوەکان بۆ هەڵگرتنی وێنەکان
+        let encodedBase64Image = ''; 
+        let encodedIdFront = '';
+        let encodedIdBack = '';
 
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
@@ -503,11 +512,16 @@
             fetchOrders();
         }
 
-        function convertImageToBase64() {
-            const file = document.getElementById('cvFileDrop').files[0];
+        // فەنکشنی گشتگیر بۆ گۆڕینی وێنەکان بۆ فۆرماتی بەهێزی Base64
+        function convertImageToBase64(inputId, targetType) {
+            const file = document.getElementById(inputId).files[0];
             if (!file) return;
             const reader = new FileReader();
-            reader.onloadend = function () { encodedBase64Image = reader.result; };
+            reader.onloadend = function () {
+                if (targetType === 'cv') encodedBase64Image = reader.result;
+                if (targetType === 'front') encodedIdFront = reader.result;
+                if (targetType === 'back') encodedIdBack = reader.result;
+            };
             reader.readAsDataURL(file);
         }
 
@@ -516,17 +530,17 @@
             activeServiceName = serviceName;
             activeServicePrice = price;
             encodedBase64Image = '';
+            encodedIdFront = '';
+            encodedIdBack = '';
             
             document.getElementById('orderModalTitle').innerText = "داواکردنی " + serviceName;
             document.getElementById('orderModalPrice').innerText = "بڕی پارە لە باڵانست دەبڕدرێت: " + price.toLocaleString() + " د.ع";
             
-            // شاردنەوەی هەموو بەشەکان سەرەتا
             document.getElementById('cvFields').classList.add('hidden');
             document.getElementById('snapchatFields').classList.add('hidden');
             document.getElementById('burnFields').classList.add('hidden');
             document.getElementById('generalFields').classList.add('hidden');
 
-            // نیشاندانی بەشی گونجاو بەپێی جۆری خزمەتگوزاری
             if (serviceName === 'CV') {
                 document.getElementById('cvFields').classList.remove('hidden');
             } else if (serviceName.includes('باندی سناپچات')) {
@@ -568,7 +582,9 @@
                 const reason = document.getElementById('burnReason').value;
                 const more = document.getElementById('burnDetails').value;
                 if(!target) return alert('تکایە لینک یاخود یوزەرنەییمی ئەکاونتەکە بنووسە!');
-                details = `ئەکاونتی مەبەست: ${target} | هۆکار: ${reason} | وردەکاری زیاتر: ${more}`;
+                if(!encodedIdFront || !encodedIdBack) return alert('بارکردنی وێنەی پێشەوە و دواوەی کارتی نیشتمانی ناچارییە!');
+                
+                details = `ئەکاونتی مەبەست: ${target} | هۆکار: ${reason} | کارتی نیشتمانی پێشەوە: ${encodedIdFront} | کارتی نیشتمانی دواوە: ${encodedIdBack} | وردەکاری زیاتر: ${more}`;
             } else {
                 details = document.getElementById('generalDetails').value;
                 if(!details.trim()) return alert('تکایە زانیاری داواکارییەکە بنووسە!');
