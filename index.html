@@ -152,7 +152,7 @@
                 </div>
                 <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
                     <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
-                    <span class="text-sm font-black text-amber-400">٤,٠٠0 د.ع</span>
+                    <span class="text-sm font-black text-amber-400">٤,٠٠٠ د.ع</span>
                 </div>
             </div>
 
@@ -170,6 +170,7 @@
                 </div>
             </div>
 
+            <!-- 👻 باندی سناپچات -->
             <div onclick="openOrderModal('چاککردنی باندی سناپچات (SS06/SS07)', 20000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 rounded-xl bg-yellow-500/10 flex items-center justify-center text-yellow-400 text-xl"><i class="fa-brands fa-snapchat"></i></div>
@@ -184,6 +185,7 @@
                 </div>
             </div>
 
+            <!-- 🚨 سوتاندنی ئەکاونت -->
             <div onclick="openOrderModal('سوتاندنی ئەکاونت (بڵاوکردنەوەی وێنە و هەڕەشە)', 45000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
                 <div class="flex items-center gap-4">
                     <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400 text-xl"><i class="fa-solid fa-shield-halved"></i></div>
@@ -194,7 +196,7 @@
                 </div>
                 <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
                     <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
-                    <span class="text-sm font-black text-red-400">٤base,٠٠٠ د.ع</span>
+                    <span class="text-sm font-black text-red-400">٤٥,٠٠٠ د.ع</span>
                 </div>
             </div>
         </div>
@@ -209,7 +211,7 @@
             <div class="grid md:grid-cols-3 gap-4">
                 <div class="premium-card p-5 rounded-2xl border border-white/5 relative">
                     <div class="flex gap-1 text-[10px] text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                    <p class="text-slate-300 text-xs leading-relaxed">"سیڤییەکەم بۆ دروستکردن زۆر خێرا و پرۆفیشnaڵ بوو، ڕێک بەو شێوازەی خۆم دەمویست. دەستان خۆش بێت."</p>
+                    <p class="text-slate-300 text-xs leading-relaxed">"سیڤییەکەم بۆ دروستکردن زۆر خێرا و پرۆفیشناڵ بوو، ڕێک بەو شێوازەی خۆم دەمویست. دەستان خۆش بێت."</p>
                     <h4 class="text-xs font-bold text-amber-400 mt-4">- ئەحمەد عەلی</h4>
                 </div>
                 <div class="premium-card p-5 rounded-2xl border border-white/5 relative">
@@ -219,7 +221,7 @@
                 </div>
                 <div class="premium-card p-5 rounded-2xl border border-white/5 relative">
                     <div class="flex gap-1 text-[10px] text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                    <p class="text-slate-300 text-xs leading-relaxed">"سیستەمی کاشێرەکەیان زۆر بێ باگە و خێرایە، پشتگیری کڕیارانیان زۆر باشە و هەمیشە وەڵام دەدەنەوە."</p>
+                    <p class="text-slate-300 text-xs leading-relaxed">"سیستانە کاشێرەکەیان زۆر بێ باگە و خێرایە، پشتگیری کڕیارانیان زۆر باشە و هەمیشە وەڵام دەدەنەوە."</p>
                     <h4 class="text-xs font-bold text-amber-400 mt-4">- هێمن عومەر</h4>
                 </div>
             </div>
@@ -280,13 +282,16 @@
         </div>
     </div>
 
+    <!-- مۆداڵی داواکاری هەمەلایەنە -->
     <div id="orderModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[99999] relative-z">
         <div class="bg-[#111622] border border-white/10 rounded-2xl p-6 w-full max-w-md relative shadow-2xl">
             <button onclick="closeOrderModal()" class="absolute top-4 left-4 text-slate-400"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <h3 id="orderModalTitle" class="text-lg font-black text-white mb-1">داواکردنی khزمەتگوزاری</h3>
+            <h3 id="orderModalTitle" class="text-lg font-black text-white mb-1">داواکردنی خزمەتگوزاری</h3>
             <p id="orderModalPrice" class="text-xs text-amber-400 font-bold mb-4"></p>
             
             <form onsubmit="submitOrder(event)">
+                
+                <!-- 1. بەشی سیڤی (CV) -->
                 <div id="cvFields" class="hidden space-y-3 mb-4">
                     <input type="text" id="cvDept" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="بەشەکەت چییە؟ (بۆ نموونە: کۆمپیوتەر)">
                     <div class="w-full">
@@ -296,6 +301,31 @@
                     <textarea id="cvInfo" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="زانیارییەکانی تر (ناو، تەمەن، ئەزموون، زمانەکان)"></textarea>
                 </div>
 
+                <!-- 2. بەشی باندی سناپچات SS06 / SS07 -->
+                <div id="snapchatFields" class="hidden space-y-3 mb-4">
+                    <input type="text" id="snapUser" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="یوزەرنەییمی سناپچات (Username)">
+                    <input type="text" id="snapDevice" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="ناوی مۆبایل و مۆدێلەکەی (بۆ نموونە: iPhone 14 Pro Max)">
+                    <input type="text" id="snapImei" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="کۆدی IMEI مۆبایلەکەت (ئەگەر هەیە)">
+                    <select id="snapCode" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
+                        <option value="SS06">کۆدی باند: SS06</option>
+                        <option value="SS07">کۆدی باند: SS07</option>
+                        <option value="هەردووکی">SS06 و SS07 پێکەوە</option>
+                    </select>
+                </div>
+
+                <!-- 3. بەشی سوتاندنی ئەکاونت -->
+                <div id="burnFields" class="hidden space-y-3 mb-4">
+                    <input type="text" id="burnTarget" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="لینک یاخود یوزەرنەییمی ئەکاونتی سەرپێچیکار">
+                    <select id="burnReason" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
+                        <option value="بڵاوکردنەوەی وێنەی شەخسی">بڵاوکردنەوەی وێنەی شەخسی و نامووسی</option>
+                        <option value="هەڕەشەکردن و سەرانە">هەڕەشەکردن و داواکردنی سەرانە (ابتزاز)</option>
+                        <option value="ئەکاونتی ساختە و فەیک">ئەکاونتی ساختە (Fake Account)</option>
+                        <option value="کێشەی تر">کێشەی تر</option>
+                    </select>
+                    <textarea id="burnDetails" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="وردەکاری زیاتر بنووسە ئەگەر پێویستە..."></textarea>
+                </div>
+
+                <!-- 4. بەشی گشتی (ڕاپۆرت، سیمینار، کاشێر) -->
                 <div id="generalFields" class="hidden mb-4">
                     <textarea id="generalDetails" rows="4" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="تکایە بە تەواوی ڕوونی بکەرەوە کە دەتەوێت بابەتەکە لەسەر چی بێت و چۆن بێت..."></textarea>
                 </div>
@@ -414,9 +444,7 @@
             document.getElementById('usernameField').classList.toggle('hidden', !isSignUpMode);
             document.getElementById('phoneField').classList.toggle('hidden', !isSignUpMode);
             document.getElementById('passwordHint').classList.toggle('hidden', !isSignUpMode);
-            
             document.getElementById('forgotPasswordContainer').classList.toggle('hidden', isSignUpMode);
-            
             document.getElementById('authTitle').innerText = isSignUpMode ? "دروستکردنی حیساب" : "چوونەژوورەوە";
             document.getElementById('submitAuthBtn').innerText = isSignUpMode ? "تۆماربوون" : "چوونەژوورەوە";
             document.getElementById('toggleModeBtn').innerText = isSignUpMode ? "حیسابم هەیە؟ لۆگین" : "دروستکردنی حیسابی نوێ";
@@ -492,21 +520,26 @@
             document.getElementById('orderModalTitle').innerText = "داواکردنی " + serviceName;
             document.getElementById('orderModalPrice').innerText = "بڕی پارە لە باڵانست دەبڕدرێت: " + price.toLocaleString() + " د.ع";
             
+            // شاردنەوەی هەموو بەشەکان سەرەتا
+            document.getElementById('cvFields').classList.add('hidden');
+            document.getElementById('snapchatFields').classList.add('hidden');
+            document.getElementById('burnFields').classList.add('hidden');
+            document.getElementById('generalFields').classList.add('hidden');
+
+            // نیشاندانی بەشی گونجاو بەپێی جۆری خزمەتگوزاری
             if (serviceName === 'CV') {
                 document.getElementById('cvFields').classList.remove('hidden');
-                document.getElementById('generalFields').classList.add('hidden');
-            } else if (serviceName === 'چاککردنی باندی سناپچات (SS06 / SS07)') {
-                document.getElementById('cvFields').classList.add('hidden');
-                document.getElementById('generalFields').classList.remove('hidden');
-                document.getElementById('generalDetails').placeholder = "تکایە ئەم زانیاریانە بنووسە:\n١- یوزەرنەییمی سناپچات:\n٢- جۆری ئامێر (ئایفۆن یان ئەندرۆید):\n٣- کۆدی باندەکە (SS06 یان SS07):";
-            } else if (serviceName === 'سوتاندنی ئەکاونت (بڵاوکردنەوەی وێنە و هەڕەشە)') {
-                document.getElementById('cvFields').classList.add('hidden');
-                document.getElementById('generalFields').classList.remove('hidden');
-                document.getElementById('generalDetails').placeholder = "تکایە بە وردی بنووسە:\n١- لینکی ئەکاونتی سەرپێچیکار یان یوزەرنەیەم:\n٢- کێشەکە چییە؟ (وێنەی بڵاوکردووەتەوە، فەیکە، یان هەڕەشە دەکات؟):\n*(تێبینی: ئەم کەیسانە بە خێراترین کات کاریان لەسەر دەکرێت)*";
+            } else if (serviceName.includes('باندی سناپچات')) {
+                document.getElementById('snapchatFields').classList.remove('hidden');
+            } else if (serviceName.includes('سوتاندنی ئەکاونت')) {
+                document.getElementById('burnFields').classList.remove('hidden');
             } else {
-                document.getElementById('cvFields').classList.add('hidden');
                 document.getElementById('generalFields').classList.remove('hidden');
-                document.getElementById('generalDetails').placeholder = "تکایە بە تەواوی ڕوونی بکەرەوە کە دەتەوێت بابەتەکە لەسەر چی بێت و چۆن بێت...";
+                if (serviceName === 'ڕاپۆرت') {
+                    document.getElementById('generalDetails').placeholder = "تکایە ناونیشانی ڕاپۆرت، زمان، و ژمارەی پەڕە یاخود سەرچاوەکان لێرە بنووسە...";
+                } else {
+                    document.getElementById('generalDetails').placeholder = "تکایە بە تەواوی ڕوونی بکەرەوە کە دەتەوێت بابەتەکە لەسەر چی بێت و چۆن بێت...";
+                }
             }
             document.getElementById('orderModal').classList.remove('hidden');
         }
@@ -523,8 +556,22 @@
                 const info = document.getElementById('cvInfo').value;
                 if(!encodedBase64Image) return alert('تکایە سەرەتا وێنەیەک بۆ ناو CV دیاری بکە!');
                 details = `بەش: ${dept} | وێنە: ${encodedBase64Image} | زانیاری: ${info}`;
+            } else if (activeServiceName.includes('باندی سناپچات')) {
+                const user = document.getElementById('snapUser').value;
+                const device = document.getElementById('snapDevice').value;
+                const imei = document.getElementById('snapImei').value;
+                const code = document.getElementById('snapCode').value;
+                if(!user || !device) return alert('تکایە ناوی مۆبایل و یوزەرنەییم پڕبکەرەوە!');
+                details = `سناپچات یوزەر: ${user} | جۆری مۆبایل: ${device} | ئای مەی مۆبایل IMEI: ${imei} | جۆری باند: ${code}`;
+            } else if (activeServiceName.includes('سوتاندنی ئەکاونت')) {
+                const target = document.getElementById('burnTarget').value;
+                const reason = document.getElementById('burnReason').value;
+                const more = document.getElementById('burnDetails').value;
+                if(!target) return alert('تکایە لینک یاخود یوزەرنەییمی ئەکاونتەکە بنووسە!');
+                details = `ئەکاونتی مەبەست: ${target} | هۆکار: ${reason} | وردەکاری زیاتر: ${more}`;
             } else {
                 details = document.getElementById('generalDetails').value;
+                if(!details.trim()) return alert('تکایە زانیاری داواکارییەکە بنووسە!');
             }
 
             try {
