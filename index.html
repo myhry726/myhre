@@ -55,34 +55,70 @@
         }
 
         .gold-text {
-            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #b38728 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        /* دوگمەی زێڕینی لۆکس و درەوشاوە لە کاتی هۆڤەردا */
         .gold-btn {
             background: linear-gradient(135deg, #bf953f 0%, #d4af37 50%, #b38728 100%);
             color: #0b0f17;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
+        }
+
+        .gold-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: all 0.6s ease;
         }
 
         .gold-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(212, 175, 55, 0.35);
+            filter: brightness(1.1);
         }
 
+        .gold-btn:hover::before {
+            left: 100%;
+        }
+
+        .gold-btn:active {
+            transform: translateY(-1px) scale(0.99);
+        }
+
+        /* کارتە پرۆفیشناڵەکان بە هێڵی لێواری جوڵاو */
         .premium-card {
-            background: rgba(15, 22, 36, 0.7);
+            background: rgba(15, 22, 36, 0.65);
             border: 1px solid rgba(212, 175, 55, 0.08);
             backdrop-filter: blur(16px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            -webkit-backdrop-filter: blur(16px);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         .premium-card:hover {
-            border-color: rgba(212, 175, 55, 0.4);
-            background: rgba(20, 30, 48, 0.85);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            border-color: rgba(212, 175, 55, 0.45);
+            background: rgba(22, 34, 54, 0.85);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.05);
+        }
+
+        /* دیزاینی دوگمە ئاساییەکانی سەرەوە (پەڕەی سەرەکی و دەشبۆرد) */
+        .nav-link-btn {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+        }
+        
+        .nav-link-btn:hover {
+            background-color: rgba(212, 175, 55, 0.1);
+            color: #fcd34d !important;
+            transform: translateY(-1px);
         }
     </style>
 </head>
@@ -97,11 +133,11 @@
                 <span class="text-2xl font-black tracking-wide gold-text">میهری</span>
             </div>
             <div class="flex items-center gap-3">
-                <button id="navHomeBtn" onclick="showPage('home')" class="text-xs sm:text-sm font-bold text-amber-400 px-3 py-2 rounded-xl bg-white/5 border border-amber-500/20 hidden">پەڕەی سەرەکی</button>
-                <button id="navDashboardBtn" onclick="showPage('dashboard')" class="text-xs sm:text-sm font-bold text-slate-300 hover:text-white px-3 py-2 rounded-xl hidden">دەشبۆرد</button>
+                <button id="navHomeBtn" onclick="showPage('home')" class="nav-link-btn text-xs sm:text-sm font-bold text-amber-400 px-4 py-2 rounded-xl bg-white/5 border border-amber-500/20 hidden">پەڕەی سەرەکی</button>
+                <button id="navDashboardBtn" onclick="showPage('dashboard')" class="nav-link-btn text-xs sm:text-sm font-bold text-slate-300 hover:text-white px-4 py-2 rounded-xl hidden">دەشبۆرد</button>
                 
-                <button id="authBtn" onclick="openAuthModal()" class="gold-btn text-xs sm:text-sm font-black px-4 py-2 rounded-xl shadow-lg">چوونەژوورەوە / تۆماربوون</button>
-                <button id="logoutBtn" onclick="logout()" class="hidden text-xs text-red-400 bg-red-500/10 px-3 py-2 rounded-xl font-bold">دەرچوون</button>
+                <button id="authBtn" onclick="openAuthModal()" class="gold-btn text-xs sm:text-sm font-black px-5 py-2.5 rounded-xl shadow-lg">چوونەژوورەوە / تۆماربوون</button>
+                <button id="logoutBtn" onclick="logout()" class="hidden text-xs text-red-400 bg-red-500/10 hover:bg-red-500/20 px-3 py-2 rounded-xl font-bold transition duration-300">دەرچوون</button>
             </div>
         </div>
     </header>
@@ -194,7 +230,7 @@
                 </div>
                 <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
                     <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
-                    <span class="text-sm font-black text-red-400">٤٥,٠٠0 د.ع</span>
+                    <span class="text-sm font-black text-red-400">٤٥,٠٠٠ د.ع</span>
                 </div>
             </div>
         </div>
@@ -231,7 +267,7 @@
             </div>
             <h3 class="text-base font-black text-white mb-1">پشتیوانی و هاکاری میهری (Sports Support)</h3>
             <p class="text-xs text-slate-400 mb-4 leading-relaxed">بۆ هەر کێشەیەک، پرسیارێک یاخود ڕێنماییەک لەسەر خزمەتگوزارییەکانمان، تیمی پشتیوانی هەمیشە ئامادەیە یارمەتیت بدات.</p>
-            <a href="https://t.me/dark_1877t" target="_blank" class="inline-flex items-center gap-2 bg-[#229ED9] hover:bg-[#1e8ec3] text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-lg">
+            <a href="https://t.me/dark_1877t" target="_blank" class="inline-flex items-center gap-2 bg-[#229ED9] hover:bg-[#1e8ec3] text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-[#229ED9]/20">
                 <i class="fa-brands fa-telegram text-sm"></i>
                 پەیوەندی بە پشتیوانی تەلەگرام
             </a>
@@ -252,7 +288,7 @@
                 <div class="p-5 rounded-2xl premium-card text-center">
                     <h4 class="text-xs font-black text-amber-400 mb-2">شحنکردن و زیادکردنی باڵانس</h4>
                     <p class="text-[11px] text-slate-400 mb-4">بۆ زیادکردنی باڵانسی حیسابەکەت، تکایە ڕاستەوخۆ لە ڕێگەی تەلەگرامەوە پەیوەندیم پێوە بکە.</p>
-                    <a href="https://t.me/dark_1877t" target="_blank" class="w-full inline-flex justify-center items-center gap-2 bg-[#229ED9] hover:bg-[#1e8ec3] text-white font-bold py-2.5 rounded-xl text-xs transition duration-300 shadow-md">
+                    <a href="https://t.me/dark_1877t" target="_blank" class="w-full inline-flex justify-center items-center gap-2 bg-[#229ED9] hover:bg-[#1e8ec3] text-white font-bold py-2.5 rounded-xl text-xs transition-all duration-300 transform hover:-translate-y-1 shadow-md">
                         <i class="fa-brands fa-telegram text-sm"></i>
                         پەیوەندی بە تەلەگرامەوە بکە
                     </a>
@@ -282,26 +318,26 @@
 
     <div id="orderModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[99999] relative-z">
         <div class="bg-[#111622] border border-white/10 rounded-2xl p-6 w-full max-w-md relative shadow-2xl">
-            <button onclick="closeOrderModal()" class="absolute top-4 left-4 text-slate-400"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <button onclick="closeOrderModal()" class="absolute top-4 left-4 text-slate-400 hover:text-white transition"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 id="orderModalTitle" class="text-lg font-black text-white mb-1">داواکردنی خزمەتگوزاری</h3>
             <p id="orderModalPrice" class="text-xs text-amber-400 font-bold mb-4"></p>
             
             <form onsubmit="submitOrder(event)">
                 
                 <div id="cvFields" class="hidden space-y-3 mb-4">
-                    <input type="text" id="cvDept" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="بەشەکەت چییە؟ (بۆ نموونە: کۆمپیوتەر)">
+                    <input type="text" id="cvDept" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition" placeholder="بەشەکەت چییە؟ (بۆ نموونە: کۆمپیوتەر)">
                     <div class="w-full">
                         <label class="block text-[11px] text-slate-400 mb-1">وێنەیەک بۆ ناو CV دیاری بکە:</label>
                         <input type="file" id="cvFileDrop" accept="image/*" onchange="convertImageToBase64('cvFileDrop', 'cv')" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white file:bg-amber-500/20 file:text-amber-400 file:border-0 file:rounded-lg file:px-2 file:py-1 file:ml-2 file:font-bold cursor-pointer">
                     </div>
-                    <textarea id="cvInfo" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="زانیارییەکانی تر (ناو، تەمەن، ئەزموون، زمانەکان)"></textarea>
+                    <textarea id="cvInfo" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition" placeholder="زانیارییەکانی تر (ناو، تەمەن، ئەزموون، زمانەکان)"></textarea>
                 </div>
 
                 <div id="snapchatFields" class="hidden space-y-3 mb-4">
-                    <input type="text" id="snapUser" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="یوزەرنەییمی سناپچات (Username)">
-                    <input type="text" id="snapDevice" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="ناوی مۆبایل و مۆدێلەکەی (بۆ نموونە: iPhone 14 Pro Max)">
-                    <input type="text" id="snapImei" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="کۆدی IMEI مۆبایلەکەت (ئەگەر هەیە)">
-                    <select id="snapCode" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
+                    <input type="text" id="snapUser" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition" placeholder="یوزەرنەییمی سناپچات (Username)">
+                    <input type="text" id="snapDevice" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition" placeholder="ناوی مۆبایل و مۆدێلەکەی (بۆ نموونە: iPhone 14 Pro Max)">
+                    <input type="text" id="snapImei" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition" placeholder="کۆدی IMEI مۆبایلەکەت (ئەگەر هەیە)">
+                    <select id="snapCode" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition">
                         <option value="SS06">کۆدی باند: SS06</option>
                         <option value="SS07">کۆدی باند: SS07</option>
                         <option value="هەردووکی">SS06 و SS07 پێکەوە</option>
@@ -309,8 +345,8 @@
                 </div>
 
                 <div id="burnFields" class="hidden space-y-3 mb-4">
-                    <input type="text" id="burnTarget" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="لینک یاخود یوزەرنەییمی ئەکاونتی سەرپێچیکار">
-                    <select id="burnReason" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white">
+                    <input type="text" id="burnTarget" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition" placeholder="لینک یاخود یوزەرنەییمی ئەکاونتی سەرپێچیکار">
+                    <select id="burnReason" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition">
                         <option value="بڵاوکردنەوەی وێنەی شەخسی">بڵاوکردنەوەی وێنەی شەخسی و نامووسی</option>
                         <option value="هەڕەشەکردن و سەرانە">هەڕەشەکردن و داواکردنی سەرانە (ابتزاز)</option>
                         <option value="ئەکاونتی ساختە و فەیک">ئەکاونتی ساختە (Fake Account)</option>
@@ -328,11 +364,11 @@
                         </div>
                     </div>
 
-                    <textarea id="burnDetails" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="وردەکاری زیاتر بنووسە ئەگەر پێویستە..."></textarea>
+                    <textarea id="burnDetails" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition" placeholder="وردەکاری زیاتر بنووسە ئەگەر پێویستە..."></textarea>
                 </div>
 
                 <div id="generalFields" class="hidden mb-4">
-                    <textarea id="generalDetails" rows="4" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white" placeholder="تکایە بە تەواوی ڕوونی بکەرەوە کە دەتەوێت بابەتەکە لەسەر چی بێت و چۆن بێت..."></textarea>
+                    <textarea id="generalDetails" rows="4" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition" placeholder="تکایە بە تەواوی ڕوونی بکەرەوە کە دەتەوێت بابەتەکە لەسەر چی بێت و چۆن بێت..."></textarea>
                 </div>
 
                 <button type="submit" class="w-full gold-btn font-black py-2.5 rounded-xl text-xs shadow-md">پەسەندکردنی داواکاری</button>
@@ -342,13 +378,13 @@
 
     <div id="authModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[99999] relative-z">
         <div class="bg-[#111622] border border-white/10 rounded-2xl p-6 w-full max-w-sm relative shadow-2xl">
-            <button onclick="closeAuthModal()" class="absolute top-4 left-4 text-slate-400"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <button onclick="closeAuthModal()" class="absolute top-4 left-4 text-slate-400 hover:text-white transition"><i class="fa-solid fa-xmark text-lg"></i></button>
             <h3 id="authTitle" class="text-lg font-black text-white mb-4">چوونەژوورەوە</h3>
             <form onsubmit="handleAuth(event)">
-                <input type="text" id="usernameField" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white mb-2 hidden" placeholder="ناوی تەواو (بەکارهێنەر)">
-                <input type="email" id="emailField" required class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-2" dir="ltr" placeholder="ئیمەیڵ">
-                <input type="tel" id="phoneField" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-2 hidden" dir="ltr" placeholder="مۆبایل">
-                <input type="password" id="passwordField" required class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-1" dir="ltr" placeholder="پاسۆرد">
+                <input type="text" id="usernameField" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white mb-2 hidden focus:border-amber-500 outline-none transition" placeholder="ناوی تەواو (بەکارهێنەر)">
+                <input type="email" id="emailField" required class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-2 focus:border-amber-500 outline-none transition" dir="ltr" placeholder="ئیمەیڵ">
+                <input type="tel" id="phoneField" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-2 hidden focus:border-amber-500 outline-none transition" dir="ltr" placeholder="مۆبایل">
+                <input type="password" id="passwordField" required class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-1 focus:border-amber-500 outline-none transition" dir="ltr" placeholder="پاسۆرد">
                 
                 <p id="passwordHint" class="text-[10px] text-slate-500 mb-4 hidden leading-tight">پاسۆرد دەبێت لانی کەم ٨ پیت بێت، پیتی گەورە (A-Z) و هێمای تێدابێت (وەک @،#،$).</p>
                 
@@ -358,7 +394,7 @@
 
                 <button type="submit" id="submitAuthBtn" class="w-full gold-btn font-black py-2 rounded-xl text-xs mb-4">چوونەژوورەوە</button>
             </form>
-            <button onclick="toggleAuthMode()" id="toggleModeBtn" class="text-xs text-amber-400 underline font-bold w-full text-center">دروستکردنی حیسابی نوێ</button>
+            <button onclick="toggleAuthMode()" id="toggleModeBtn" class="text-xs text-amber-400 underline font-bold w-full text-center hover:text-amber-300 transition">دروستکردنی حیسابی نوێ</button>
         </div>
     </div>
 
@@ -380,7 +416,6 @@
         let activeServiceName = '';
         let activeServicePrice = 0;
         
-        // گۆڕاوەکان بۆ هەڵگرتنی وێنەکان
         let encodedBase64Image = ''; 
         let encodedIdFront = '';
         let encodedIdBack = '';
@@ -419,9 +454,21 @@
         function animateParticles() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
         animateParticles();
 
-        window.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('DOMContentLoaded', async () => {
             const savedUser = localStorage.getItem('mihry_session');
-            if (savedUser) { loginSuccess(JSON.parse(savedUser)); }
+            if (savedUser) { 
+                const parsedUser = JSON.parse(savedUser);
+                try {
+                    const { data, error } = await supabaseClient.from('mihry_users').select('*').eq('email', parsedUser.email).maybeSingle();
+                    if (data && !error) {
+                        loginSuccess(data); 
+                    } else {
+                        loginSuccess(parsedUser); 
+                    }
+                } catch (e) {
+                    loginSuccess(parsedUser);
+                }
+            }
         });
 
         function showPage(pageName) {
@@ -433,7 +480,6 @@
             if (pageName === 'home') {
                 homePage.classList.remove('hidden'); dashboardPage.classList.add('hidden');
                 navHomeBtn.classList.add('text-amber-400', 'bg-white/5', 'border', 'border-amber-500/20');
-                navHomeBtn.classList.remove('text-slate-300');
                 navDashboardBtn.classList.remove('text-amber-400', 'bg-white/5', 'border', 'border-amber-500/20');
                 navDashboardBtn.classList.add('text-slate-300');
             } else if (pageName === 'dashboard') {
@@ -481,6 +527,9 @@
                         return alert('پاسۆردەکەت لاوازە! دەبێت لانی کەم ٨ پیت بێت و پیتی گەورە و سیمبولی تێدابێت.');
                     }
 
+                    const { data: existingUser } = await supabaseClient.from('mihry_users').select('email').eq('email', email).maybeSingle();
+                    if (existingUser) return alert('ئەم ئیمەیڵە پێشتر بەکارهاتووە!');
+
                     const { data, error } = await supabaseClient.from('mihry_users').insert([{ username, email, phone, password, balance: 0 }]).select().maybeSingle();
                     if (error) throw error;
                     alert('حیساب بە سەرکەوتوویی دروستبوو! 🎉');
@@ -500,7 +549,11 @@
 
             document.getElementById('navHomeBtn').classList.remove('hidden');
             document.getElementById('navDashboardBtn').classList.remove('hidden');
-            showPage('home');
+            
+            if(document.getElementById('dashboardPage').classList.contains('hidden')) {
+                showPage('home');
+            }
+            
             document.getElementById('authBtn').classList.add('hidden');
             document.getElementById('logoutBtn').classList.remove('hidden');
             
@@ -512,10 +565,16 @@
             fetchOrders();
         }
 
-        // فەنکشنی گشتگیر بۆ گۆڕینی وێنەکان بۆ فۆرماتی بەهێزی Base64
         function convertImageToBase64(inputId, targetType) {
             const file = document.getElementById(inputId).files[0];
             if (!file) return;
+            
+            if (file.size > 2 * 1024 * 1024) {
+                alert('قەبارەی وێنەکە زۆر گەورەیە! تکایە وێنەیەکی کەمتر لە ٢ مێگابایت دابنێ.');
+                document.getElementById(inputId).value = '';
+                return;
+            }
+
             const reader = new FileReader();
             reader.onloadend = function () {
                 if (targetType === 'cv') encodedBase64Image = reader.result;
@@ -562,21 +621,30 @@
 
         async function submitOrder(e) {
             e.preventDefault();
-            if (currentUser.balance < activeServicePrice) return alert('باڵانسی پێویستت نییە! تکایە باڵانسەکەت شحن بکەرەوە.');
+            
+            try {
+                const { data: freshUser } = await supabaseClient.from('mihry_users').select('balance').eq('email', currentUser.email).maybeSingle();
+                if (!freshUser || freshUser.balance < activeServicePrice) {
+                    return alert('باڵانسی پێویستت نییە! تکایە باڵانسەکەت شحن بکەرەوە.');
+                }
+                currentUser.balance = freshUser.balance; 
+            } catch (err) {
+                return alert('کێشەیەک لە هێڵدا هەیە، تکایە دووبارە هەوڵ بدەرەوە.');
+            }
 
             let details = '';
             if (activeServiceName === 'CV') {
                 const dept = document.getElementById('cvDept').value;
                 const info = document.getElementById('cvInfo').value;
                 if(!encodedBase64Image) return alert('تکایە سەرەتا وێنەیەک بۆ ناو CV دیاری بکە!');
-                details = `بەش: ${dept} | وێنە: ${encodedBase64Image} | زانیاری: ${info}`;
+                details = `بەش: ${dept} | وێنە: Base64_Data | زانیاری: ${info}`;
             } else if (activeServiceName.includes('باندی سناپچات')) {
                 const user = document.getElementById('snapUser').value;
                 const device = document.getElementById('snapDevice').value;
                 const imei = document.getElementById('snapImei').value;
                 const code = document.getElementById('snapCode').value;
                 if(!user || !device) return alert('تکایە ناوی مۆبایل و یوزەرنەییم پڕبکەرەوە!');
-                details = `سناپچات یوزەر: ${user} | جۆری مۆبایل: ${device} | ئای مەی مۆبایل IMEI: ${imei} | جۆری باند: ${code}`;
+                details = `سناپچات یوزەر: ${user} | جۆری مۆبایل: ${device} | IMEI: ${imei} | جۆری باند: ${code}`;
             } else if (activeServiceName.includes('سوتاندنی ئەکاونت')) {
                 const target = document.getElementById('burnTarget').value;
                 const reason = document.getElementById('burnReason').value;
@@ -584,7 +652,7 @@
                 if(!target) return alert('تکایە لینک یاخود یوزەرنەییمی ئەکاونتەکە بنووسە!');
                 if(!encodedIdFront || !encodedIdBack) return alert('بارکردنی وێنەی پێشەوە و دواوەی کارتی نیشتمانی ناچارییە!');
                 
-                details = `ئەکاونتی مەبەست: ${target} | هۆکار: ${reason} | کارتی نیشتمانی پێشەوە: ${encodedIdFront} | کارتی نیشتمانی دواوە: ${encodedIdBack} | وردەکاری زیاتر: ${more}`;
+                details = `ئەکاونتی مەبەست: ${target} | هۆکار: ${reason} | ناسنامە بارکراوە | وردەکاری زیاتر: ${more}`;
             } else {
                 details = document.getElementById('generalDetails').value;
                 if(!details.trim()) return alert('تکایە زانیاری داواکارییەکە بنووسە!');
