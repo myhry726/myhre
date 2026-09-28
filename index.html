@@ -1,717 +1,591 @@
 <!DOCTYPE html>
 <html lang="ku" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>میهری</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap');
-        
-        body {
-            font-family: 'Vazirmatn', sans-serif;
-            background-color: #070a12;
-            color: #e2e8f0;
-            overflow-x: hidden;
-            position: relative;
-            user-select: none;
-            -webkit-user-select: none;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('1782168552908_edit_179338382467262.png');
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.11;
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        #particleCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .relative-z {
-            position: relative;
-            z-index: 10;
-        }
-
-        .gold-text {
-            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #b38728 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* دوگمەی زێڕینی لۆکس و درەوشاوە لە کاتی هۆڤەردا */
-        .gold-btn {
-            background: linear-gradient(135deg, #bf953f 0%, #d4af37 50%, #b38728 100%);
-            color: #0b0f17;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15);
-        }
-
-        .gold-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: all 0.6s ease;
-        }
-
-        .gold-btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 25px rgba(212, 175, 55, 0.35);
-            filter: brightness(1.1);
-        }
-
-        .gold-btn:hover::before {
-            left: 100%;
-        }
-
-        .gold-btn:active {
-            transform: translateY(-1px) scale(0.99);
-        }
-
-        /* کارتە پرۆفیشناڵەکان بە هێڵی لێواری جوڵاو */
-        .premium-card {
-            background: rgba(15, 22, 36, 0.65);
-            border: 1px solid rgba(212, 175, 55, 0.08);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        .premium-card:hover {
-            border-color: rgba(212, 175, 55, 0.45);
-            background: rgba(22, 34, 54, 0.85);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.05);
-        }
-
-        /* دیزاینی دوگمە ئاساییەکانی سەرەوە (پەڕەی سەرەکی و دەشبۆرد) */
-        .nav-link-btn {
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            position: relative;
-        }
-        
-        .nav-link-btn:hover {
-            background-color: rgba(212, 175, 55, 0.1);
-            color: #fcd34d !important;
-            transform: translateY(-1px);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>mihry</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap');
+body { font-family: 'Vazirmatn', sans-serif; background-color: #070a12; color: #e2e8f0; overflow-x: hidden; position: relative; user-select: none; -webkit-user-select: none; margin: 0; padding: 0; min-height: 100vh; }
+body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('1782168552908_edit_179338382467262.png'); background-size: contain; background-position: center; background-repeat: no-repeat; opacity: 0.11; z-index: -2; pointer-events: none; }
+#particleCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.relative-z { position: relative; z-index: 10; }
+.gold-text { background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #b38728 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.gold-btn { background: linear-gradient(135deg, #bf953f 0%, #d4af37 50%, #b38728 100%); color: #0b0f17; position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 4px 15px rgba(212, 175, 55, 0.15); }
+.gold-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: all 0.6s ease; }
+.gold-btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 25px rgba(212,175,55,0.35); filter: brightness(1.1); }
+.gold-btn:hover::before { left: 100%; }
+.gold-btn:active { transform: translateY(-1px) scale(0.99); }
+.premium-card { background: rgba(15,22,36,0.65); border: 1px solid rgba(212,175,55,0.08); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); transition: all 0.4s cubic-bezier(0.25,0.8,0.25,1); }
+.premium-card:hover { border-color: rgba(212,175,55,0.45); background: rgba(22,34,54,0.85); transform: translateY(-4px); box-shadow: 0 20px 35px rgba(0,0,0,0.6), 0 0 15px rgba(212,175,55,0.05); }
+.nav-link-btn { transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1); position: relative; }
+.nav-link-btn:hover { background-color: rgba(212,175,55,0.1); color: #fcd34d !important; transform: translateY(-1px); }
+.sec-label { font-size: 10px; font-weight: 900; color: #d4af37; letter-spacing: 0.05em; margin-bottom: 6px; display: block; }
+.sec-divider { border-top: 1px solid rgba(212,175,55,0.15); margin: 10px 0; padding-top: 10px; }
+</style>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
+<canvas id="particleCanvas"></canvas>
 
-    <canvas id="particleCanvas"></canvas>
+<!-- HEADER -->
+<header class="border-b border-white/5 backdrop-blur-md sticky top-0 z-50 bg-[#070a12]/80 relative-z">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<i class="fa-solid fa-crown text-2xl text-amber-400"></i>
+<span class="text-2xl font-black tracking-wide gold-text">Mihry</span>
+</div>
+<div class="flex items-center gap-3">
+<button id="navHomeBtn" onclick="showPage('home')" class="nav-link-btn text-xs sm:text-sm font-bold text-amber-400 px-4 py-2 rounded-xl bg-white/5 border border-amber-500/20 hidden">&#x67E5;&#x6E40;&#x6DC9; &#x633;&#x6D5;&#x631;&#x6D5;&#x6A9;&#x6CC;</button>
+<button id="navDashboardBtn" onclick="showPage('dashboard')" class="nav-link-btn text-xs sm:text-sm font-bold text-slate-300 hover:text-white px-4 py-2 rounded-xl hidden">&#x62F;&#x6D5;&#x634;&#x628;&#x6C6;&#x631;&#x62F;</button>
+<button id="authBtn" onclick="openAuthModal()" class="gold-btn text-xs sm:text-sm font-black px-5 py-2.5 rounded-xl shadow-lg">&#x686;&#x648;&#x648;&#x646;&#x6D5;&#x698;&#x648;&#x648;&#x631;&#x6D5;&#x648;&#x6D5; / &#x62A;&#x6C6;&#x645;&#x627;&#x631;&#x628;&#x648;&#x648;&#x646;</button>
+<button id="logoutBtn" onclick="logout()" class="hidden text-xs text-red-400 bg-red-500/10 hover:bg-red-500/20 px-3 py-2 rounded-xl font-bold transition duration-300">&#x62F;&#x6D5;&#x631;&#x686;&#x648;&#x648;&#x646;</button>
+</div>
+</div>
+</header>
 
-    <header class="border-b border-white/5 backdrop-blur-md sticky top-0 z-50 bg-[#070a12]/80 relative-z">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-crown text-2xl text-amber-400"></i>
-                <span class="text-2xl font-black tracking-wide gold-text">میهری</span>
-            </div>
-            <div class="flex items-center gap-3">
-                <button id="navHomeBtn" onclick="showPage('home')" class="nav-link-btn text-xs sm:text-sm font-bold text-amber-400 px-4 py-2 rounded-xl bg-white/5 border border-amber-500/20 hidden">پەڕەی سەرەکی</button>
-                <button id="navDashboardBtn" onclick="showPage('dashboard')" class="nav-link-btn text-xs sm:text-sm font-bold text-slate-300 hover:text-white px-4 py-2 rounded-xl hidden">دەشبۆرد</button>
-                
-                <button id="authBtn" onclick="openAuthModal()" class="gold-btn text-xs sm:text-sm font-black px-5 py-2.5 rounded-xl shadow-lg">چوونەژوورەوە / تۆماربوون</button>
-                <button id="logoutBtn" onclick="logout()" class="hidden text-xs text-red-400 bg-red-500/10 hover:bg-red-500/20 px-3 py-2 rounded-xl font-bold transition duration-300">دەرچوون</button>
-            </div>
-        </div>
-    </header>
+<!-- HOME PAGE -->
+<main id="homePage" class="max-w-5xl mx-auto px-4 sm:px-6 py-12 w-full relative-z space-y-16">
+<div class="text-center max-w-2xl mx-auto">
+<h1 class="text-3xl sm:text-5xl font-black mb-4 leading-tight text-white"><span class="gold-text">Mihry</span></h1>
+<p class="text-slate-400 text-xs sm:text-sm">&#x626;&#x6D5;&#x632;&#x645;&#x648;&#x648;&#x646;&#x6CC; &#x62E;&#x632;&#x645;&#x6D5;&#x62A;&#x6AF;&#x648;&#x632;&#x627;&#x631;&#x6CC; &#x645;&#x6C6;&#x62F;&#x6CE;&#x631;&#x646; &#x628;&#x6D5; &#x628;&#x6D5;&#x631;&#x632;&#x62A;&#x631;&#x6CC;&#x646; &#x6A9;&#x648;&#x627;&#x644;&#x6CE;&#x62A;&#x6CC; &#x628;&#x6C6; &#x67E5;&#x6C6;&#x698;&#x6D5;&#x6A9;&#x627;&#x646;&#x62A;.</p>
+</div>
 
-    <main id="homePage" class="max-w-5xl mx-auto px-4 sm:px-6 py-12 w-full relative-z space-y-16">
-        
-        <div class="text-center max-w-2xl mx-auto">
-            <h1 class="text-3xl sm:text-5xl font-black mb-4 leading-tight text-white"><span class="gold-text">میهری</span></h1>
-            <p class="text-slate-400 text-xs sm:text-sm">ئەزموونی خزمەتگوزاری مۆدێرن بە بەرزترین کوالێتی بۆ پڕۆژەکانت.</p>
-        </div>
+<div class="space-y-4">
 
-        <div class="space-y-4">
-            <div onclick="openOrderModal('ڕاپۆرت', 5000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-file-invoice"></i></div>
-                    <div>
-                        <h3 class="text-base sm:text-lg font-bold text-white">دروستکردنی ڕاپۆرت</h3>
-                        <p class="text-slate-400 text-xs mt-0.5">ئامادەکردنی ڕاپۆرتی زانستی و ئەکادیمی بە وردەکاری زۆر بەرزەوە.</p>
-                    </div>
-                </div>
-                <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
-                    <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
-                    <span class="text-sm font-black text-amber-400">٥,٠٠٠ د.ع</span>
-                </div>
-            </div>
+<!-- REPORT -->
+<div onclick="openOrderModal('report', 5000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-file-invoice"></i></div>
+<div>
+<h3 class="text-base sm:text-lg font-bold text-white">&#x62F;&#x631;&#x648;&#x633;&#x62A;&#x6A9;&#x631;&#x62F;&#x646;&#x6CC; &#x695;&#x627;&#x67E5;&#x6C6;&#x631;&#x62A;</h3>
+<p class="text-slate-400 text-xs mt-0.5">&#x626;&#x627;&#x645;&#x627;&#x62F;&#x6D5;&#x6A9;&#x631;&#x62F;&#x646;&#x6CC; &#x695;&#x627;&#x67E5;&#x6C6;&#x631;&#x62A;&#x6CC; &#x632;&#x627;&#x646;&#x633;&#x62A;&#x6CC; &#x648; &#x626;&#x6D5;&#x6A9;&#x627;&#x62F;&#x6CC;&#x645;&#x6CC; &#x628;&#x6D5; &#x648;&#x631;&#x62F;&#x6D5;&#x6A9;&#x627;&#x631;&#x6CC; &#x632;&#x6C6;&#x631; &#x628;&#x6D5;&#x631;&#x632;&#x6D5;&#x648;&#x6D5;.</p>
+</div>
+</div>
+<div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
+<span class="text-xs text-slate-500">&#x646;&#x631;&#x62E;&#x6CC; &#x633;&#x6D5;&#x631;&#x6D5;&#x62A;&#x627;&#x6CC;&#x6CC;</span>
+<span class="text-sm font-black text-amber-400">5,000 &#x62F;.&#x639;</span>
+</div>
+</div>
 
-            <div onclick="openOrderModal('سیمینار', 8000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-chalkboard-user"></i></div>
-                    <div>
-                        <h3 class="text-base sm:text-lg font-bold text-white">ئامادەکردنی سیمینار</h3>
-                        <p class="text-slate-400 text-xs mt-0.5">دیزاینکردنی سیمینار و پاوەرپۆینتی سەکۆیی بەرز بۆ پێشکەشکردن.</p>
-                    </div>
-                </div>
-                <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
-                    <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
-                    <span class="text-sm font-black text-amber-400">٨,٠٠٠ د.ع</span>
-                </div>
-            </div>
+<!-- SEMINAR -->
+<div onclick="openOrderModal('seminar', 8000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-chalkboard-user"></i></div>
+<div>
+<h3 class="text-base sm:text-lg font-bold text-white">&#x626;&#x627;&#x645;&#x627;&#x62F;&#x6D5;&#x6A9;&#x631;&#x62F;&#x646;&#x6CC; &#x633;&#x6CC;&#x645;&#x6CC;&#x646;&#x627;&#x631;</h3>
+<p class="text-slate-400 text-xs mt-0.5">&#x62F;&#x6CC;&#x632;&#x627;&#x6CC;&#x646;&#x6A9;&#x631;&#x62F;&#x646;&#x6CC; &#x633;&#x6CC;&#x645;&#x6CC;&#x646;&#x627;&#x631; &#x648; &#x67E5;&#x627;&#x648;&#x6D5;&#x631;&#x67E5;&#x6C6;&#x6CC;&#x646;&#x62A;&#x6CC; &#x633;&#x6D5;&#x6A9;&#x6C6;&#x6CC;&#x6CC; &#x628;&#x6D5;&#x631;&#x632; &#x628;&#x6C6; &#x67E5;&#x6CE;&#x634;&#x6A9;&#x6D5;&#x634;&#x6A9;&#x631;&#x62F;&#x646;.</p>
+</div>
+</div>
+<div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
+<span class="text-xs text-slate-500">&#x646;&#x631;&#x62E;&#x6CC; &#x633;&#x6D5;&#x631;&#x6D5;&#x62A;&#x627;&#x6CC;&#x6CC;</span>
+<span class="text-sm font-black text-amber-400">8,000 &#x62F;.&#x639;</span>
+</div>
+</div>
 
-            <div onclick="openOrderModal('CV', 4000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-address-card"></i></div>
-                    <div>
-                        <h3 class="text-base sm:text-lg font-bold text-white">دروستکردنی CV</h3>
-                        <p class="text-slate-400 text-xs mt-0.5">دیزاینکردنی سیڤی پرۆفیشناڵ و مۆدێرن بە زمانی جیاواز بۆ کار و دامەزراندن.</p>
-                    </div>
-                </div>
-                <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
-                    <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
-                    <span class="text-sm font-black text-amber-400">٤,٠٠٠ د.ع</span>
-                </div>
-            </div>
+<!-- CV -->
+<div onclick="openOrderModal('cv', 4000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-address-card"></i></div>
+<div>
+<h3 class="text-base sm:text-lg font-bold text-white">&#x62F;&#x631;&#x648;&#x633;&#x62A;&#x6A9;&#x631;&#x62F;&#x646;&#x6CC; CV</h3>
+<p class="text-slate-400 text-xs mt-0.5">&#x62F;&#x6CC;&#x632;&#x627;&#x6CC;&#x646;&#x6A9;&#x631;&#x62F;&#x646;&#x6CC; &#x633;&#x6CC;&#x6A4;&#x6CC; &#x67E5;&#x631;&#x6C6;&#x641;&#x6CC;&#x634;&#x646;&#x627;&#x6B5; &#x648; &#x645;&#x6C6;&#x62F;&#x6CE;&#x631;&#x646; &#x628;&#x6D5; &#x632;&#x645;&#x627;&#x646;&#x6CC; &#x62C;&#x6CC;&#x627;&#x648;&#x627;&#x632; &#x628;&#x6C6; &#x6A9;&#x627;&#x631; &#x648; &#x62F;&#x627;&#x645;&#x6D5;&#x632;&#x631;&#x627;&#x646;&#x62F;&#x646;.</p>
+</div>
+</div>
+<div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
+<span class="text-xs text-slate-500">&#x646;&#x631;&#x62E;&#x6CC; &#x633;&#x6D5;&#x631;&#x6D5;&#x62A;&#x627;&#x6CC;&#x6CC;</span>
+<span class="text-sm font-black text-amber-400">4,000 &#x62F;.&#x639;</span>
+</div>
+</div>
 
-            <div onclick="openOrderModal('سیستەمی کاشێری', 150000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-cash-register"></i></div>
-                    <div>
-                        <h3 class="text-base sm:text-lg font-bold text-white">دروستکردنی سیستەمی کاشێری</h3>
-                        <p class="text-slate-400 text-xs mt-0.5">باشترین کۆدەکان بۆ بەڕێوەبردنی کۆگا و فرۆشتنی مارکێتەکان.</p>
-                    </div>
-                </div>
-                <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
-                    <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
-                    <span class="text-sm font-black text-amber-400">١٥٠,٠٠٠ د.ع</span>
-                </div>
-            </div>
+<!-- CASHIER -->
+<div onclick="openOrderModal('cashier', 150000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl"><i class="fa-solid fa-cash-register"></i></div>
+<div>
+<h3 class="text-base sm:text-lg font-bold text-white">&#x62F;&#x631;&#x648;&#x633;&#x62A;&#x6A9;&#x631;&#x62F;&#x646;&#x6CC; &#x633;&#x6CC;&#x633;&#x62A;&#x6D5;&#x645;&#x6CC; &#x6A9;&#x627;&#x634;&#x6CE;&#x631;&#x6CC;</h3>
+<p class="text-slate-400 text-xs mt-0.5">&#x628;&#x627;&#x634;&#x62A;&#x631;&#x6CC;&#x646; &#x6A9;&#x6C6;&#x62F;&#x6D5;&#x6A9;&#x627;&#x646; &#x628;&#x6C6; &#x628;&#x6D5;&#x695;&#x6CE;&#x648;&#x6D5;&#x628;&#x631;&#x62F;&#x646;&#x6CC; &#x6A9;&#x6C6;&#x6AF;&#x627; &#x648; &#x641;&#x631;&#x6C6;&#x634;&#x62A;&#x646;&#x6CC; &#x645;&#x627;&#x631;&#x6A9;&#x6CE;&#x62A;&#x6D5;&#x6A9;&#x627;&#x646;.</p>
+</div>
+</div>
+<div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
+<span class="text-xs text-slate-500">&#x646;&#x631;&#x62E;&#x6CC; &#x633;&#x6D5;&#x631;&#x6D5;&#x62A;&#x627;&#x6CC;&#x6CC;</span>
+<span class="text-sm font-black text-amber-400">150,000 &#x62F;.&#x639;</span>
+</div>
+</div>
 
-            <div onclick="openOrderModal('چاککردنی باندی سناپچات (SS06/SS07)', 20000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-yellow-500/10 flex items-center justify-center text-yellow-400 text-xl"><i class="fa-brands fa-snapchat"></i></div>
-                    <div>
-                        <h3 class="text-base sm:text-lg font-bold text-white">چاککردنی باندی سناپچات (SS06 / SS07)</h3>
-                        <p class="text-slate-400 text-xs mt-0.5">چارەسەرکردنی باندی سەر شاشە و ئامێری ئایفۆن و ئەندرۆید لە کەمترین کاتدا.</p>
-                    </div>
-                </div>
-                <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
-                    <span class="text-xs text-slate-500">نرخی جێگیر</span>
-                    <span class="text-sm font-black text-amber-400">٢٠,٠٠٠ د.ع</span>
-                </div>
-            </div>
+<!-- SNAPCHAT -->
+<div onclick="openOrderModal('snapchat', 20000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-yellow-500/10 flex items-center justify-center text-yellow-400 text-xl"><i class="fa-brands fa-snapchat"></i></div>
+<div>
+<h3 class="text-base sm:text-lg font-bold text-white">&#x686;&#x627;&#x643;&#x643;&#x631;&#x62F;&#x646;&#x6CC; &#x628;&#x627;&#x646;&#x62F;&#x6CC; &#x633;&#x646;&#x627;&#x67E5;&#x686;&#x627;&#x62A; (SS06 / SS07)</h3>
+<p class="text-slate-400 text-xs mt-0.5">&#x686;&#x627;&#x631;&#x6D5;&#x633;&#x6D5;&#x631;&#x6A9;&#x631;&#x62F;&#x646;&#x6CC; &#x628;&#x627;&#x646;&#x62F;&#x6CC; &#x633;&#x6D5;&#x631; &#x634;&#x627;&#x634;&#x6D5; &#x648; &#x626;&#x627;&#x645;&#x6CE;&#x631;&#x6CC; &#x626;&#x627;&#x6CC;&#x641;&#x6C6;&#x646; &#x648; &#x626;&#x6D5;&#x646;&#x62F;&#x631;&#x6C6;&#x6CC;&#x62F; &#x644;&#x6D5; &#x6A9;&#x6D5;&#x645;&#x62A;&#x631;&#x6CC;&#x646; &#x6A9;&#x627;&#x62A;&#x62F;&#x627;.</p>
+</div>
+</div>
+<div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
+<span class="text-xs text-slate-500">&#x646;&#x631;&#x62E;&#x6CC; &#x62C;&#x6CE;&#x6AF;&#x6CC;&#x631;</span>
+<span class="text-sm font-black text-amber-400">20,000 &#x62F;.&#x639;</span>
+</div>
+</div>
 
-            <div onclick="openOrderModal('سوتاندنی ئەکاونت (بڵاوکردنەوەی وێنە و هەڕەشە)', 45000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400 text-xl"><i class="fa-solid fa-shield-halved"></i></div>
-                    <div>
-                        <h3 class="text-base sm:text-lg font-bold text-white">سوتاندنی ئەکاونت (بڵاوکردنەوەی وێنە و هەڕەشە)</h3>
-                        <p class="text-slate-400 text-xs mt-0.5">داخستنی بەپەلەی ئەو ئەکاونتانەی وێنەی شەخسی بڵاودەکەنەوە، Lock کراون یان هەڕەشە دەکەن.</p>
-                    </div>
-                </div>
-                <div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
-                    <span class="text-xs text-slate-500">نرخی سەرەتایی</span>
-                    <span class="text-sm font-black text-red-400">٤٥,٠٠٠ د.ع</span>
-                </div>
-            </div>
-        </div>
+<!-- BURN -->
+<div onclick="openOrderModal('burn', 45000)" class="premium-card p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400 text-xl"><i class="fa-solid fa-shield-halved"></i></div>
+<div>
+<h3 class="text-base sm:text-lg font-bold text-white">&#x633;&#x648;&#x62A;&#x627;&#x646;&#x62F;&#x646;&#x6CC; &#x626;&#x6D5;&#x6A9;&#x627;&#x648;&#x646;&#x62A;</h3>
+<p class="text-slate-400 text-xs mt-0.5">&#x62F;&#x627;&#x62E;&#x633;&#x62A;&#x646;&#x6CC; &#x628;&#x6D5;&#x67E5;&#x6D5;&#x644;&#x6D5;&#x6CC; &#x626;&#x6D5;&#x648; &#x626;&#x6D5;&#x6A9;&#x627;&#x648;&#x646;&#x62A;&#x627;&#x646;&#x6D5;&#x6CC; &#x648;&#x6CE;&#x646;&#x6D5;&#x6CC; &#x634;&#x6D5;&#x62E;&#x633;&#x6CC; &#x628;&#x6B5;&#x627;&#x648;&#x62F;&#x6D5;&#x6A9;&#x6D5;&#x646;&#x6D5;&#x648;&#x6D5;, Lock &#x6A9;&#x631;&#x627;&#x648;&#x646; &#x6CC;&#x627;&#x646; &#x647;&#x6D5;&#x695;&#x6D5;&#x634;&#x6D5; &#x62F;&#x6D5;&#x6A9;&#x6D5;&#x646;.</p>
+</div>
+</div>
+<div class="text-right w-full sm:w-auto border-t sm:border-t-0 pt-3 sm:pt-0 flex sm:flex-col justify-between items-center sm:items-end">
+<span class="text-xs text-slate-500">&#x646;&#x631;&#x62E;&#x6CC; &#x633;&#x6D5;&#x631;&#x6D5;&#x62A;&#x627;&#x6CC;&#x6CC;</span>
+<span class="text-sm font-black text-red-400">45,000 &#x62F;.&#x639;</span>
+</div>
+</div>
 
-        <div class="pt-6">
-            <div class="text-center mb-8">
-                <h2 class="text-xl sm:text-2xl font-black text-white flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-star text-amber-400 text-sm"></i> ڕای کڕیارانمان <i class="fa-solid fa-star text-amber-400 text-sm"></i>
-                </h2>
-                <p class="text-slate-500 text-xs mt-1">ئەوەی کڕیارەکانمان دەربارەی خزمەتگوزارییەکانمان دەڵێن</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-4">
-                <div class="premium-card p-5 rounded-2xl border border-white/5 relative">
-                    <div class="flex gap-1 text-[10px] text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                    <p class="text-slate-300 text-xs leading-relaxed">"سیڤییەکەم بۆ دروستکردن زۆر خێرا و پرۆفیشناڵ بوو، ڕێک بەو شێوازەی خۆم دەمویست. دەستان خۆش بێت."</p>
-                    <h4 class="text-xs font-bold text-amber-400 mt-4">- ئەحمەد عەلی</h4>
-                </div>
-                <div class="premium-card p-5 rounded-2xl border border-white/5 relative">
-                    <div class="flex gap-1 text-[10px] text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                    <p class="text-slate-300 text-xs leading-relaxed">"ڕاپۆرتێکی زانستیم لایان داواکرد، وردەکاری و سەرچاوەکان زۆر ڕێک و پێك بوون. باشترین پلاتفۆڕمن بەڕاستی."</p>
-                    <h4 class="text-xs font-bold text-amber-400 mt-4">- لانە محەمەد</h4>
-                </div>
-                <div class="premium-card p-5 rounded-2xl border border-white/5 relative">
-                    <div class="flex gap-1 text-[10px] text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                    <p class="text-slate-300 text-xs leading-relaxed">"سیستانە کاشێرەکەیان زۆر بێ باگە و خێرایە، پشتگیری کڕیارانیان زۆر باشە و هەمیشە وەڵام دەدەنەوە."</p>
-                    <h4 class="text-xs font-bold text-amber-400 mt-4">- هێمن عومەر</h4>
-                </div>
-            </div>
-        </div>
+</div>
 
-        <div class="premium-card p-6 rounded-2xl border border-amber-500/20 text-center max-w-xl mx-auto">
-            <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl mx-auto mb-3">
-                <i class="fa-solid fa-headset"></i>
-            </div>
-            <h3 class="text-base font-black text-white mb-1">پشتیوانی و هاکاری میهری (Sports Support)</h3>
-            <p class="text-xs text-slate-400 mb-4 leading-relaxed">بۆ هەر کێشەیەک، پرسیارێک یاخود ڕێنماییەک لەسەر خزمەتگوزارییەکانمان، تیمی پشتیوانی هەمیشە ئامادەیە یارمەتیت بدات.</p>
-            <a href="https://t.me/dark_1877t" target="_blank" class="inline-flex items-center gap-2 bg-[#229ED9] hover:bg-[#1e8ec3] text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-[#229ED9]/20">
-                <i class="fa-brands fa-telegram text-sm"></i>
-                پەیوەندی بە پشتیوانی تەلەگرام
-            </a>
-        </div>
-    </main>
+<!-- REVIEWS -->
+<div class="pt-6">
+<div class="text-center mb-8">
+<h2 class="text-xl sm:text-2xl font-black text-white flex items-center justify-center gap-2"><i class="fa-solid fa-star text-amber-400 text-sm"></i> &#x695;&#x627;&#x6CC; &#x6A9;&#x695;&#x6CC;&#x627;&#x631;&#x627;&#x646;&#x645;&#x627;&#x646; <i class="fa-solid fa-star text-amber-400 text-sm"></i></h2>
+<p class="text-slate-500 text-xs mt-1">&#x626;&#x6D5;&#x648;&#x6D5;&#x6CC; &#x6A9;&#x695;&#x6CC;&#x627;&#x631;&#x6D5;&#x6A9;&#x627;&#x646;&#x645;&#x627;&#x646; &#x62F;&#x6D5;&#x631;&#x628;&#x627;&#x631;&#x6D5;&#x6CC; &#x62E;&#x632;&#x645;&#x6D5;&#x62A;&#x6AF;&#x648;&#x632;&#x627;&#x631;&#x6CC;&#x6CC;&#x6D5;&#x6A9;&#x627;&#x646;&#x645;&#x627;&#x646; &#x62F;&#x6D5;&#x6B5;&#x6CE;&#x646;</p>
+</div>
+<div class="grid md:grid-cols-3 gap-4">
+<div class="premium-card p-5 rounded-2xl border border-white/5">
+<div class="flex gap-1 text-[10px] text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+<p class="text-slate-300 text-xs leading-relaxed">"&#x633;&#x6CC;&#x6A4;&#x6CC;&#x6CC;&#x6D5;&#x6A9;&#x6D5;&#x645; &#x628;&#x6C6; &#x62F;&#x631;&#x648;&#x633;&#x62A;&#x6A9;&#x631;&#x62F;&#x646; &#x632;&#x6C6;&#x631; &#x62E;&#x6CE;&#x631;&#x627; &#x648; &#x67E5;&#x631;&#x6C6;&#x641;&#x6CC;&#x634;&#x646;&#x627;&#x6B5; &#x628;&#x648;&#x648;, &#x695;&#x6CE;&#x6A9; &#x628;&#x6D5;&#x648; &#x634;&#x6CE;&#x648;&#x627;&#x632;&#x6D5;&#x6CC; &#x62E;&#x6C6;&#x645; &#x62F;&#x6D5;&#x645;&#x648;&#x6CC;&#x633;&#x62A;. &#x62F;&#x6D5;&#x633;&#x62A;&#x627;&#x646; &#x62E;&#x6C6;&#x634; &#x628;&#x6CE;&#x62A;."</p>
+<h4 class="text-xs font-bold text-amber-400 mt-4">- Ahmad Ali</h4>
+</div>
+<div class="premium-card p-5 rounded-2xl border border-white/5">
+<div class="flex gap-1 text-[10px] text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+<p class="text-slate-300 text-xs leading-relaxed">"&#x695;&#x627;&#x67E5;&#x6C6;&#x631;&#x62A;&#x6CE;&#x6A9;&#x6CC; &#x632;&#x627;&#x646;&#x633;&#x62A;&#x6CC;&#x645; &#x644;&#x627;&#x6CC;&#x627;&#x646; &#x62F;&#x627;&#x648;&#x627;&#x6A9;&#x631;&#x62F;, &#x648;&#x631;&#x62F;&#x6D5;&#x6A9;&#x627;&#x631;&#x6CC; &#x648; &#x633;&#x6D5;&#x631;&#x686;&#x627;&#x648;&#x6D5;&#x6A9;&#x627;&#x646; &#x632;&#x6C6;&#x631; &#x695;&#x6CE;&#x6A9; &#x648; &#x67E5;&#x6CE;&#x6A9; &#x628;&#x648;&#x648;&#x646;. &#x628;&#x627;&#x634;&#x62A;&#x631;&#x6CC;&#x646; &#x67E5;&#x644;&#x627;&#x62A;&#x641;&#x6C6;&#x695;&#x645;&#x646; &#x628;&#x6D5;&#x695;&#x627;&#x633;&#x62A;&#x6CC;."</p>
+<h4 class="text-xs font-bold text-amber-400 mt-4">- Lana Mohammed</h4>
+</div>
+<div class="premium-card p-5 rounded-2xl border border-white/5">
+<div class="flex gap-1 text-[10px] text-amber-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+<p class="text-slate-300 text-xs leading-relaxed">"&#x633;&#x6CC;&#x633;&#x62A;&#x627;&#x646;&#x6D5; &#x6A9;&#x627;&#x634;&#x6CE;&#x631;&#x6D5;&#x6A9;&#x6D5;&#x6CC;&#x627;&#x646; &#x632;&#x6C6;&#x631; &#x628;&#x6CE; &#x628;&#x627;&#x6AF;&#x6D5; &#x648; &#x62E;&#x6CE;&#x631;&#x627;&#x6CC;&#x6D5;, &#x67E5;&#x634;&#x62A;&#x6AF;&#x6CC;&#x631;&#x6CC; &#x6A9;&#x695;&#x6CC;&#x627;&#x631;&#x627;&#x646;&#x6CC;&#x627;&#x646; &#x632;&#x6C6;&#x631; &#x628;&#x627;&#x634;&#x6D5;."</p>
+<h4 class="text-xs font-bold text-amber-400 mt-4">- Himan Omar</h4>
+</div>
+</div>
+</div>
 
-    <div id="dashboardPage" class="max-w-6xl mx-auto px-4 sm:px-6 py-8 w-full hidden relative-z">
-        <div class="grid lg:grid-cols-3 gap-6">
-            <div class="lg:col-span-1 space-y-4">
-                <div class="p-6 rounded-2xl bg-zinc-950 border border-amber-500/30 text-white shadow-xl">
-                    <h4 class="text-xs font-bold text-slate-400 mb-1">باڵانسی تۆ</h4>
-                    <div class="text-3xl font-black text-amber-400"><span id="userBalance">0</span> د.ع</div>
-                    <div class="text-[11px] text-slate-400 mt-2 border-t border-white/5 pt-2" id="userUsernameDisplay">ناو: ...</div>
-                    <div class="text-[11px] text-slate-400 mt-1" id="userEmail">ئیمەیڵ: ...</div>
-                    <div class="text-[11px] text-slate-400 mt-1" id="userPhoneDisplay">مۆبایل: ...</div>
-                </div>
+<!-- SUPPORT -->
+<div class="premium-card p-6 rounded-2xl border border-amber-500/20 text-center max-w-xl mx-auto">
+<div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl mx-auto mb-3"><i class="fa-solid fa-headset"></i></div>
+<h3 class="text-base font-black text-white mb-1">&#x67E5;&#x634;&#x62A;&#x6CC;&#x648;&#x627;&#x646;&#x6CC; &#x648; &#x647;&#x627;&#x6A9;&#x627;&#x631;&#x6CC; &#x645;&#x6CC;&#x647;&#x631;&#x6CC;</h3>
+<p class="text-xs text-slate-400 mb-4 leading-relaxed">&#x628;&#x6C6; &#x647;&#x6D5;&#x631; &#x6A9;&#x6CE;&#x634;&#x6D5;&#x6CC;&#x6D5;&#x6A9;, &#x67E5;&#x631;&#x633;&#x6CC;&#x627;&#x631;&#x6CE;&#x6A9; &#x6CC;&#x627;&#x62E;&#x648;&#x62F; &#x695;&#x6CE;&#x646;&#x645;&#x627;&#x6CC;&#x6CC;&#x6D5;&#x6A9; &#x644;&#x6D5;&#x633;&#x6D5;&#x631; &#x62E;&#x632;&#x645;&#x6D5;&#x62A;&#x6AF;&#x648;&#x632;&#x627;&#x631;&#x6CC;&#x6CC;&#x6D5;&#x6A9;&#x627;&#x646;&#x645;&#x627;&#x646;, &#x62A;&#x6CC;&#x645;&#x6CC; &#x67E5;&#x634;&#x62A;&#x6CC;&#x648;&#x627;&#x646;&#x6CC; &#x647;&#x6D5;&#x645;&#x6CC;&#x634;&#x6D5; &#x626;&#x627;&#x645;&#x627;&#x62F;&#x6D5;&#x6CC;&#x6D5; &#x6CC;&#x627;&#x631;&#x645;&#x6D5;&#x62A;&#x6CC;&#x62A; &#x628;&#x62F;&#x627;&#x62A;.</p>
+<a href="https://t.me/dark_1877t" target="_blank" class="inline-flex items-center gap-2 bg-[#229ED9] hover:bg-[#1e8ec3] text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg"><i class="fa-brands fa-telegram text-sm"></i>&#x67E5;&#x6D5;&#x6CC;&#x648;&#x6D5;&#x646;&#x62F;&#x6CC; &#x628;&#x6D5; &#x67E5;&#x634;&#x62A;&#x6CC;&#x648;&#x627;&#x646;&#x6CC; &#x62A;&#x6D5;&#x644;&#x6D5;&#x6AF;&#x631;&#x627;&#x645;</a>
+</div>
+</main>
 
-                <div class="p-5 rounded-2xl premium-card text-center">
-                    <h4 class="text-xs font-black text-amber-400 mb-2">شحنکردن و زیادکردنی باڵانس</h4>
-                    <p class="text-[11px] text-slate-400 mb-4">بۆ زیادکردنی باڵانسی حیسابەکەت، تکایە ڕاستەوخۆ لە ڕێگەی تەلەگرامەوە پەیوەندیم پێوە بکە.</p>
-                    <a href="https://t.me/dark_1877t" target="_blank" class="w-full inline-flex justify-center items-center gap-2 bg-[#229ED9] hover:bg-[#1e8ec3] text-white font-bold py-2.5 rounded-xl text-xs transition-all duration-300 transform hover:-translate-y-1 shadow-md">
-                        <i class="fa-brands fa-telegram text-sm"></i>
-                        پەیوەندی بە تەلەگرامەوە بکە
-                    </a>
-                </div>
-            </div>
+<!-- DASHBOARD -->
+<div id="dashboardPage" class="max-w-6xl mx-auto px-4 sm:px-6 py-8 w-full hidden relative-z">
+<div class="grid lg:grid-cols-3 gap-6">
+<div class="lg:col-span-1 space-y-4">
+<div class="p-6 rounded-2xl bg-zinc-950 border border-amber-500/30 text-white shadow-xl">
+<h4 class="text-xs font-bold text-slate-400 mb-1">&#x628;&#x627;&#x6B5;&#x627;&#x646;&#x633;&#x6CC; &#x62A;&#x6C6;</h4>
+<div class="text-3xl font-black text-amber-400"><span id="userBalance">0</span> &#x62F;.&#x639;</div>
+<div class="text-[11px] text-slate-400 mt-2 border-t border-white/5 pt-2" id="userUsernameDisplay">&#x646;&#x627;&#x648;: ...</div>
+<div class="text-[11px] text-slate-400 mt-1" id="userEmail">&#x626;&#x6CC;&#x645;&#x6D5;&#x6CC;&#x6B5;: ...</div>
+<div class="text-[11px] text-slate-400 mt-1" id="userPhoneDisplay">&#x645;&#x6C6;&#x628;&#x627;&#x6CC;&#x644;: ...</div>
+</div>
+<div class="p-5 rounded-2xl premium-card text-center">
+<h4 class="text-xs font-black text-amber-400 mb-2">&#x634;&#x62D;&#x646;&#x6A9;&#x631;&#x62F;&#x646; &#x648; &#x632;&#x6CC;&#x627;&#x62F;&#x6A9;&#x631;&#x62F;&#x646;&#x6CC; &#x628;&#x627;&#x6B5;&#x627;&#x646;&#x633;</h4>
+<p class="text-[11px] text-slate-400 mb-4">&#x628;&#x6C6; &#x632;&#x6CC;&#x627;&#x62F;&#x6A9;&#x631;&#x62F;&#x646;&#x6CC; &#x628;&#x627;&#x6B5;&#x627;&#x646;&#x633;&#x6CC; &#x62D;&#x6CC;&#x633;&#x627;&#x628;&#x6D5;&#x6A9;&#x6D5;&#x62A;, &#x62A;&#x6A9;&#x627;&#x6CC;&#x6D5; &#x695;&#x627;&#x633;&#x62A;&#x6D5;&#x648;&#x62E;&#x6C6; &#x644;&#x6D5; &#x695;&#x6CE;&#x6AF;&#x6D5;&#x6CC; &#x62A;&#x6D5;&#x644;&#x6D5;&#x6AF;&#x631;&#x627;&#x645;&#x6D5;&#x648;&#x6D5; &#x67E5;&#x6D5;&#x6CC;&#x648;&#x6D5;&#x646;&#x62F;&#x6CC;&#x645; &#x67E5;&#x6CE;&#x648;&#x6D5; &#x628;&#x6A9;&#x6D5;.</p>
+<a href="https://t.me/dark_1877t" target="_blank" class="w-full inline-flex justify-center items-center gap-2 bg-[#229ED9] hover:bg-[#1e8ec3] text-white font-bold py-2.5 rounded-xl text-xs transition-all duration-300 transform hover:-translate-y-1 shadow-md"><i class="fa-brands fa-telegram text-sm"></i>&#x67E5;&#x6D5;&#x6CC;&#x648;&#x6D5;&#x646;&#x62F;&#x6CC; &#x628;&#x6D5; &#x62A;&#x6D5;&#x644;&#x6D5;&#x6AF;&#x631;&#x627;&#x645;&#x6D5;&#x648;&#x6D5; &#x628;&#x6A9;&#x6D5;</a>
+</div>
+</div>
+<div class="lg:col-span-2 p-5 sm:p-6 rounded-2xl premium-card">
+<h3 class="text-base font-black text-white mb-4">&#x645;&#x6CE;&#x698;&#x648;&#x648;&#x6CC; &#x62F;&#x627;&#x648;&#x627;&#x6A9;&#x627;&#x631;&#x6CC;&#x6CC;&#x6D5;&#x6A9;&#x627;&#x646;&#x62A;</h3>
+<div class="overflow-x-auto">
+<table class="w-full text-right text-xs">
+<thead><tr class="text-slate-500 border-b border-white/5"><th class="pb-2">&#x62E;&#x632;&#x645;&#x6D5;&#x62A;&#x6AF;&#x648;&#x632;&#x627;&#x631;&#x6CC;</th><th class="pb-2">&#x628;&#x695;&#x6CC; &#x67E5;&#x627;&#x631;&#x6D5;</th><th class="pb-2">&#x62F;&#x6C6;&#x62E;</th><th class="pb-2 text-center">&#x641;&#x627;&#x6CC;&#x644;&#x6CC; &#x626;&#x627;&#x645;&#x627;&#x62F;&#x6D5;&#x6A9;&#x631;&#x627;&#x648;</th></tr></thead>
+<tbody id="historyTable" class="text-slate-300 divide-y divide-white/5"><tr><td colspan="4" class="text-center py-8 text-slate-500">&#x647;&#x6CC;&#x686; &#x62F;&#x627;&#x648;&#x627;&#x6A9;&#x627;&#x631;&#x6CC;&#x6CC;&#x6D5;&#x6A9; &#x646;&#x6CC;&#x6CC;&#x6D5;.</td></tr></tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
 
-            <div class="lg:col-span-2 p-5 sm:p-6 rounded-2xl premium-card">
-                <h3 class="text-base font-black text-white mb-4">مێژووی داواکارییەکانت</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-right text-xs">
-                        <thead>
-                            <tr class="text-slate-500 border-b border-white/5">
-                                <th class="pb-2">خزمەتگوزاری</th>
-                                <th class="pb-2">بڕی پارە</th>
-                                <th class="pb-2">دۆخ</th>
-                                <th class="pb-2 text-center">فایلی ئامادەکراو</th>
-                            </tr>
-                        </thead>
-                        <tbody id="historyTable" class="text-slate-300 divide-y divide-white/5">
-                            <tr><td colspan="4" class="text-center py-8 text-slate-500">هیچ داواکارییەک نییە.</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- ORDER MODAL -->
+<div id="orderModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[99999]">
+<div class="bg-[#111622] border border-white/10 rounded-2xl p-6 w-full max-w-lg relative shadow-2xl" style="max-height:90vh;overflow-y:auto">
+<button onclick="closeOrderModal()" class="absolute top-4 left-4 text-slate-400 hover:text-white transition"><i class="fa-solid fa-xmark text-lg"></i></button>
+<h3 id="orderModalTitle" class="text-lg font-black text-white mb-1">&#x62F;&#x627;&#x648;&#x627;&#x6A9;&#x631;&#x62F;&#x646;&#x6CC; &#x62E;&#x632;&#x645;&#x6D5;&#x62A;&#x6AF;&#x648;&#x632;&#x627;&#x631;&#x6CC;</h3>
+<p id="orderModalPrice" class="text-xs text-amber-400 font-bold mb-4"></p>
+<form onsubmit="submitOrder(event)">
 
-    <div id="orderModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[99999] relative-z">
-        <div class="bg-[#111622] border border-white/10 rounded-2xl p-6 w-full max-w-md relative shadow-2xl">
-            <button onclick="closeOrderModal()" class="absolute top-4 left-4 text-slate-400 hover:text-white transition"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <h3 id="orderModalTitle" class="text-lg font-black text-white mb-1">داواکردنی خزمەتگوزاری</h3>
-            <p id="orderModalPrice" class="text-xs text-amber-400 font-bold mb-4"></p>
-            
-            <form onsubmit="submitOrder(event)">
-                
-                <div id="cvFields" class="hidden space-y-3 mb-4">
-                    <input type="text" id="cvDept" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition" placeholder="بەشەکەت چییە؟ (بۆ نموونە: کۆمپیوتەر)">
-                    <div class="w-full">
-                        <label class="block text-[11px] text-slate-400 mb-1">وێنەیەک بۆ ناو CV دیاری بکە:</label>
-                        <input type="file" id="cvFileDrop" accept="image/*" onchange="convertImageToBase64('cvFileDrop', 'cv')" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white file:bg-amber-500/20 file:text-amber-400 file:border-0 file:rounded-lg file:px-2 file:py-1 file:ml-2 file:font-bold cursor-pointer">
-                    </div>
-                    <textarea id="cvInfo" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition" placeholder="زانیارییەکانی تر (ناو، تەمەن، ئەزموون، زمانەکان)"></textarea>
-                </div>
+<!-- CV FIELDS -->
+<div id="cvFields" class="hidden space-y-2 mb-4">
+<p class="text-[11px] font-black text-amber-400 mb-2"><i class="fa-solid fa-user ml-1"></i> &#x632;&#x627;&#x646;&#x6CC;&#x627;&#x631;&#x6CC;&#x6CC; &#x6A9;&#x6D5;&#x633;&#x6CC;</p>
+<input type="text" id="cvFullName" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x646;&#x627;&#x648;&#x6CC; &#x62A;&#x6D5;&#x648;&#x627;&#x648; (&#x6A9;&#x648;&#x631;&#x62F;&#x6CC; / &#x639;&#x6D5;&#x631;&#x6D5;&#x628;&#x6CC; / &#x626;&#x6CE;&#x646;&#x6AF;&#x644;&#x6CC;&#x632;&#x6CC;)">
+<input type="text" id="cvAge" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x62A;&#x6D5;&#x645;&#x6D5;&#x646; (&#x628;&#x6C6; &#x646;&#x645;&#x648;&#x648;&#x646;&#x6D5;: 23 &#x633;&#x627;&#x6B5;)">
+<input type="text" id="cvCity" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x634;&#x627;&#x631;&#x633;&#x62A;&#x627;&#x646; (Sulaymaniyah / Erbil / Duhok...)">
+<input type="text" id="cvPhone" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" dir="ltr" placeholder="&#x646;&#x648;&#x645;&#x631;&#x6D5;&#x6CC; &#x645;&#x6C6;&#x628;&#x627;&#x6CC;&#x644;">
+<input type="email" id="cvEmailField" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" dir="ltr" placeholder="&#x626;&#x6CC;&#x645;&#x6D5;&#x6CC;&#x6B5; (&#x626;&#x6D5;&#x6AF;&#x6D5;&#x631; &#x647;&#x6D5;&#x6CC;&#x6D5;)">
 
-                <div id="snapchatFields" class="hidden space-y-3 mb-4">
-                    <input type="text" id="snapUser" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition" placeholder="یوزەرنەییمی سناپچات (Username)">
-                    <input type="text" id="snapDevice" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition" placeholder="ناوی مۆبایل و مۆدێلەکەی (بۆ نموونە: iPhone 14 Pro Max)">
-                    <input type="text" id="snapImei" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition" placeholder="کۆدی IMEI مۆبایلەکەت (ئەگەر هەیە)">
-                    <select id="snapCode" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition">
-                        <option value="SS06">کۆدی باند: SS06</option>
-                        <option value="SS07">کۆدی باند: SS07</option>
-                        <option value="هەردووکی">SS06 و SS07 پێکەوە</option>
-                    </select>
-                </div>
+<div class="border-t border-amber-500/10 pt-2 mt-1">
+<p class="text-[11px] font-black text-amber-400 mb-2"><i class="fa-solid fa-graduation-cap ml-1"></i> &#x62E;&#x648;&#x6CE;&#x646;&#x62F;&#x646; &#x648; &#x628;&#x6D5;&#x634;</p>
+<input type="text" id="cvDept" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x628;&#x6D5;&#x634;&#x6D5;&#x6A9;&#x6D5;&#x62A; (&#x628;&#x6C6; &#x646;&#x645;&#x648;&#x648;&#x646;&#x6D5;: &#x6A9;&#x6C6;&#x645;&#x67E5;&#x6CC;&#x648;&#x62A;&#x6D5;&#x631; / &#x628;&#x6D5;&#x67E5;&#x6CE;&#x632;&#x634;&#x6A9;&#x6CC; / &#x626;&#x627;&#x628;&#x648;&#x648;&#x631;&#x6CC;)">
+<input type="text" id="cvUniversity" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none mt-2" placeholder="&#x632;&#x627;&#x646;&#x6A9;&#x6C6; / &#x62E;&#x6C6;&#x6CE;&#x646;&#x62F;&#x646;&#x6AF;&#x6D5; &#x646;&#x627;&#x648;&#x6CC;">
+<input type="text" id="cvGradYear" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none mt-2" placeholder="&#x633;&#x627;&#x6B5;&#x6CC; &#x62F;&#x6D5;&#x631;&#x686;&#x648;&#x648;&#x646; / &#x62E;&#x631;&#x6CE;&#x62C;&#x628;&#x648;&#x648;&#x646; (&#x628;&#x6C6; &#x646;&#x645;&#x648;&#x648;&#x646;&#x6D5;: 2024)">
+</div>
 
-                <div id="burnFields" class="hidden space-y-3 mb-4">
-                    <input type="text" id="burnTarget" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition" placeholder="لینک یاخود یوزەرنەییمی ئەکاونتی سەرپێچیکار">
-                    <select id="burnReason" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition">
-                        <option value="بڵاوکردنەوەی وێنەی شەخسی">بڵاوکردنەوەی وێنەی شەخسی و نامووسی</option>
-                        <option value="هەڕەشەکردن و سەرانە">هەڕەشەکردن و داواکردنی سەرانە (ابتزاز)</option>
-                        <option value="ئەکاونتی ساختە و فەیک">ئەکاونتی ساختە (Fake Account)</option>
-                        <option value="کێشەی تر">کێشەی تر</option>
-                    </select>
-                    
-                    <div class="grid grid-cols-2 gap-2 border border-white/5 p-2 rounded-xl bg-black/20">
-                        <div>
-                            <label class="block text-[10px] text-slate-400 mb-1">وێنەی پێشەوەی کارت:</label>
-                            <input type="file" id="idFrontFile" accept="image/*" onchange="convertImageToBase64('idFrontFile', 'front')" class="w-full bg-black/40 border border-white/10 rounded-xl p-1 text-[10px] text-white file:bg-amber-500/20 file:text-amber-400 file:border-0 file:rounded file:px-1 cursor-pointer">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] text-slate-400 mb-1">وێنەی دواوەی کارت:</label>
-                            <input type="file" id="idBackFile" accept="image/*" onchange="convertImageToBase64('idBackFile', 'back')" class="w-full bg-black/40 border border-white/10 rounded-xl p-1 text-[10px] text-white file:bg-amber-500/20 file:text-amber-400 file:border-0 file:rounded file:px-1 cursor-pointer">
-                        </div>
-                    </div>
+<div class="border-t border-amber-500/10 pt-2 mt-1">
+<p class="text-[11px] font-black text-amber-400 mb-2"><i class="fa-solid fa-briefcase ml-1"></i> &#x626;&#x6D5;&#x632;&#x645;&#x648;&#x648;&#x646;&#x6CC; &#x6A9;&#x627;&#x631;&#x6CC;</p>
+<textarea id="cvExperience" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x626;&#x6D5;&#x632;&#x645;&#x648;&#x648;&#x646;&#x6D5;&#x6A9;&#x627;&#x646;&#x6CC; &#x6A9;&#x627;&#x631;&#x6CC;&#x6CC;&#x6D5;&#x62A; &#x628;&#x646;&#x648;&#x648;&#x633;&#x6D5; (&#x646;&#x627;&#x648;&#x6CC; &#x634;&#x6CC;&#x631;&#x6A9;&#x6D5;&#x62A;, &#x628;&#x648;&#x648;&#x646;&#x6D5;&#x648;&#x6D5;&#x634;&#x6CC;&#x6A9; &#x648; &#x6A9;&#x627;&#x62A;&#x6D5;&#x6A9;&#x6D5;&#x6CC;...) &#x6CC;&#x627;&#x646; &#x62F;&#x627;&#x648;&#x627;&#x6A9;&#x627;&#x631;&#x6CC;&#x6CC; &#x646;&#x6CC;&#x6CC;&#x6D5; &#x626;&#x6D5;&#x6AF;&#x6D5;&#x631; &#x646;&#x6D5;&#x648;&#x6CE;&#x62A;"></textarea>
+</div>
 
-                    <textarea id="burnDetails" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition" placeholder="وردەکاری زیاتر بنووسە ئەگەر پێویستە..."></textarea>
-                </div>
+<div class="border-t border-amber-500/10 pt-2 mt-1">
+<p class="text-[11px] font-black text-amber-400 mb-2"><i class="fa-solid fa-stars ml-1"></i> &#x633;&#x6A9;&#x6CC;&#x644; &#x648; &#x62A;&#x648;&#x627;&#x646;&#x627;&#x6CC;&#x6CC;&#x6D5;&#x6A9;&#x627;&#x646;</p>
+<textarea id="cvSkills" rows="2" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x633;&#x6A9;&#x6CC;&#x644;&#x6D5;&#x6A9;&#x627;&#x646;&#x62A; (&#x628;&#x6C6; &#x646;&#x645;&#x648;&#x648;&#x646;&#x6D5;: Python, Photoshop, Excel, &#x628;&#x6D5;&#x695;&#x6CE;&#x648;&#x6D5;&#x628;&#x631;&#x62F;&#x646;&#x6CC; &#x6A9;&#x627;&#x62A;&#x627;...)"></textarea>
+</div>
 
-                <div id="generalFields" class="hidden mb-4">
-                    <textarea id="generalDetails" rows="4" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none transition" placeholder="تکایە بە تەواوی ڕوونی بکەرەوە کە دەتەوێت بابەتەکە لەسەر چی بێت و چۆن بێت..."></textarea>
-                </div>
+<div class="border-t border-amber-500/10 pt-2 mt-1">
+<p class="text-[11px] font-black text-amber-400 mb-2"><i class="fa-solid fa-language ml-1"></i> &#x632;&#x645;&#x627;&#x646;&#x6D5;&#x6A9;&#x627;&#x646;</p>
+<input type="text" id="cvLanguages" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x632;&#x645;&#x627;&#x646;&#x6D5;&#x6A9;&#x627;&#x646;&#x6CC; &#x632;&#x627;&#x646;&#x6CC;&#x6CC;&#x62A; (&#x628;&#x6C6; &#x646;&#x645;&#x648;&#x648;&#x646;&#x6D5;: &#x6A9;&#x648;&#x631;&#x62F;&#x6CC;: &#x646;&#x6CC;&#x634;&#x62A;&#x645;&#x627;&#x646;&#x6CC;, &#x639;&#x6D5;&#x631;&#x6D5;&#x628;&#x6CC;: &#x628;&#x627;&#x634;, &#x626;&#x6CE;&#x646;&#x6AF;&#x644;&#x6CC;&#x632;&#x6CC;: &#x646;&#x6CC;&#x634;&#x62A;)">
+</div>
 
-                <button type="submit" class="w-full gold-btn font-black py-2.5 rounded-xl text-xs shadow-md">پەسەندکردنی داواکاری</button>
-            </form>
-        </div>
-    </div>
+<div class="border-t border-amber-500/10 pt-2 mt-1">
+<p class="text-[11px] font-black text-amber-400 mb-2"><i class="fa-solid fa-certificate ml-1"></i> &#x695;&#x627;&#x632;&#x627;&#x646;&#x62F;&#x646;&#x627;&#x645;&#x6D5; &#x648; &#x6A9;&#x6C6;&#x631;&#x633; (&#x626;&#x6D5;&#x6AF;&#x6D5;&#x631; &#x647;&#x6D5;&#x6CC;&#x6D5;)</p>
+<textarea id="cvCertificates" rows="2" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x695;&#x627;&#x632;&#x627;&#x646;&#x62F;&#x646;&#x627;&#x645;&#x6D5; &#x6CC;&#x627; &#x6A9;&#x6C6;&#x631;&#x633;&#x6D5;&#x6A9;&#x627;&#x646; (&#x628;&#x6C6; &#x646;&#x645;&#x648;&#x648;&#x646;&#x6D5;: ICDL, CCNA...) &#x6CC;&#x627; &#x628;&#x646;&#x648;&#x648;&#x633;&#x6D5; &#x646;&#x6CC;&#x6CC;&#x6D5;"></textarea>
+</div>
 
-    <div id="authModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[99999] relative-z">
-        <div class="bg-[#111622] border border-white/10 rounded-2xl p-6 w-full max-w-sm relative shadow-2xl">
-            <button onclick="closeAuthModal()" class="absolute top-4 left-4 text-slate-400 hover:text-white transition"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <h3 id="authTitle" class="text-lg font-black text-white mb-4">چوونەژوورەوە</h3>
-            <form onsubmit="handleAuth(event)">
-                <input type="text" id="usernameField" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white mb-2 hidden focus:border-amber-500 outline-none transition" placeholder="ناوی تەواو (بەکارهێنەر)">
-                <input type="email" id="emailField" required class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-2 focus:border-amber-500 outline-none transition" dir="ltr" placeholder="ئیمەیڵ">
-                <input type="tel" id="phoneField" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-2 hidden focus:border-amber-500 outline-none transition" dir="ltr" placeholder="مۆبایل">
-                <input type="password" id="passwordField" required class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-1 focus:border-amber-500 outline-none transition" dir="ltr" placeholder="پاسۆرد">
-                
-                <p id="passwordHint" class="text-[10px] text-slate-500 mb-4 hidden leading-tight">پاسۆرد دەبێت لانی کەم ٨ پیت بێت، پیتی گەورە (A-Z) و هێمای تێدابێت (وەک @،#،$).</p>
-                
-                <div id="forgotPasswordContainer" class="text-right mb-4">
-                    <a href="https://t.me/dark_1877t?text=سڵاو،%20پاسۆردی%20حیسابەکەم%20لەبیرچووە،%20تکایە%20یارمەتیم%20بدەن." target="_blank" class="text-[11px] text-slate-400 hover:text-amber-400 transition font-bold">پاسۆردت لەبیرچووە؟</a>
-                </div>
+<div class="border-t border-amber-500/10 pt-2 mt-1">
+<p class="text-[11px] font-black text-amber-400 mb-2"><i class="fa-solid fa-palette ml-1"></i> &#x698;&#x6CC;&#x646;&#x6D5;&#x6CC; &#x62F;&#x6CE;&#x632;&#x627;&#x6CC;&#x646; &#x648; &#x632;&#x645;&#x627;&#x646;</p>
+<select id="cvStyle" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none">
+<option value="Modern Dark">&#x645;&#x6C6;&#x62F;&#x6CE;&#x631;&#x646; &#x62A;&#x627;&#x631;&#x6CC;&#x6A9; (Modern Dark)</option>
+<option value="Classic White">&#x6A9;&#x644;&#x627;&#x633;&#x6CC;&#x6A9; &#x633;&#x67E5;&#x6CC; (Classic White)</option>
+<option value="Colorful">&#x695;&#x6D5;&#x646;&#x6AF;&#x627;&#x648;&#x6CC;&#x646; (Colorful)</option>
+<option value="Minimal">&#x645;&#x6CC;&#x646;&#x6CC;&#x645;&#x627;&#x6B5; (Minimal)</option>
+</select>
+<select id="cvLang" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none mt-2">
+<option value="Kurdish">&#x628;&#x6D5; &#x632;&#x645;&#x627;&#x646;&#x6CC; &#x6A9;&#x648;&#x631;&#x62F;&#x6CC;</option>
+<option value="Arabic">&#x628;&#x6D5; &#x632;&#x645;&#x627;&#x646;&#x6CC; &#x639;&#x6D5;&#x631;&#x6D5;&#x628;&#x6CC;</option>
+<option value="English">&#x628;&#x6D5; &#x632;&#x645;&#x627;&#x646;&#x6CC; &#x626;&#x6CE;&#x646;&#x6AF;&#x644;&#x6CC;&#x632;&#x6CC;</option>
+<option value="Kurdish+English">&#x6A9;&#x648;&#x631;&#x62F;&#x6CC; + &#x626;&#x6CE;&#x646;&#x6AF;&#x644;&#x6CC;&#x632;&#x6CC;</option>
+</select>
+</div>
 
-                <button type="submit" id="submitAuthBtn" class="w-full gold-btn font-black py-2 rounded-xl text-xs mb-4">چوونەژوورەوە</button>
-            </form>
-            <button onclick="toggleAuthMode()" id="toggleModeBtn" class="text-xs text-amber-400 underline font-bold w-full text-center hover:text-amber-300 transition">دروستکردنی حیسابی نوێ</button>
-        </div>
-    </div>
+<div class="border-t border-amber-500/10 pt-2 mt-1">
+<p class="text-[11px] font-black text-amber-400 mb-2"><i class="fa-solid fa-image ml-1"></i> &#x648;&#x6CE;&#x646;&#x6D5;&#x6CC; &#x6A9;&#x6D5;&#x633;&#x6CC;&#x6CC;&#x6D5;&#x62A;</p>
+<input type="file" id="cvFileDrop" accept="image/*" onchange="convertImageToBase64('cvFileDrop','cv')" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white file:bg-amber-500/20 file:text-amber-400 file:border-0 file:rounded-lg file:px-2 file:py-1 file:font-bold cursor-pointer">
+</div>
 
-    <footer class="border-t border-white/5 py-4 text-center text-xs text-slate-600 relative-z">© ٢٠٢٦ پلاتفۆرمی میهری.</footer>
+<div class="border-t border-amber-500/10 pt-2 mt-1">
+<p class="text-[11px] font-black text-amber-400 mb-2"><i class="fa-solid fa-note-sticky ml-1"></i> &#x646;&#x648;&#x62A;&#x6CC; &#x632;&#x6CC;&#x627;&#x62A;&#x631; (&#x626;&#x6D5;&#x6AF;&#x6D5;&#x631; &#x67E5;&#x6CE;&#x648;&#x6CC;&#x633;&#x62A;&#x6D5;)</p>
+<textarea id="cvInfo" rows="2" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x647;&#x6D5;&#x631; &#x632;&#x627;&#x646;&#x6CC;&#x627;&#x631;&#x6CC;&#x6CC;&#x6A9;&#x6CC; &#x62A;&#x631; &#x6A9;&#x6D5; &#x62F;&#x6D5;&#x62A;&#x6D5;&#x648;&#x6CE;&#x62A; &#x644;&#x6D5; CV&#x62F;&#x627; &#x628;&#x6CC;&#x62A;..."></textarea>
+</div>
+</div>
 
-    <script>
-        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-        document.onkeydown = function(e) {
-            if (e.keyCode == 123) return false;
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
-            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
-        };
+<!-- SEMINAR FIELDS -->
+<div id="seminarFields" class="hidden space-y-2 mb-4">
+<p class="text-[11px] font-black text-amber-400 mb-2"><i class="fa-solid fa-chalkboard-user ml-1"></i> &#x632;&#x627;&#x646;&#x6CC;&#x627;&#x631;&#x6CC;&#x6CC; &#x633;&#x6CC;&#x645;&#x6CC;&#x646;&#x627;&#x631;</p>
+<input type="text" id="semTitle" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x646;&#x627;&#x648;&#x646;&#x6CC;&#x634;&#x627;&#x646;&#x6CC; &#x633;&#x6CC;&#x645;&#x6CC;&#x646;&#x627;&#x631;&#x6D5;&#x6A9;&#x6D5;&#x62A;">
+<input type="text" id="semDept" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x628;&#x6D5;&#x634; &#x648; &#x632;&#x627;&#x646;&#x6A9;&#x6C6;">
+<input type="text" id="semStudentName" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x646;&#x627;&#x648;&#x6CC; &#x62E;&#x648;&#x6CE;&#x646;&#x62F;&#x6A9;&#x627;&#x631;">
+<input type="text" id="semSupervisor" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x646;&#x627;&#x648;&#x6CC; &#x633;&#x6D5;&#x631;&#x67E5;&#x6D5;&#x631;&#x634;&#x62A; (Supervisor) - &#x626;&#x6D5;&#x6AF;&#x6D5;&#x631; &#x647;&#x6D5;&#x6CC;&#x6D5;">
+<select id="semSlides" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none">
+<option value="10-15">10-15 &#x633;&#x6B5;&#x627;&#x6CC;&#x62F;</option>
+<option value="15-20">15-20 &#x633;&#x6B5;&#x627;&#x6CC;&#x62F;</option>
+<option value="20-30">20-30 &#x633;&#x6B5;&#x627;&#x6CC;&#x62F;</option>
+<option value="30+">&#x632;&#x6CC;&#x627;&#x62A;&#x631; &#x644;&#x6D5; 30</option>
+</select>
+<select id="semLang" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none">
+<option value="Kurdish">&#x628;&#x6D5; &#x632;&#x645;&#x627;&#x646;&#x6CC; &#x6A9;&#x648;&#x631;&#x62F;&#x6CC;</option>
+<option value="Arabic">&#x628;&#x6D5; &#x632;&#x645;&#x627;&#x646;&#x6CC; &#x639;&#x6D5;&#x631;&#x6D5;&#x628;&#x6CC;</option>
+<option value="English">&#x628;&#x6D5; &#x632;&#x645;&#x627;&#x646;&#x6CC; &#x626;&#x6CE;&#x646;&#x6AF;&#x644;&#x6CC;&#x632;&#x6CC;</option>
+</select>
+<textarea id="semDetails" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x648;&#x631;&#x62F;&#x6D5;&#x6A9;&#x627;&#x631;&#x6CC; &#x628;&#x646;&#x648;&#x648;&#x633;&#x6D5; - &#x626;&#x6D5;&#x6AF;&#x6D5;&#x631; &#x62F;&#x6D5;&#x633;&#x62A;&#x62A; &#x628;&#x6CE;&#x62A; &#x62F;&#x6D5;&#x633;&#x62A;&#x648;&#x648;&#x631; &#x628;&#x62F;&#x6D5;&#x6CC; &#x628;&#x6D5;&#x62F;&#x6D5;&#x6CC;&#x62A;&#x647;&#x6CE;&#x646;&#x6CC;&#x646;..."></textarea>
+</div>
 
-        const supabaseClient = window.supabase.createClient('https://lydmtihssxpglpfoeyiz.supabase.co', 'sb_publishable_VWm_EBXynu4Pk1Kx0tjPLw_z7PQoIyy');
+<!-- REPORT FIELDS -->
+<div id="reportFields" class="hidden space-y-2 mb-4">
+<p class="text-[11px] font-black text-amber-400 mb-2"><i class="fa-solid fa-file-invoice ml-1"></i> &#x632;&#x627;&#x646;&#x6CC;&#x627;&#x631;&#x6CC;&#x6CC; &#x695;&#x627;&#x67E5;&#x6C6;&#x631;&#x62A;</p>
+<input type="text" id="repTitle" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x646;&#x627;&#x648;&#x646;&#x6CC;&#x634;&#x627;&#x646;&#x6CC; &#x695;&#x627;&#x67E5;&#x6C6;&#x631;&#x62A;&#x6D5;&#x6A9;&#x6D5;&#x62A;">
+<input type="text" id="repDept" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x628;&#x6D5;&#x634; &#x648; &#x632;&#x627;&#x646;&#x6A9;&#x6C6;">
+<input type="text" id="repStudentName" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x646;&#x627;&#x648;&#x6CC; &#x62E;&#x648;&#x6CE;&#x646;&#x62F;&#x6A9;&#x627;&#x631;">
+<input type="text" id="repSupervisor" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x646;&#x627;&#x648;&#x6CC; &#x633;&#x6D5;&#x631;&#x67E5;&#x6D5;&#x631;&#x634;&#x62A; - &#x626;&#x6D5;&#x6AF;&#x6D5;&#x631; &#x647;&#x6D5;&#x6CC;&#x6D5;">
+<select id="repPages" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none">
+<option value="5-10">5-10 &#x67E5;&#x6D5;&#x695;&#x6D5;</option>
+<option value="10-20">10-20 &#x67E5;&#x6D5;&#x695;&#x6D5;</option>
+<option value="20-30">20-30 &#x67E5;&#x6D5;&#x695;&#x6D5;</option>
+<option value="30+">&#x632;&#x6CC;&#x627;&#x62A;&#x631; &#x644;&#x6D5; 30</option>
+</select>
+<select id="repLang" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none">
+<option value="Kurdish">&#x628;&#x6D5; &#x632;&#x645;&#x627;&#x646;&#x6CC; &#x6A9;&#x648;&#x631;&#x62F;&#x6CC;</option>
+<option value="Arabic">&#x628;&#x6D5; &#x632;&#x645;&#x627;&#x646;&#x6CC; &#x639;&#x6D5;&#x631;&#x6D5;&#x628;&#x6CC;</option>
+<option value="English">&#x628;&#x6D5; &#x632;&#x645;&#x627;&#x646;&#x6CC; &#x626;&#x6CE;&#x646;&#x6AF;&#x644;&#x6CC;&#x632;&#x6CC;</option>
+</select>
+<textarea id="repDetails" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x648;&#x631;&#x62F;&#x6D5;&#x6A9;&#x627;&#x631;&#x6CC; &#x628;&#x646;&#x648;&#x648;&#x633;&#x6D5; - &#x626;&#x6D5;&#x6AF;&#x6D5;&#x631; &#x62F;&#x6D5;&#x633;&#x62A;&#x62A; &#x628;&#x6CE;&#x62A; &#x62F;&#x6D5;&#x633;&#x62A;&#x648;&#x648;&#x631; &#x628;&#x62F;&#x6D5;&#x6CC; &#x628;&#x6D5;&#x62F;&#x6D5;&#x6CC;&#x62A;&#x647;&#x6CE;&#x646;&#x6CC;&#x646;..."></textarea>
+</div>
 
-        let currentUser = null;
-        let isSignUpMode = false;
-        let activeServiceName = '';
-        let activeServicePrice = 0;
-        
-        let encodedBase64Image = ''; 
-        let encodedIdFront = '';
-        let encodedIdBack = '';
+<!-- SNAPCHAT FIELDS -->
+<div id="snapchatFields" class="hidden space-y-3 mb-4">
+<input type="text" id="snapUser" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x6CC;&#x648;&#x632;&#x6D5;&#x631;&#x646;&#x6D5;&#x6CC;&#x6CC;&#x645;&#x6CC; &#x633;&#x646;&#x627;&#x67E5;&#x686;&#x627;&#x62A;">
+<input type="text" id="snapDevice" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x646;&#x627;&#x648;&#x6CC; &#x645;&#x6C6;&#x628;&#x627;&#x6CC;&#x644; &#x648; &#x645;&#x6C6;&#x62F;&#x6CE;&#x644;">
+<input type="text" id="snapImei" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x6A9;&#x6C6;&#x62F;&#x6CC; IMEI (&#x626;&#x6D5;&#x6AF;&#x6D5;&#x631; &#x647;&#x6D5;&#x6CC;&#x6D5;)">
+<select id="snapCode" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none">
+<option value="SS06">SS06</option>
+<option value="SS07">SS07</option>
+<option value="both">SS06 + SS07</option>
+</select>
+</div>
 
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+<!-- BURN FIELDS -->
+<div id="burnFields" class="hidden space-y-3 mb-4">
+<input type="text" id="burnTarget" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x644;&#x6CC;&#x646;&#x6A9; &#x6CC;&#x627;&#x62E;&#x648;&#x62F; &#x6CC;&#x648;&#x632;&#x6D5;&#x631;&#x646;&#x6D5;&#x6CC;&#x6CC;&#x645; &#x626;&#x6D5;&#x6A9;&#x627;&#x648;&#x646;&#x62A;&#x6CC; &#x633;&#x6D5;&#x631;&#x67E5;&#x6CE;&#x686;&#x6CC;&#x6A9;&#x627;&#x631;">
+<select id="burnReason" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none">
+<option value="pic">&#x628;&#x6B5;&#x627;&#x648;&#x6A9;&#x631;&#x62F;&#x646;&#x6D5;&#x648;&#x6D5;&#x6CC; &#x648;&#x6CE;&#x646;&#x6D5;&#x6CC; &#x634;&#x6D5;&#x62E;&#x633;&#x6CC;</option>
+<option value="threat">&#x647;&#x6D5;&#x695;&#x6D5;&#x634;&#x6D5; &#x648; &#x626;&#x627;&#x628;&#x62A;&#x632;&#x627;&#x632;</option>
+<option value="fake">&#x626;&#x6D5;&#x6A9;&#x627;&#x648;&#x646;&#x62A;&#x6CC; &#x633;&#x627;&#x62E;&#x62A;&#x6D5; (Fake)</option>
+<option value="other">&#x6A9;&#x6CE;&#x634;&#x6D5;&#x6CC; &#x62A;&#x631;</option>
+</select>
+<div class="grid grid-cols-2 gap-2 border border-white/5 p-2 rounded-xl bg-black/20">
+<div><label class="block text-[10px] text-slate-400 mb-1">&#x648;&#x6CE;&#x646;&#x6D5;&#x6CC; &#x67E5;&#x6CE;&#x634;&#x6D5;&#x648;&#x6D5;:</label><input type="file" id="idFrontFile" accept="image/*" onchange="convertImageToBase64('idFrontFile','front')" class="w-full bg-black/40 border border-white/10 rounded-xl p-1 text-[10px] text-white file:bg-amber-500/20 file:text-amber-400 file:border-0 file:rounded file:px-1 cursor-pointer"></div>
+<div><label class="block text-[10px] text-slate-400 mb-1">&#x648;&#x6CE;&#x646;&#x6D5;&#x6CC; &#x62F;&#x648;&#x627;&#x648;&#x6D5;:</label><input type="file" id="idBackFile" accept="image/*" onchange="convertImageToBase64('idBackFile','back')" class="w-full bg-black/40 border border-white/10 rounded-xl p-1 text-[10px] text-white file:bg-amber-500/20 file:text-amber-400 file:border-0 file:rounded file:px-1 cursor-pointer"></div>
+</div>
+<textarea id="burnDetails" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x648;&#x631;&#x62F;&#x6D5;&#x6A9;&#x627;&#x631;&#x6CC; &#x632;&#x6CC;&#x627;&#x62A;&#x631;..."></textarea>
+</div>
 
-        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+<!-- GENERAL -->
+<div id="generalFields" class="hidden mb-4">
+<textarea id="generalDetails" rows="4" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:border-amber-500 outline-none" placeholder="&#x62A;&#x6A9;&#x627;&#x6CC;&#x6D5; &#x628;&#x6D5; &#x62A;&#x6D5;&#x648;&#x627;&#x648;&#x6CC; &#x695;&#x648;&#x648;&#x646;&#x6CC; &#x628;&#x6A9;&#x6D5;&#x631;&#x6D5;&#x648;&#x6D5;..."></textarea>
+</div>
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
-                this.alpha = Math.random() * 0.5 + 0.2;
-            }
-            update() {
-                this.x += this.speedX; this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-            draw() {
-                ctx.save(); ctx.globalAlpha = this.alpha;
-                ctx.shadowBlur = 10; ctx.shadowColor = '#d4af37'; ctx.fillStyle = '#d4af37';
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
-                ctx.restore();
-            }
-        }
-        function initParticles() { particles = []; for (let i = 0; i < 75; i++) particles.push(new Particle()); }
-        initParticles();
-        function animateParticles() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
-        animateParticles();
+<button type="submit" class="w-full gold-btn font-black py-2.5 rounded-xl text-xs shadow-md">&#x67E5;&#x6D5;&#x633;&#x6D5;&#x646;&#x62F;&#x6A9;&#x631;&#x62F;&#x646;&#x6CC; &#x62F;&#x627;&#x648;&#x627;&#x6A9;&#x627;&#x631;&#x6CC;</button>
+</form>
+</div>
+</div>
 
-        window.addEventListener('DOMContentLoaded', async () => {
-            const savedUser = localStorage.getItem('mihry_session');
-            if (savedUser) { 
-                const parsedUser = JSON.parse(savedUser);
-                try {
-                    const { data, error } = await supabaseClient.from('mihry_users').select('*').eq('email', parsedUser.email).maybeSingle();
-                    if (data && !error) {
-                        loginSuccess(data); 
-                    } else {
-                        loginSuccess(parsedUser); 
-                    }
-                } catch (e) {
-                    loginSuccess(parsedUser);
-                }
-            }
-        });
+<!-- AUTH MODAL -->
+<div id="authModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[99999]">
+<div class="bg-[#111622] border border-white/10 rounded-2xl p-6 w-full max-w-sm relative shadow-2xl">
+<button onclick="closeAuthModal()" class="absolute top-4 left-4 text-slate-400 hover:text-white transition"><i class="fa-solid fa-xmark text-lg"></i></button>
+<h3 id="authTitle" class="text-lg font-black text-white mb-4">&#x686;&#x648;&#x648;&#x646;&#x6D5;&#x698;&#x648;&#x648;&#x631;&#x6D5;&#x648;&#x6D5;</h3>
+<form onsubmit="handleAuth(event)">
+<input type="text" id="usernameField" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white mb-2 hidden focus:border-amber-500 outline-none" placeholder="&#x646;&#x627;&#x648;&#x6CC; &#x62A;&#x6D5;&#x648;&#x627;&#x648;">
+<input type="email" id="emailField" required class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-2 focus:border-amber-500 outline-none" dir="ltr" placeholder="&#x626;&#x6CC;&#x645;&#x6D5;&#x6CC;&#x6B5;">
+<input type="tel" id="phoneField" class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-2 hidden focus:border-amber-500 outline-none" dir="ltr" placeholder="&#x645;&#x6C6;&#x628;&#x627;&#x6CC;&#x644;">
+<input type="password" id="passwordField" required class="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-left text-white mb-1 focus:border-amber-500 outline-none" dir="ltr" placeholder="&#x67E5;&#x627;&#x633;&#x6C6;&#x631;&#x62F;">
+<p id="passwordHint" class="text-[10px] text-slate-500 mb-4 hidden">&#x67E5;&#x627;&#x633;&#x6C6;&#x631;&#x62F; &#x62F;&#x6D5;&#x628;&#x6CE;&#x62A; &#x644;&#x627;&#x646;&#x6CC; &#x6A9;&#x6D5;&#x645; 8 &#x67E5;&#x6CC;&#x62A; &#x628;&#x6CE;&#x62A;, &#x67E5;&#x6CC;&#x62A;&#x6CC; &#x6AF;&#x6D5;&#x648;&#x631;&#x6D5; (A-Z) &#x648; &#x647;&#x6CE;&#x645;&#x627;&#x6CC; &#x62A;&#x6CE;&#x62F;&#x627;&#x628;&#x6CE;&#x62A;.</p>
+<div id="forgotPasswordContainer" class="text-right mb-4"><a href="https://t.me/dark_1877t" target="_blank" class="text-[11px] text-slate-400 hover:text-amber-400 transition font-bold">&#x67E5;&#x627;&#x633;&#x6C6;&#x631;&#x62F;&#x62A; &#x644;&#x6D5;&#x628;&#x6CC;&#x631;&#x686;&#x648;&#x648;&#x6D5;?</a></div>
+<button type="submit" id="submitAuthBtn" class="w-full gold-btn font-black py-2 rounded-xl text-xs mb-4">&#x686;&#x648;&#x648;&#x646;&#x6D5;&#x698;&#x648;&#x648;&#x631;&#x6D5;&#x648;&#x6D5;</button>
+</form>
+<button onclick="toggleAuthMode()" id="toggleModeBtn" class="text-xs text-amber-400 underline font-bold w-full text-center hover:text-amber-300 transition">&#x62F;&#x631;&#x648;&#x633;&#x62A;&#x6A9;&#x631;&#x62F;&#x646;&#x6CC; &#x62D;&#x6CC;&#x633;&#x627;&#x628;&#x6CC; &#x646;&#x648;&#x6CE;</button>
+</div>
+</div>
 
-        function showPage(pageName) {
-            const homePage = document.getElementById('homePage');
-            const dashboardPage = document.getElementById('dashboardPage');
-            const navHomeBtn = document.getElementById('navHomeBtn');
-            const navDashboardBtn = document.getElementById('navDashboardBtn');
+<footer class="border-t border-white/5 py-4 text-center text-xs text-slate-600 relative-z">&#xA9; 2026 &#x67E5;&#x644;&#x627;&#x62A;&#x641;&#x6C6;&#x631;&#x645;&#x6CC; &#x645;&#x6CC;&#x647;&#x631;&#x6CC;.</footer>
 
-            if (pageName === 'home') {
-                homePage.classList.remove('hidden'); dashboardPage.classList.add('hidden');
-                navHomeBtn.classList.add('text-amber-400', 'bg-white/5', 'border', 'border-amber-500/20');
-                navDashboardBtn.classList.remove('text-amber-400', 'bg-white/5', 'border', 'border-amber-500/20');
-                navDashboardBtn.classList.add('text-slate-300');
-            } else if (pageName === 'dashboard') {
-                homePage.classList.add('hidden'); dashboardPage.classList.remove('hidden');
-                navDashboardBtn.classList.add('text-amber-400', 'bg-white/5', 'border', 'border-amber-500/20');
-                navDashboardBtn.classList.remove('text-slate-300');
-                navHomeBtn.classList.remove('text-amber-400', 'bg-white/5', 'border', 'border-amber-500/20');
-                navHomeBtn.classList.add('text-slate-300');
-            }
-        }
+<script>
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.onkeydown=e=>{if(e.keyCode==123)return false;if(e.ctrlKey&&e.shiftKey&&e.keyCode==73)return false;if(e.ctrlKey&&e.shiftKey&&e.keyCode==67)return false;if(e.ctrlKey&&e.keyCode==85)return false;};
 
-        function openAuthModal() { document.getElementById('authModal').classList.remove('hidden'); }
-        function closeAuthModal() { document.getElementById('authModal').classList.add('hidden'); }
+const supabaseClient=window.supabase.createClient('https://lydmtihssxpglpfoeyiz.supabase.co','sb_publishable_VWm_EBXynu4Pk1Kx0tjPLw_z7PQoIyy');
+let currentUser=null,isSignUpMode=false,activeServiceType='',activeServicePrice=0;
+let encodedBase64Image='',encodedIdFront='',encodedIdBack='';
 
-        function toggleAuthMode() {
-            isSignUpMode = !isSignUpMode;
-            document.getElementById('usernameField').classList.toggle('hidden', !isSignUpMode);
-            document.getElementById('phoneField').classList.toggle('hidden', !isSignUpMode);
-            document.getElementById('passwordHint').classList.toggle('hidden', !isSignUpMode);
-            document.getElementById('forgotPasswordContainer').classList.toggle('hidden', isSignUpMode);
-            document.getElementById('authTitle').innerText = isSignUpMode ? "دروستکردنی حیساب" : "چوونەژوورەوە";
-            document.getElementById('submitAuthBtn').innerText = isSignUpMode ? "تۆماربوون" : "چوونەژوورەوە";
-            document.getElementById('toggleModeBtn').innerText = isSignUpMode ? "حیسابم هەیە؟ لۆگین" : "دروستکردنی حیسابی نوێ";
-        }
+const canvas=document.getElementById('particleCanvas');
+const ctx=canvas.getContext('2d');
+let particles=[];
+function resizeCanvas(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+window.addEventListener('resize',resizeCanvas);resizeCanvas();
+class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*2+0.5;this.speedX=Math.random()*0.5-0.25;this.speedY=Math.random()*0.5-0.25;this.alpha=Math.random()*0.5+0.2;}update(){this.x+=this.speedX;this.y+=this.speedY;if(this.x<0||this.x>canvas.width)this.speedX*=-1;if(this.y<0||this.y>canvas.height)this.speedY*=-1;}draw(){ctx.save();ctx.globalAlpha=this.alpha;ctx.shadowBlur=10;ctx.shadowColor='#d4af37';ctx.fillStyle='#d4af37';ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();ctx.restore();}}
+function initParticles(){particles=[];for(let i=0;i<75;i++)particles.push(new Particle());}
+initParticles();
+function animateParticles(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animateParticles);}
+animateparticles=animateParticles;animateParticles();
 
-        function isPasswordStrong(password) {
-            const minLength = 8;
-            const hasUpperCase = /[A-Z]/.test(password);
-            const hasSymbol = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(password);
-            return password.length >= minLength && hasUpperCase && hasSymbol;
-        }
+window.addEventListener('DOMContentLoaded',async()=>{
+const savedUser=localStorage.getItem('mihry_session');
+if(savedUser){const p=JSON.parse(savedUser);try{const{data,error}=await supabaseClient.from('mihry_users').select('*').eq('email',p.email).maybeSingle();loginSuccess(data&&!error?data:p);}catch(e){loginSuccess(p);}}
+});
 
-        async function handleAuth(e) {
-            e.preventDefault();
-            const email = document.getElementById('emailField').value;
-            const password = document.getElementById('passwordField').value;
+function showPage(p){
+const h=document.getElementById('homePage'),d=document.getElementById('dashboardPage');
+const nh=document.getElementById('navHomeBtn'),nd=document.getElementById('navDashboardBtn');
+if(p==='home'){h.classList.remove('hidden');d.classList.add('hidden');nh.classList.add('text-amber-400','bg-white/5','border','border-amber-500/20');nd.classList.remove('text-amber-400');nd.classList.add('text-slate-300');}
+else{h.classList.add('hidden');d.classList.remove('hidden');nd.classList.add('text-amber-400','bg-white/5','border','border-amber-500/20');nd.classList.remove('text-slate-300');nh.classList.remove('text-amber-400','bg-white/5','border','border-amber-500/20');}
+}
+function openAuthModal(){document.getElementById('authModal').classList.remove('hidden');}
+function closeAuthModal(){document.getElementById('authModal').classList.add('hidden');}
+function toggleAuthMode(){
+isSignUpMode=!isSignUpMode;
+document.getElementById('usernameField').classList.toggle('hidden',!isSignUpMode);
+document.getElementById('phoneField').classList.toggle('hidden',!isSignUpMode);
+document.getElementById('passwordHint').classList.toggle('hidden',!isSignUpMode);
+document.getElementById('forgotPasswordContainer').classList.toggle('hidden',isSignUpMode);
+document.getElementById('authTitle').innerText=isSignUpMode?'Hesabeki Nwe Drust Bke':'Bchnezhurrewe';
+document.getElementById('submitAuthBtn').innerText=isSignUpMode?'Tomarbun':'Bchnezhurrewe';
+document.getElementById('toggleModeBtn').innerText=isSignUpMode?'Hesabm Heye - Login':'Hesabeki Nwe Drust Bke';
+}
+function isPasswordStrong(pw){return pw.length>=8&&/[A-Z]/.test(pw)&&/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(pw);}
+async function handleAuth(e){
+e.preventDefault();
+const email=document.getElementById('emailField').value;
+const password=document.getElementById('passwordField').value;
+try{
+if(isSignUpMode){
+const username=document.getElementById('usernameField').value;
+const phone=document.getElementById('phoneField').value;
+if(!username.trim())return alert('Tkaye Nawt Bnuse!');
+if(!isPasswordStrong(password))return alert('Pasordekat Lawaze!');
+const{data:ex}=await supabaseClient.from('mihry_users').select('email').eq('email',email).maybeSingle();
+if(ex)return alert('Em Imeylet Peshtr Bekarhatwe!');
+const{data,error}=await supabaseClient.from('mihry_users').insert([{username,email,phone,password,balance:0}]).select().maybeSingle();
+if(error)throw error;
+alert('Hesab Be Serkewtuyi Drustbwa!');
+loginSuccess(data);
+}else{
+const{data,error}=await supabaseClient.from('mihry_users').select('*').eq('email',email).eq('password',password).maybeSingle();
+if(error)throw error;
+if(!data)return alert('Imeyl yan Pasord Heleyе!');
+loginSuccess(data);
+}
+}catch(err){alert(err.message);}
+}
+function loginSuccess(user){
+currentUser=user;
+localStorage.setItem('mihry_session',JSON.stringify(user));
+document.getElementById('navHomeBtn').classList.remove('hidden');
+document.getElementById('navDashboardBtn').classList.remove('hidden');
+if(document.getElementById('dashboardPage').classList.contains('hidden'))showPage('home');
+document.getElementById('authBtn').classList.add('hidden');
+document.getElementById('logoutBtn').classList.remove('hidden');
+document.getElementById('userUsernameDisplay').innerText='Naw: '+(user.username||'...');
+document.getElementById('userEmail').innerText='Email: '+user.email;
+document.getElementById('userPhoneDisplay').innerText='Mobile: '+(user.phone||'...');
+document.getElementById('userBalance').innerText=parseInt(user.balance).toLocaleString();
+closeAuthModal();
+fetchOrders();
+}
+function convertImageToBase64(inputId,targetType){
+const file=document.getElementById(inputId).files[0];
+if(!file)return;
+if(file.size>2*1024*1024){alert('Qabarey Wenekey Zor Gewreye! Kemtr le 2MB.');document.getElementById(inputId).value='';return;}
+const reader=new FileReader();
+reader.onloadend=function(){
+if(targetType==='cv')encodedBase64Image=reader.result;
+if(targetType==='front')encodedIdFront=reader.result;
+if(targetType==='back')encodedIdBack=reader.result;
+};
+reader.readAsDataURL(file);
+}
 
-            try {
-                if (isSignUpMode) {
-                    const username = document.getElementById('usernameField').value;
-                    const phone = document.getElementById('phoneField').value;
+const serviceNames={'cv':'CV','seminar':'Seminar','report':'Rapport','cashier':'Kasheri','snapchat':'Snapchat Band','burn':'Sutandni Account'};
+const servicePrices={'cv':4000,'seminar':8000,'report':5000,'cashier':150000,'snapchat':20000,'burn':45000};
 
-                    if (!username.trim()) return alert('تکایە ناوی بەکارهێنەر بنووسە!');
-                    if (!isPasswordStrong(password)) {
-                        return alert('پاسۆردەکەت لاوازە! دەبێت لانی کەم ٨ پیت بێت و پیتی گەورە و سیمبولی تێدابێت.');
-                    }
-
-                    const { data: existingUser } = await supabaseClient.from('mihry_users').select('email').eq('email', email).maybeSingle();
-                    if (existingUser) return alert('ئەم ئیمەیڵە پێشتر بەکارهاتووە!');
-
-                    const { data, error } = await supabaseClient.from('mihry_users').insert([{ username, email, phone, password, balance: 0 }]).select().maybeSingle();
-                    if (error) throw error;
-                    alert('حیساب بە سەرکەوتوویی دروستبوو! 🎉');
-                    loginSuccess(data);
-                } else {
-                    const { data, error } = await supabaseClient.from('mihry_users').select('*').eq('email', email).eq('password', password).maybeSingle();
-                    if (error) throw error;
-                    if (!data) return alert('ئیمەیڵ یان پاسۆرد هەڵەیە!');
-                    loginSuccess(data);
-                }
-            } catch (error) { alert(error.message); }
-        }
-
-        function loginSuccess(user) {
-            currentUser = user;
-            localStorage.setItem('mihry_session', JSON.stringify(user));
-
-            document.getElementById('navHomeBtn').classList.remove('hidden');
-            document.getElementById('navDashboardBtn').classList.remove('hidden');
-            
-            if(document.getElementById('dashboardPage').classList.contains('hidden')) {
-                showPage('home');
-            }
-            
-            document.getElementById('authBtn').classList.add('hidden');
-            document.getElementById('logoutBtn').classList.remove('hidden');
-            
-            document.getElementById('userUsernameDisplay').innerText = "ناو: " + (user.username || 'دیاری نەکراوە');
-            document.getElementById('userEmail').innerText = "ئیمەیڵ: " + user.email;
-            document.getElementById('userPhoneDisplay').innerText = "مۆبایل: " + (user.phone || 'دیاری نەکراوە');
-            document.getElementById('userBalance').innerText = parseInt(user.balance).toLocaleString();
-            closeAuthModal();
-            fetchOrders();
-        }
-
-        function convertImageToBase64(inputId, targetType) {
-            const file = document.getElementById(inputId).files[0];
-            if (!file) return;
-            
-            if (file.size > 2 * 1024 * 1024) {
-                alert('قەبارەی وێنەکە زۆر گەورەیە! تکایە وێنەیەکی کەمتر لە ٢ مێگابایت دابنێ.');
-                document.getElementById(inputId).value = '';
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onloadend = function () {
-                if (targetType === 'cv') encodedBase64Image = reader.result;
-                if (targetType === 'front') encodedIdFront = reader.result;
-                if (targetType === 'back') encodedIdBack = reader.result;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function openOrderModal(serviceName, price) {
-            if (!currentUser) return alert('تکایە پێشتر لۆگین بکە بۆ داواکردنی خزمەتگوزاری!');
-            activeServiceName = serviceName;
-            activeServicePrice = price;
-            encodedBase64Image = '';
-            encodedIdFront = '';
-            encodedIdBack = '';
-            
-            document.getElementById('orderModalTitle').innerText = "داواکردنی " + serviceName;
-            document.getElementById('orderModalPrice').innerText = "بڕی پارە لە باڵانست دەبڕدرێت: " + price.toLocaleString() + " د.ع";
-            
-            document.getElementById('cvFields').classList.add('hidden');
-            document.getElementById('snapchatFields').classList.add('hidden');
-            document.getElementById('burnFields').classList.add('hidden');
-            document.getElementById('generalFields').classList.add('hidden');
-
-            if (serviceName === 'CV') {
-                document.getElementById('cvFields').classList.remove('hidden');
-            } else if (serviceName.includes('باندی سناپچات')) {
-                document.getElementById('snapchatFields').classList.remove('hidden');
-            } else if (serviceName.includes('سوتاندنی ئەکاونت')) {
-                document.getElementById('burnFields').classList.remove('hidden');
-            } else {
-                document.getElementById('generalFields').classList.remove('hidden');
-                if (serviceName === 'ڕاپۆرت') {
-                    document.getElementById('generalDetails').placeholder = "تکایە ناونیشانی ڕاپۆرت، زمان، و ژمارەی پەڕە یاخود سەرچاوەکان لێرە بنووسە...";
-                } else {
-                    document.getElementById('generalDetails').placeholder = "تکایە بە تەواوی ڕوونی بکەرەوە کە دەتەوێت بابەتەکە لەسەر چی بێت و چۆن بێت...";
-                }
-            }
-            document.getElementById('orderModal').classList.remove('hidden');
-        }
-
-        function closeOrderModal() { document.getElementById('orderModal').classList.add('hidden'); }
-
-        async function submitOrder(e) {
-            e.preventDefault();
-            
-            try {
-                const { data: freshUser } = await supabaseClient.from('mihry_users').select('balance').eq('email', currentUser.email).maybeSingle();
-                if (!freshUser || freshUser.balance < activeServicePrice) {
-                    return alert('باڵانسی پێویستت نییە! تکایە باڵانسەکەت شحن بکەرەوە.');
-                }
-                currentUser.balance = freshUser.balance; 
-            } catch (err) {
-                return alert('کێشەیەک لە هێڵدا هەیە، تکایە دووبارە هەوڵ بدەرەوە.');
-            }
-
-            let details = '';
-            if (activeServiceName === 'CV') {
-                const dept = document.getElementById('cvDept').value;
-                const info = document.getElementById('cvInfo').value;
-                if(!encodedBase64Image) return alert('تکایە سەرەتا وێنەیەک بۆ ناو CV دیاری بکە!');
-                details = `بەش: ${dept} | وێنە: Base64_Data | زانیاری: ${info}`;
-            } else if (activeServiceName.includes('باندی سناپچات')) {
-                const user = document.getElementById('snapUser').value;
-                const device = document.getElementById('snapDevice').value;
-                const imei = document.getElementById('snapImei').value;
-                const code = document.getElementById('snapCode').value;
-                if(!user || !device) return alert('تکایە ناوی مۆبایل و یوزەرنەییم پڕبکەرەوە!');
-                details = `سناپچات یوزەر: ${user} | جۆری مۆبایل: ${device} | IMEI: ${imei} | جۆری باند: ${code}`;
-            } else if (activeServiceName.includes('سوتاندنی ئەکاونت')) {
-                const target = document.getElementById('burnTarget').value;
-                const reason = document.getElementById('burnReason').value;
-                const more = document.getElementById('burnDetails').value;
-                if(!target) return alert('تکایە لینک یاخود یوزەرنەییمی ئەکاونتەکە بنووسە!');
-                if(!encodedIdFront || !encodedIdBack) return alert('بارکردنی وێنەی پێشەوە و دواوەی کارتی نیشتمانی ناچارییە!');
-                
-                details = `ئەکاونتی مەبەست: ${target} | هۆکار: ${reason} | ناسنامە بارکراوە | وردەکاری زیاتر: ${more}`;
-            } else {
-                details = document.getElementById('generalDetails').value;
-                if(!details.trim()) return alert('تکایە زانیاری داواکارییەکە بنووسە!');
-            }
-
-            try {
-                const { error: orderError } = await supabaseClient.from('mihry_orders').insert([{
-                    user_email: currentUser.email,
-                    service_name: activeServiceName,
-                    price: activeServicePrice,
-                    details: details,
-                    status: 'لەکاردایە',
-                    download_url: ''
-                }]);
-                if (orderError) throw orderError;
-
-                const newBalance = currentUser.balance - activeServicePrice;
-                const { error: userError } = await supabaseClient.from('mihry_users').update({ balance: newBalance }).eq('email', currentUser.email);
-                if (userError) throw userError;
-
-                alert('داواکارییەکەت بە سەرکەوتوویی تۆمارکرا! 🎉');
-                currentUser.balance = newBalance;
-                document.getElementById('userBalance').innerText = newBalance.toLocaleString();
-                
-                localStorage.setItem('mihry_session', JSON.stringify(currentUser));
-                
-                closeOrderModal();
-                fetchOrders();
-            } catch (error) { alert('کێشەیەک ڕوویدا: ' + error.message); }
-        }
-
-        async function fetchOrders() {
-            const { data } = await supabaseClient.from('mihry_orders').select('*').eq('user_email', currentUser.email);
-            const tbody = document.getElementById('historyTable');
-            tbody.innerHTML = '';
-            
-            if (data && data.length > 0) {
-                data.forEach(row => {
-                    let downloadButton = `<span class="text-slate-500 text-[11px]">هێشتا ئامادە نییە</span>`;
-                    if (row.download_url) {
-                        downloadButton = `<a href="${row.download_url}" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-black px-3 py-1 rounded-lg font-bold text-[11px] inline-block transition"><i class="fa-solid fa-download"></i> داونلۆد</a>`;
-                    }
-                    tbody.innerHTML += `
-                        <tr class="border-b border-white/5">
-                            <td class="py-3 font-bold">${row.service_name}</td>
-                            <td>${parseInt(row.price).toLocaleString()} د.ع</td>
-                            <td class="text-amber-400">${row.status}</td>
-                            <td class="text-center py-2">${downloadButton}</td>
-                        </tr>`;
-                });
-            } else {
-                tbody.innerHTML = '<tr><td colspan="4" class="text-center py-8 text-slate-500">هیچ داواکارییەک نییە.</td></tr>';
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem('mihry_session');
-            location.reload();
-        }
-    </script>
+function openOrderModal(type,price){
+if(!currentUser)return alert('Tkaye Pewtr Login Bke!');
+activeServiceType=type;
+activeServicePrice=price;
+encodedBase64Image='';encodedIdFront='';encodedIdBack='';
+document.getElementById('orderModalTitle').innerText='Dawakrdni '+serviceNames[type];
+document.getElementById('orderModalPrice').innerText='Bri Pare le Balansit Debrdret: '+price.toLocaleString()+' D.A';
+['cvFields','seminarFields','reportFields','snapchatFields','burnFields','generalFields'].forEach(id=>document.getElementById(id).classList.add('hidden'));
+if(type==='cv')document.getElementById('cvFields').classList.remove('hidden');
+else if(type==='seminar')document.getElementById('seminarFields').classList.remove('hidden');
+else if(type==='report')document.getElementById('reportFields').classList.remove('hidden');
+else if(type==='snapchat')document.getElementById('snapchatFields').classList.remove('hidden');
+else if(type==='burn')document.getElementById('burnFields').classList.remove('hidden');
+else{document.getElementById('generalFields').classList.remove('hidden');}
+document.getElementById('orderModal').classList.remove('hidden');
+}
+function closeOrderModal(){document.getElementById('orderModal').classList.add('hidden');}
+async function submitOrder(e){
+e.preventDefault();
+try{
+const{data:freshUser}=await supabaseClient.from('mihry_users').select('balance').eq('email',currentUser.email).maybeSingle();
+if(!freshUser||freshUser.balance<activeServicePrice)return alert('Balansiy Pewist Niyet!');
+currentUser.balance=freshUser.balance;
+}catch(err){return alert('Keshaw heyе, duwabara hewl bdewe.');}
+let details='';
+if(activeServiceType==='cv'){
+const n=document.getElementById('cvFullName').value;
+const age=document.getElementById('cvAge').value;
+const city=document.getElementById('cvCity').value;
+const ph=document.getElementById('cvPhone').value;
+const em=document.getElementById('cvEmailField').value;
+const dept=document.getElementById('cvDept').value;
+const uni=document.getElementById('cvUniversity').value;
+const grad=document.getElementById('cvGradYear').value;
+const exp=document.getElementById('cvExperience').value;
+const skills=document.getElementById('cvSkills').value;
+const langs=document.getElementById('cvLanguages').value;
+const certs=document.getElementById('cvCertificates').value;
+const style=document.getElementById('cvStyle').value;
+const lang=document.getElementById('cvLang').value;
+const note=document.getElementById('cvInfo').value;
+if(!n)return alert('Tkaye Nawt Bnuse!');
+details=`NAW: ${n} | TEMEN: ${age} | SHARSTAN: ${city} | MOBILE: ${ph} | EMAIL: ${em} | BESH: ${dept} | ZANKO: ${uni} | SALI DEYCHUN: ${grad} | EZMUN: ${exp} | SKILL: ${skills} | ZIMAN: ${langs} | CERT: ${certs} | STYLE: ${style} | ZMANEWANE: ${lang} | NOTE: ${note} | WENE: ${encodedBase64Image?'Barkrawa':'Niye'}`;
+}else if(activeServiceType==='seminar'){
+const t=document.getElementById('semTitle').value;
+const d=document.getElementById('semDept').value;
+const s=document.getElementById('semStudentName').value;
+const sp=document.getElementById('semSupervisor').value;
+const sl=document.getElementById('semSlides').value;
+const l=document.getElementById('semLang').value;
+const dt=document.getElementById('semDetails').value;
+if(!t)return alert('Tkaye Nawni Seminar Bnuse!');
+details=`NAWNISHANI SEMINAR: ${t} | BESH: ${d} | KHWENDKAR: ${s} | SUPERVISOR: ${sp} | SLAYID: ${sl} | ZIMAN: ${l} | WORDEKAR: ${dt}`;
+}else if(activeServiceType==='report'){
+const t=document.getElementById('repTitle').value;
+const d=document.getElementById('repDept').value;
+const s=document.getElementById('repStudentName').value;
+const sp=document.getElementById('repSupervisor').value;
+const pg=document.getElementById('repPages').value;
+const l=document.getElementById('repLang').value;
+const dt=document.getElementById('repDetails').value;
+if(!t)return alert('Tkaye Nawni Rapport Bnuse!');
+details=`NAWNISHANI RAPPORT: ${t} | BESH: ${d} | KHWENDKAR: ${s} | SUPERVISOR: ${sp} | PEREKAN: ${pg} | ZIMAN: ${l} | WORDEKAR: ${dt}`;
+}else if(activeServiceType==='snapchat'){
+const u=document.getElementById('snapUser').value;
+const dv=document.getElementById('snapDevice').value;
+const im=document.getElementById('snapImei').value;
+const cd=document.getElementById('snapCode').value;
+if(!u||!dv)return alert('Tkaye Nawt Mobile u Username Prke!');
+details=`SNAP USER: ${u} | MOBILE: ${dv} | IMEI: ${im} | KOD: ${cd}`;
+}else if(activeServiceType==='burn'){
+const tg=document.getElementById('burnTarget').value;
+const rs=document.getElementById('burnReason').value;
+const dt=document.getElementById('burnDetails').value;
+if(!tg)return alert('Tkaye Link yan Username Account Bnuse!');
+if(!encodedIdFront||!encodedIdBack)return alert('Barkrdni Wene Kart Pewiste!');
+details=`TARGET: ${tg} | REASON: ${rs} | NASNAME: Barkrawa | DETAILS: ${dt}`;
+}else{
+details=document.getElementById('generalDetails').value;
+if(!details.trim())return alert('Tkaye Zanyari Dawakaryeke Bnuse!');
+}
+try{
+const{error:oE}=await supabaseClient.from('mihry_orders').insert([{user_email:currentUser.email,service_name:serviceNames[activeServiceType],price:activeServicePrice,details:details,status:'Lekardeye',download_url:''}]);
+if(oE)throw oE;
+const nb=currentUser.balance-activeServicePrice;
+const{error:uE}=await supabaseClient.from('mihry_users').update({balance:nb}).eq('email',currentUser.email);
+if(uE)throw uE;
+alert('Dawakaryekeyet Be Serkewtuyi Tomarkra!');
+currentUser.balance=nb;
+document.getElementById('userBalance').innerText=nb.toLocaleString();
+localStorage.setItem('mihry_session',JSON.stringify(currentUser));
+closeOrderModal();
+fetchOrders();
+}catch(err){alert('Keshaw: '+err.message);}
+}
+async function fetchOrders(){
+const{data}=await supabaseClient.from('mihry_orders').select('*').eq('user_email',currentUser.email);
+const tbody=document.getElementById('historyTable');
+tbody.innerHTML='';
+if(data&&data.length>0){
+data.forEach(row=>{
+let btn=row.download_url?`<a href="${row.download_url}" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-black px-3 py-1 rounded-lg font-bold text-[11px] inline-block"><i class="fa-solid fa-download"></i> Download</a>`:'<span class="text-slate-500 text-[11px]">Heshta Amade Niyet</span>';
+tbody.innerHTML+=`<tr class="border-b border-white/5"><td class="py-3 font-bold">${row.service_name}</td><td>${parseInt(row.price).toLocaleString()} D.A</td><td class="text-amber-400">${row.status}</td><td class="text-center py-2">${btn}</td></tr>`;
+});
+}else{tbody.innerHTML='<tr><td colspan="4" class="text-center py-8 text-slate-500">Hich Dawakaryiyke Niyet.</td></tr>';}
+}
+function logout(){localStorage.removeItem('mihry_session');location.reload();}
+</script>
 </body>
 </html>
